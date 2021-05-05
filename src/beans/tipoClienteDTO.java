@@ -4,6 +4,7 @@ public class tipoClienteDTO {
 	
 	private int idTipocliente;
 	private String descTipocliente;
+	
 	public int getIdTipocliente() {
 		return idTipocliente;
 	}
