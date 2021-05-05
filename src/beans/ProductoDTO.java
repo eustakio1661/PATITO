@@ -5,7 +5,9 @@ public class ProductoDTO {
 	private String descripcion,imagen;
 	private double precio;
 	
-
+	public ProductoDTO() {
+		
+	}
 	
 	public int getCodidgo() {
 		return codidgo;
