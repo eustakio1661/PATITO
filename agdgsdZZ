@@ -1,0 +1,82 @@
+[33mcommit 79fdf330ce21d674bf8d9bb0a7a739911d5ad76c[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m
+Merge: 3c6eeae 890da47
+Author: dacho <admin@gmail.com>
+Date:   Wed May 5 13:11:22 2021 -0500
+
+    Merge branch 'dev' of https://github.com/eustakio1661/PATITO into dev
+
+[33mcommit 890da4725df0a3f500546f1fdcbae883a8b496c0[m
+Author: diegogu <diegogu@gmail.com>
+Date:   Wed May 5 13:06:50 2021 -0500
+
+    Agregando clase CategoriaDTO
+
+[33mcommit af2939824bbca4096fee50be3bf0e7f4cd0644c2[m
+Author: diegogu <diegogu@gmail.com>
+Date:   Wed May 5 13:06:10 2021 -0500
+
+    Modificando ProductoDTO y agregando la clase CategoriaDTO
+
+[33mcommit 3c6eeae518592c9ac65a580f992910d5e9733df8[m[33m ([m[1;31morigin/gongora[m[33m, [m[1;32mgongora[m[33m)[m
+Author: dacho <admin@gmail.com>
+Date:   Wed May 5 13:05:47 2021 -0500
+
+    beans Clientes
+
+[33mcommit 9bd41a8419050b118301789f6acf272998d24855[m
+Merge: 5a348ef f912c95
+Author: eustakio1661 <69691829+eustakio1661@users.noreply.github.com>
+Date:   Wed May 5 12:52:02 2021 -0500
+
+    Merge pull request #1 from eustakio1661/dev
+    
+    Merge - Integrantes del grupo
+
+[33mcommit f912c95a1e5577ac73087d1281487b6ce1af0fe0[m
+Merge: 4ff0152 91abbbd
+Author: diegogu <diegogu@gmail.com>
+Date:   Wed May 5 12:26:48 2021 -0500
+
+    Agregando cambios
+
+[33mcommit 91abbbdffe743b4cf3655f18cf01f80f5345f35b[m
+Author: Ricardo Rios <ricardos_92@hotmail.com>
+Date:   Wed May 5 12:12:05 2021 -0500
+
+    Integrantes
+
+[33mcommit 4ff0152ab663f512035abc7ce75820ea4926b3fd[m[33m ([m[1;31morigin/gutarra[m[33m)[m
+Author: diegogu <diegogu@gmail.com>
+Date:   Wed May 5 12:10:30 2021 -0500
+
+    Ingresando mi nombre
+
+[33mcommit 8ac032623b845ff0d1c21ea05a72c69fdfe01d5a[m
+Author: dacho <admin@gmail.com>
+Date:   Wed May 5 12:08:34 2021 -0500
+
+    Agregando Darly Gongora
+
+[33mcommit 8e69e4a1edc818286420113509dae72bbd576e9d[m
+Author: jossrc <kuro.rc10@gmail.com>
+Date:   Wed May 5 12:07:27 2021 -0500
+
+    Creando archivo README.MD
+
+[33mcommit 5a348ef756ea0609a71726739ab9d2ef513baa4e[m[33m ([m[1;31morigin/robles[m[33m, [m[1;31morigin/rios[m[33m, [m[1;31morigin/montes[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: diegogu <diegogu@gmail.com>
+Date:   Wed May 5 11:21:49 2021 -0500
+
+    Probando ProductoDTO
+
+[33mcommit d609b34b95e5cd5b2c1fcf9fb8421cc2e3be2fbf[m
+Author: diegogu <diegogu@gmail.com>
+Date:   Wed May 5 11:19:11 2021 -0500
+
+    Agregando paquetes y utilizando DAO
+
+[33mcommit c2f6f88dfbf05b271b320f522d4cf86c5db0ad53[m
+Author: diegogu <diegogu@gmail.com>
+Date:   Wed May 5 10:44:21 2021 -0500
+
+    Iniciando proyecto Patito

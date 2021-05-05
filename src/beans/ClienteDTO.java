@@ -1,12 +1,12 @@
 package beans;
 
 public class ClienteDTO {
-
+	
 	private int codigoCliente, codigoDistrito;
 	private String dniCliente, nombreCliente, apellidoCliente, direccionCliente, telefonoCliente;
 
 	public String toString() {
-		return "ClienteDTO [codigoCliente=" + codigoCliente + ", codigoDistrito=" + codigoDistrito + ", dniCliente="
+		return "ClienteDTO [codigoCliente=" + codigoCliente + ", codigoDistrito=" + codigoDistrito + ", dniCliente=" 
 				+ dniCliente + ", nombreCliente=" + nombreCliente + ", apellidoCliente=" + apellidoCliente
 				+ ", direccionCliente=" + direccionCliente + ", telefonoCliente=" + telefonoCliente + "]";
 	}
