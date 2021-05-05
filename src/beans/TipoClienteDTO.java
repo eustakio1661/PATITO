@@ -1,12 +1,11 @@
 package beans;
 
-public class tipoClienteDTO {
+public class TipoClienteDTO {
 	
 	private int id;
 	private String descripcion;
 	
-	public tipoClienteDTO(int id, String descripcion) {
-		super();
+	public TipoClienteDTO(int id, String descripcion) {
 		this.id = id;
 		this.descripcion = descripcion;
 	}
