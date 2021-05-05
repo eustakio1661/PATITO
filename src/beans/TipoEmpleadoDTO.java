@@ -1,11 +1,11 @@
 package beans;
 
-public class DistritoDTO {
+public class TipoEmpleadoDTO {
 
 	private int id;
 	private String descripcion;
 
-	public DistritoDTO(int id, String descripcion) {
+	public TipoEmpleadoDTO(int id, String descripcion) {
 		this.id = id;
 		this.descripcion = descripcion;
 	}
