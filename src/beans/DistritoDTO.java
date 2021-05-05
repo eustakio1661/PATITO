@@ -6,7 +6,6 @@ public class DistritoDTO {
 	private String descripcion;
 	
 	public DistritoDTO(int id, String descripcion) {
-		super();
 		this.id = id;
 		this.descripcion = descripcion;
 	}
