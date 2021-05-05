@@ -2,20 +2,27 @@ package beans;
 
 public class DistritoDTO {
 	
-	private int iddistrito;
-	private String desdistrito;
-	public int getIddistrito() {
-		return iddistrito;
+	private int id;
+	private String descripcion;
+	
+	public DistritoDTO(int id, String descripcion) {
+		super();
+		this.id = id;
+		this.descripcion = descripcion;
 	}
-	public void setIddistrito(int iddistrito) {
-		this.iddistrito = iddistrito;
+	public int getId() {
+		return id;
 	}
-	public String getDesdistrito() {
-		return desdistrito;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public void setDesdistrito(String desdistrito) {
-		this.desdistrito = desdistrito;
+	public String getDescripcion() {
+		return descripcion;
 	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
 	
 	
 

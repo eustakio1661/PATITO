@@ -2,20 +2,25 @@ package beans;
 
 public class tipoClienteDTO {
 	
-	private int idTipocliente;
-	private String descTipocliente;
+	private int id;
+	private String descripcion;
 	
-	public int getIdTipocliente() {
-		return idTipocliente;
+	public tipoClienteDTO(int id, String descripcion) {
+		super();
+		this.id = id;
+		this.descripcion = descripcion;
 	}
-	public void setIdTipocliente(int idTipocliente) {
-		this.idTipocliente = idTipocliente;
+	public int getId() {
+		return id;
 	}
-	public String getDescTipocliente() {
-		return descTipocliente;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public void setDescTipocliente(String descTipocliente) {
-		this.descTipocliente = descTipocliente;
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	
 	
