@@ -1,22 +1,21 @@
 package beans;
 
 public class ClienteDTO {
-	
-	private int codigoCliente, codigoDistrito;
-	private String dniCliente, nombreCliente, apellidoCliente, direccionCliente, telefonoCliente;
+
+	private int codigo, codigoDistrito;
+	private String dni, nombre, apellido, direccion, telefono;
 
 	public String toString() {
-		return "ClienteDTO [codigoCliente=" + codigoCliente + ", codigoDistrito=" + codigoDistrito + ", dniCliente=" 
-				+ dniCliente + ", nombreCliente=" + nombreCliente + ", apellidoCliente=" + apellidoCliente
-				+ ", direccionCliente=" + direccionCliente + ", telefonoCliente=" + telefonoCliente + "]";
+		return "ClienteDTO [codigo=" + codigo + ", codigoDistrito=" + codigoDistrito + ", dni=" + dni + ", nombre="
+				+ nombre + ", apellido=" + apellido + ", direccion=" + direccion + ", telefono=" + telefono + "]";
 	}
 
-	public int getCodigoCliente() {
-		return codigoCliente;
+	public int getCodigo() {
+		return codigo;
 	}
 
-	public void setCodigoCliente(int codigoCliente) {
-		this.codigoCliente = codigoCliente;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 
 	public int getCodigoDistrito() {
@@ -27,44 +26,44 @@ public class ClienteDTO {
 		this.codigoDistrito = codigoDistrito;
 	}
 
-	public String getDniCliente() {
-		return dniCliente;
+	public String getDni() {
+		return dni;
 	}
 
-	public void setDniCliente(String dniCliente) {
-		this.dniCliente = dniCliente;
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
-	public String getNombreCliente() {
-		return nombreCliente;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombreCliente(String nombreCliente) {
-		this.nombreCliente = nombreCliente;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getApellidoCliente() {
-		return apellidoCliente;
+	public String getApellido() {
+		return apellido;
 	}
 
-	public void setApellidoCliente(String apellidoCliente) {
-		this.apellidoCliente = apellidoCliente;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
-	public String getDireccionCliente() {
-		return direccionCliente;
+	public String getDireccion() {
+		return direccion;
 	}
 
-	public void setDireccionCliente(String direccionCliente) {
-		this.direccionCliente = direccionCliente;
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
-	public String getTelefonoCliente() {
-		return telefonoCliente;
+	public String getTelefono() {
+		return telefono;
 	}
 
-	public void setTelefonoCliente(String telefonoCliente) {
-		this.telefonoCliente = telefonoCliente;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 }
