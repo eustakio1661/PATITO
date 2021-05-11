@@ -1710,7 +1710,7 @@ a {
 }
 
 .bg-login {
-	background-image: url(../images/login-images/bg-login-img.jpg);
+	background-image: url("https://res.cloudinary.com/dgulsgme7/image/upload/v1620754077/bg-login-img_dewuns.jpg");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
