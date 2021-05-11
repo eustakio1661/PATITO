@@ -18,7 +18,7 @@
 
     <!-- loader-->
     <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
-    <link href="assets/css/pace.min.css" rel="stylesheet" />
+    <link href="css/pace.min.css" rel="stylesheet" />
 
     <!-- Bootstrap CSS -->
 
@@ -32,7 +32,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap"
       rel="stylesheet"
     />
-    <link href="assets/css/app.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
@@ -47,13 +47,13 @@
         <div class="sidebar-header">
           <div>
             <img
-              src="assets/images/logo-icon.png"
+              src="img/logo-icon.png"
               class="logo-icon"
               alt="logo icon"
             />
           </div>
           <div>
-            <h4 class="logo-text">🦆 Patito</h4>
+            <h4 class="logo-text">* Patito</h4>
           </div>
           <div class="toggle-icon ms-auto">
             <i class="bx bx-arrow-to-left"></i>
@@ -198,7 +198,7 @@
                 aria-expanded="false"
               >
                 <img
-                  src="assets/images/avatars/avatar-2.png"
+                  src="img/avatars/avatar-2.png"
                   class="user-img"
                   alt="user avatar"
                 />
@@ -401,7 +401,7 @@
                       <td>
                         <div class="d-flex align-items-center">
                           <div class="recent-product-img">
-                            <img src="assets/images/icons/chair.png" alt="" />
+                            <img src="img/icons/chair.png" alt="" />
                           </div>
                           <div class="ms-2">
                             <h6 class="mb-1 font-14">Light Blue Chair</h6>
@@ -434,7 +434,7 @@
                       <td>
                         <div class="d-flex align-items-center">
                           <div class="recent-product-img">
-                            <img src="assets/images/icons/shoes.png" alt="" />
+                            <img src="img/icons/shoes.png" alt="" />
                           </div>
                           <div class="ms-2">
                             <h6 class="mb-1 font-14">Green Sport Shoes</h6>
@@ -468,7 +468,7 @@
                         <div class="d-flex align-items-center">
                           <div class="recent-product-img">
                             <img
-                              src="assets/images/icons/headphones.png"
+                              src="img/icons/headphones.png"
                               alt=""
                             />
                           </div>
@@ -503,7 +503,7 @@
                       <td>
                         <div class="d-flex align-items-center">
                           <div class="recent-product-img">
-                            <img src="assets/images/icons/idea.png" alt="" />
+                            <img src="img/icons/idea.png" alt="" />
                           </div>
                           <div class="ms-2">
                             <h6 class="mb-1 font-14">Mini Laptop Device</h6>
@@ -537,7 +537,7 @@
                         <div class="d-flex align-items-center">
                           <div class="recent-product-img">
                             <img
-                              src="assets/images/icons/user-interface.png"
+                              src="img/icons/user-interface.png"
                               alt=""
                             />
                           </div>
@@ -572,7 +572,7 @@
                       <td>
                         <div class="d-flex align-items-center">
                           <div class="recent-product-img">
-                            <img src="assets/images/icons/watch.png" alt="" />
+                            <img src="img/icons/watch.png" alt="" />
                           </div>
                           <div class="ms-2">
                             <h6 class="mb-1 font-14">Smart Hand Watch</h6>
@@ -605,7 +605,7 @@
                       <td>
                         <div class="d-flex align-items-center">
                           <div class="recent-product-img">
-                            <img src="assets/images/icons/tshirt.png" alt="" />
+                            <img src="img/icons/tshirt.png" alt="" />
                           </div>
                           <div class="ms-2">
                             <h6 class="mb-1 font-14">T-Shirt Blue</h6>
@@ -651,7 +651,7 @@
       <!--End Back To Top Button-->
       <footer class="page-footer mt-3 p-2">
         <p class="mb-0">
-          Copyright &copy; 🦆 Patito 2021. Todos los derechos reservados.
+          Copyright &copy; * Patito 2021. Todos los derechos reservados.
         </p>
       </footer>
     </div>
@@ -665,14 +665,19 @@
     ></script>
     <!-- Plugins -->
 
-    <script src="assets/js/jquery.min.js"></script>
+    <!--  <script src="assets/js/jquery.min.js"></script> -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+      integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
-    <script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
+    <script src="js/metisMenu.min.js"></script>
     <!--Efecto más suave JQ-->
     <!--<script src="https://cdn.jsdelivr.net/npm/metismenujs/dist/metismenujs.min.js"></script>--><!--Efecto más tosco JS-->
 
     <!--<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>-->
-    <script src="assets/js/app.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
     
