@@ -6,37 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--plugins-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/metismenujs/dist/metismenujs.min.css"
-    />
-
-    <!-- loader-->
-    <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
-    <link href="css/pace.min.css" rel="stylesheet" />
-
-    <!-- Bootstrap CSS -->
-
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link href="css/app.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
-    />
+    <jsp:include page="reusable/styles.jsp"></jsp:include>
     <title>Patito Restaurant</title>
   </head>
   <body>
@@ -461,27 +431,7 @@
     </div>
     <!--end wrapper-->
 
-    <!-- Bootstrap JS -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Plugins -->
-
-    <!--  <script src="assets/js/jquery.min.js"></script> -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-      integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
-    <script src="js/metisMenu.min.js"></script>
-    <!--Efecto más suave JQ-->
-    <!--<script src="https://cdn.jsdelivr.net/npm/metismenujs/dist/metismenujs.min.js"></script>--><!--Efecto más tosco JS-->
-
-    <!--<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>-->
-    <script src="js/app.js"></script>
+    <jsp:include page="reusable/scripts.jsp"></jsp:include>
   </body>
 </html>
     
