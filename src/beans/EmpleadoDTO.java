@@ -41,6 +41,12 @@ public class EmpleadoDTO {
         this.idTipo = idTipo;
         this.estado = estado;
     }
+    
+    
+
+    public EmpleadoDTO() {
+        super();
+    }
 
     public int getId() {
         return id;
