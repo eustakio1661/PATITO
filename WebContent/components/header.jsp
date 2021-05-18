@@ -49,7 +49,7 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
           <li>
-            <a class="dropdown-item" href="javascript:;"
+            <a class="dropdown-item" href="perfil.jsp"
               ><i class="bx bx-user"></i><span>Perfil</span></a
             >
           </li>
@@ -59,7 +59,7 @@
             >
           </li>
           <li>
-            <a class="dropdown-item" href="javascript:;"
+            <a class="dropdown-item" href="home.jsp"
               ><i class="bx bx-home-circle"></i><span>Inicio</span></a
             >
           </li>
