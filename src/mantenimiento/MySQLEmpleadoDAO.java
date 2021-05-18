@@ -137,7 +137,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
     }
 
     @Override
-    public EmpleadoDTO validarAcceso(String correo, String usuario, String clave) {
+    public EmpleadoDTO validarAcceso(String correo_usuario, String clave) {
         EmpleadoDTO em = null;
 
         Connection cn = null;
@@ -146,11 +146,10 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
 
         try {
             cn = MySQLConexion8.getConexion();
-            String sql = "{call usp_validarAcceso(?,?,?)}";
+            String sql = "{call usp_validarAcceso(?,?)}";
             pst = cn.prepareStatement(sql);
-            pst.setString(1, correo);
-            pst.setString(2, usuario);
-            pst.setString(3, clave);
+            pst.setString(1, correo_usuario);
+            pst.setString(2, clave);
 
             rs = pst.executeQuery();
 
