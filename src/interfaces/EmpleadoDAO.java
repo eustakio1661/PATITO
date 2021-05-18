@@ -8,5 +8,6 @@ public interface EmpleadoDAO {
     
     public int registrar(EmpleadoDTO e);
     public ArrayList<EmpleadoDTO> listado();
-
+    public int actualizar(EmpleadoDTO e);
+    public int eliminar(EmpleadoDTO e);
 }
