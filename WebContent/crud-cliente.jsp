@@ -19,21 +19,10 @@
       <!--start page wrapper -->
       <div class="page-wrapper">
         <div class="page-content">
-          <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Cliente</div>
-            <div class="ps-3">
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 p-0">
-                  <li class="breadcrumb-item">
-                    <a href="home.jsp"><i class="bx bx-home-alt"></i></a>
-                  </li>
-                  <li class="breadcrumb-item active" aria-current="page">
-                    Registrar
-                  </li>
-                </ol>
-              </nav>
-            </div>
-          </div>
+          <jsp:include page="components/breadcrumb.jsp">
+            <jsp:param name="pagina" value="Cliente"/>
+            <jsp:param name="accion" value="Registrar"/>
+          </jsp:include>
           <div class="row">
             <div class="col-xl-9 mx-auto">
               <hr />
