@@ -62,7 +62,7 @@
       </a>
       <ul>
         <li>
-          <a href="component-alerts.html"
+          <a href="crud-cliente.jsp"
             ><i class="bx bx-right-arrow-alt"></i>Registro</a
           >
         </li>
