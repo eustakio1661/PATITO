@@ -12,24 +12,24 @@ import utils.MySQLConexion8;
 
 public class MySQLEmpleadoDAO implements EmpleadoDAO {
 
-
     public int registrar(EmpleadoDTO e) {
         int rs = 0;
         Connection con = null;
         PreparedStatement pst = null;
         try {
             con = MySQLConexion8.getConexion();
-            String sql = "insert into empleado values(null,?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into empleado values(null,?,?,?,?,?,?,?,?,?,?)";
             pst = con.prepareStatement(sql);
             pst.setString(1, e.getDni());
             pst.setString(2, e.getNombre());
             pst.setString(3, e.getApellido());
             pst.setString(4, e.getTelefono());
-            pst.setString(5, e.getUsuario());
-            pst.setString(6, e.getClave());
-            pst.setInt(7, e.getIdTipo());
-            pst.setInt(8, e.getEstado());
-            pst.setString(9, e.getImagen());
+            pst.setString(5, e.getCorreo());
+            pst.setString(6, e.getUsuario());
+            pst.setString(7, e.getClave());
+            pst.setInt(8, e.getIdTipo());
+            pst.setInt(9, e.getEstado());
+            pst.setString(10, e.getImagen());
             rs = pst.executeUpdate();
         } catch (Exception e2) {
             System.out.println("Error al registrar empleado: " + e2.getMessage());
@@ -46,7 +46,6 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         return rs;
     }
 
-
     public ArrayList<EmpleadoDTO> listado() {
         ArrayList<EmpleadoDTO> lista = null;
         Connection con = null;
@@ -59,18 +58,18 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
             rs = pst.executeQuery();
             lista = new ArrayList<EmpleadoDTO>();
             while (rs.next()) {
-                EmpleadoDTO p = new EmpleadoDTO();
-                p.setId(rs.getInt(1));
-                p.setDni(rs.getString(2));
-                p.setNombre(rs.getString(3));
-                p.setApellido(rs.getString(4));
-                p.setTelefono(rs.getString(5));
-                p.setUsuario(rs.getString(6));
-                p.setClave(rs.getString(7));
-                p.setIdTipo(rs.getInt(8));
-                p.setEstado(rs.getInt(9));
-                p.setImagen(rs.getString(10));
-                lista.add(p);
+                EmpleadoDTO e = new EmpleadoDTO();
+                e.setId(rs.getInt(1));
+                e.setDni(rs.getString(2));
+                e.setNombre(rs.getString(3));
+                e.setApellido(rs.getString(4));
+                e.setTelefono(rs.getString(5));
+                e.setUsuario(rs.getString(6));
+                e.setClave(rs.getString(7));
+                e.setIdTipo(rs.getInt(8));
+                e.setEstado(rs.getInt(9));
+                e.setImagen(rs.getString(10));
+                lista.add(e);
             }
         } catch (Exception e) {
             System.out.println("Error al listar empleados..." + e.getMessage());
@@ -85,6 +84,97 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
             }
         }
         return lista;
+    }
+
+    @Override
+    public int actualizar(EmpleadoDTO e) {
+        int rs = 0;
+        Connection cn = null;
+        PreparedStatement pst = null;
+        try {
+            cn = MySQLConexion8.getConexion();
+            String sql = "{call usp_actualizarEmpleado(?,?,?,?,?,?,?,?,?,?,?)}";
+            pst = cn.prepareStatement(sql);
+            pst.setInt(1, e.getId());
+            pst.setString(2, e.getDni());
+            pst.setString(3, e.getNombre());
+            pst.setString(4, e.getApellido());
+            pst.setString(5, e.getTelefono());
+            pst.setString(6, e.getCorreo());
+            pst.setString(7, e.getUsuario());
+            pst.setString(8, e.getClave());
+            pst.setInt(9, e.getIdTipo());
+            pst.setInt(10, e.getEstado());
+            pst.setString(11, e.getImagen());
+            rs = pst.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println("Error al actualizar empleado: " + ex.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(cn);
+        }
+        return rs;
+    }
+
+    @Override
+    public int eliminar(EmpleadoDTO e) {
+        int rs = 0;
+        Connection cn = null;
+        PreparedStatement pst = null;
+        try {
+            cn = MySQLConexion8.getConexion();
+            String sql = "{call usp_eliminarEmpleado(?)}";
+            pst = cn.prepareStatement(sql);
+            pst.setInt(1, e.getId());
+            rs = pst.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println("Error en eliminar empleado: " + ex.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(cn);
+        }
+        return rs;
+    }
+
+    @Override
+    public EmpleadoDTO validarAcceso(String correo, String usuario, String clave) {
+        EmpleadoDTO em = null;
+
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            cn = MySQLConexion8.getConexion();
+            String sql = "{call usp_validarAcceso(?,?,?)}";
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, correo);
+            pst.setString(2, usuario);
+            pst.setString(3, clave);
+
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                em = new EmpleadoDTO();
+                em.setId(rs.getInt(1));
+                em.setDni(rs.getString(2));
+                em.setNombre(rs.getString(3));
+                em.setApellido(rs.getString(4));
+                em.setTelefono(rs.getString(5));
+                em.setUsuario(rs.getString(6));
+                em.setClave(rs.getString(7));
+                em.setIdTipo(rs.getInt(8));
+                em.setEstado(rs.getInt(9));
+                em.setImagen(rs.getString(10));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error validar acceso " + e.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(cn);
+        }
+
+        return em;
     }
 
 }
