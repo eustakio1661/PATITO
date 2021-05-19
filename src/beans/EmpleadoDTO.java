@@ -115,6 +115,6 @@ public class EmpleadoDTO {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
-    }
+    }    
 
 }
