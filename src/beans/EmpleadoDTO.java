@@ -7,6 +7,7 @@ public class EmpleadoDTO {
     private String nombre;
     private String apellido;
     private String telefono;
+    private String direccion;
     private String correo;
     private String usuario;
     private String clave;
@@ -15,37 +16,6 @@ public class EmpleadoDTO {
     private String imagen;
 
     // 0 -> eliminado , 1 -> activo
-
-    public EmpleadoDTO(int id, String dni, String nombre, String apellido, String telefono, String correo,String usuario,
-            String clave, int idTipo, int estado, String imagen) {
-        this.id = id;
-        this.dni = dni;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.telefono = telefono;
-        this.correo = correo;
-        this.usuario = usuario;
-        this.clave = clave;
-        this.idTipo = idTipo;
-        this.estado = estado;
-        this.imagen = imagen;
-    }
-
-    public EmpleadoDTO(int id, String dni, String nombre, String apellido, String telefono, String correo, String usuario,
-            String clave, int idTipo, int estado) {
-        this.id = id;
-        this.dni = dni;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.telefono = telefono;
-        this.correo = correo;
-        this.usuario = usuario;
-        this.clave = clave;
-        this.idTipo = idTipo;
-        this.estado = estado;
-    }
-    
-    
 
     public EmpleadoDTO() {
         
@@ -91,6 +61,14 @@ public class EmpleadoDTO {
         this.telefono = telefono;
     }
     
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
     public String getCorreo() {
         return correo;
     }
@@ -137,6 +115,6 @@ public class EmpleadoDTO {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
-    }
+    }    
 
 }
