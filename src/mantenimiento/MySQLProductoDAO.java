@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import beans.CategoriaDTO;
 import beans.ProductoDTO;
 import interfaces.ProductoDAO;
 import utils.MySQLConexion8;
@@ -98,7 +99,7 @@ public class MySQLProductoDAO implements ProductoDAO {
     }
 
     @Override
-    public ArrayList<ProductoDTO> listadoCategoria() {
+    public ArrayList<ProductoDTO> listado() {
         ArrayList<ProductoDTO> lista = null;
         Connection con = null;
         PreparedStatement pst = null;
@@ -122,6 +123,39 @@ public class MySQLProductoDAO implements ProductoDAO {
             }
         } catch (Exception e) {
             System.out.println("Error al listar productos..." + e.getMessage());
+        } finally {
+            try {
+                if (con != null)
+                    con.close();
+                if (pst != null)
+                    pst.close();
+            } catch (SQLException e2) {
+                System.out.println("Error al cerrar : " + e2.getMessage());
+            }
+        }
+        return lista;
+    }
+
+    @Override
+    public ArrayList<CategoriaDTO> listadoCategoria() {
+        ArrayList<CategoriaDTO> lista = null;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "SELECT * FROM CATEGORIA";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            lista = new ArrayList<CategoriaDTO>();
+            while (rs.next()) {
+                CategoriaDTO c = new CategoriaDTO();
+                c.setIdcategoria(rs.getInt(1));
+                c.setDescripcion(rs.getString(2));
+                lista.add(c);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al listar categoría de productos..." + e.getMessage());
         } finally {
             try {
                 if (con != null)
