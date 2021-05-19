@@ -36,13 +36,13 @@
     </li>
     <li class="menu-label">Mantenimiento</li>
     <li>
-      <a href="javascript:;" class="has-arrow">
+      <a href="#" class="has-arrow">
         <div class="parent-icon"><i class="bx bx-id-card"></i></div>
         <div class="menu-title">Empleados</div>
       </a>
       <ul>
         <li>
-          <a href="ecommerce-products.html"
+          <a href="crud-empleado.jsp"
             ><i class="bx bx-right-arrow-alt"></i>Registro</a
           >
         </li>
