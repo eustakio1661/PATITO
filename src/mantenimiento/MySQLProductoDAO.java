@@ -33,14 +33,7 @@ public class MySQLProductoDAO implements ProductoDAO {
         } catch (Exception e2) {
             System.out.println("Error al registrar producto: " + e2.getMessage());
         } finally {
-            try {
-                if (con != null)
-                    con.close();
-                if (pst != null)
-                    pst.close();
-            } catch (SQLException e3) {
-                System.out.println("Error al cerrar     : " + e3.getMessage());
-            }
+            MySQLConexion8.closeConexion(con);
         }
         return rs;
     }
@@ -60,14 +53,7 @@ public class MySQLProductoDAO implements ProductoDAO {
         } catch (Exception ex) {
             System.out.println("Error en eliminar producto... " + ex.getMessage());
         } finally {
-            try {
-                if (con != null)
-                    con.close();
-                if (pst != null)
-                    pst.close();
-            } catch (SQLException e3) {
-                System.out.println("Error al cerrar     : " + e3.getMessage());
-            }
+            MySQLConexion8.closeConexion(con);
         }
         return rs;
     }
@@ -124,14 +110,7 @@ public class MySQLProductoDAO implements ProductoDAO {
         } catch (Exception e) {
             System.out.println("Error al listar productos..." + e.getMessage());
         } finally {
-            try {
-                if (con != null)
-                    con.close();
-                if (pst != null)
-                    pst.close();
-            } catch (SQLException e2) {
-                System.out.println("Error al cerrar : " + e2.getMessage());
-            }
+            MySQLConexion8.closeConexion(con);
         }
         return lista;
     }
@@ -157,14 +136,7 @@ public class MySQLProductoDAO implements ProductoDAO {
         } catch (Exception e) {
             System.out.println("Error al listar categoría de productos..." + e.getMessage());
         } finally {
-            try {
-                if (con != null)
-                    con.close();
-                if (pst != null)
-                    pst.close();
-            } catch (SQLException e2) {
-                System.out.println("Error al cerrar : " + e2.getMessage());
-            }
+            MySQLConexion8.closeConexion(con);
         }
         return lista;
     }
