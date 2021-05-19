@@ -3,7 +3,6 @@ package mantenimiento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.EmpleadoDTO;
@@ -35,14 +34,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         } catch (Exception e2) {
             System.out.println("Error al registrar empleado: " + e2.getMessage());
         } finally {
-            try {
-                if (con != null)
-                    con.close();
-                if (pst != null)
-                    pst.close();
-            } catch (SQLException e3) {
-                System.out.println("Error al cerrar : " + e3.getMessage());
-            }
+            MySQLConexion8.closeConexion(con);
         }
         return rs;
     }
@@ -76,14 +68,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         } catch (Exception e) {
             System.out.println("Error al listar empleados:" + e.getMessage());
         } finally {
-            try {
-                if (con != null)
-                    con.close();
-                if (pst != null)
-                    pst.close();
-            } catch (SQLException e2) {
-                System.out.println("Error al cerrar : " + e2.getMessage());
-            }
+            MySQLConexion8.closeConexion(con);
         }
         return lista;
     }
