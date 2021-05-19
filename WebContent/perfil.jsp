@@ -87,7 +87,12 @@
                               type="text"
                               class="form-control"
                               value="Diego"
+                              placeholder="Ingrese nombre"
+                              required
                             />
+                            <div class="invalid-feedback">
+                              Ingrese un nombre válido
+                            </div>
                           </div>
                         </div>
                         <div class="row mb-3">
@@ -103,7 +108,12 @@
                               type="text"
                               class="form-control"
                               value="Gutarra"
+                              placeholder="Ingrese apellido"
+                              required
                             />
+                            <div class="invalid-feedback">
+                              Ingrese un apellido válido
+                            </div>
                           </div>
                         </div>
                         <div class="row mb-3">
@@ -119,7 +129,12 @@
                               type="text"
                               class="form-control"
                               value="(239) 816-9029"
+                              placeholder="Fijo o celular"
+                              required
                             />
+                            <div class="invalid-feedback">
+                              Ingrese un teléfono válido
+                            </div>
                           </div>
                         </div>
                         <div class="row mb-3">
@@ -154,7 +169,11 @@ Buenos Aires 322 - Sicuani - Ate paralela a la fabrica Braedt</textarea
                               type="text"
                               class="form-control"
                               value="test@gmail.com"
+                              placeholder="Ingrese email"
                             />
+                            <div class="invalid-feedback">
+                              Ingrese un email válido
+                            </div>
                           </div>
                         </div>
                         <div class="row mb-3">
@@ -186,6 +205,9 @@ Buenos Aires 322 - Sicuani - Ate paralela a la fabrica Braedt</textarea
                                 id="icon-hide"
                                 ><i class="bx bx-hide"></i
                               ></a>
+                            </div>
+                            <div class="invalid-feedback">
+                              Ingrese una contraseña válido +6
                             </div>
                           </div>
                         </div>
