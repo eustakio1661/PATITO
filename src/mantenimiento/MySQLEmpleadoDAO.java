@@ -3,7 +3,6 @@ package mantenimiento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.EmpleadoDTO;
@@ -18,30 +17,24 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         PreparedStatement pst = null;
         try {
             con = MySQLConexion8.getConexion();
-            String sql = "insert into empleado values(null,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into empleado values(null,?,?,?,?,?,?,?,?,?,default)";
             pst = con.prepareStatement(sql);
             pst.setString(1, e.getDni());
             pst.setString(2, e.getNombre());
             pst.setString(3, e.getApellido());
             pst.setString(4, e.getTelefono());
-            pst.setString(5, e.getCorreo());
-            pst.setString(6, e.getUsuario());
-            pst.setString(7, e.getClave());
-            pst.setInt(8, e.getIdTipo());
-            pst.setInt(9, e.getEstado());
-            pst.setString(10, e.getImagen());
+            pst.setString(5, e.getDireccion());
+            pst.setString(6, e.getCorreo());
+            pst.setString(7, e.getUsuario());
+            pst.setString(8, e.getClave());
+            pst.setInt(9, e.getIdTipo());
+            pst.setInt(10, e.getEstado());
+            pst.setString(11, e.getImagen());
             rs = pst.executeUpdate();
         } catch (Exception e2) {
             System.out.println("Error al registrar empleado: " + e2.getMessage());
         } finally {
-            try {
-                if (con != null)
-                    con.close();
-                if (pst != null)
-                    pst.close();
-            } catch (SQLException e3) {
-                System.out.println("Error al cerrar : " + e3.getMessage());
-            }
+            MySQLConexion8.closeConexion(con);
         }
         return rs;
     }
@@ -64,24 +57,18 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
                 e.setNombre(rs.getString(3));
                 e.setApellido(rs.getString(4));
                 e.setTelefono(rs.getString(5));
-                e.setUsuario(rs.getString(6));
-                e.setClave(rs.getString(7));
-                e.setIdTipo(rs.getInt(8));
-                e.setEstado(rs.getInt(9));
-                e.setImagen(rs.getString(10));
+                e.setDireccion(rs.getString(6));
+                e.setUsuario(rs.getString(7));
+                e.setClave(rs.getString(8));
+                e.setIdTipo(rs.getInt(9));
+                e.setEstado(rs.getInt(10));
+                e.setImagen(rs.getString(11));
                 lista.add(e);
             }
         } catch (Exception e) {
-            System.out.println("Error al listar empleados..." + e.getMessage());
+            System.out.println("Error al listar empleados:" + e.getMessage());
         } finally {
-            try {
-                if (con != null)
-                    con.close();
-                if (pst != null)
-                    pst.close();
-            } catch (SQLException e2) {
-                System.out.println("Error al cerrar : " + e2.getMessage());
-            }
+            MySQLConexion8.closeConexion(con);
         }
         return lista;
     }
@@ -100,12 +87,13 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
             pst.setString(3, e.getNombre());
             pst.setString(4, e.getApellido());
             pst.setString(5, e.getTelefono());
-            pst.setString(6, e.getCorreo());
-            pst.setString(7, e.getUsuario());
-            pst.setString(8, e.getClave());
-            pst.setInt(9, e.getIdTipo());
-            pst.setInt(10, e.getEstado());
-            pst.setString(11, e.getImagen());
+            pst.setString(6, e.getDireccion());
+            pst.setString(7, e.getCorreo());
+            pst.setString(8, e.getUsuario());
+            pst.setString(9, e.getClave());
+            pst.setInt(10, e.getIdTipo());
+            pst.setInt(11, e.getEstado());
+            pst.setString(12, e.getImagen());
             rs = pst.executeUpdate();
 
         } catch (Exception ex) {
@@ -160,11 +148,13 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
                 em.setNombre(rs.getString(3));
                 em.setApellido(rs.getString(4));
                 em.setTelefono(rs.getString(5));
-                em.setUsuario(rs.getString(6));
-                em.setClave(rs.getString(7));
-                em.setIdTipo(rs.getInt(8));
-                em.setEstado(rs.getInt(9));
-                em.setImagen(rs.getString(10));
+                em.setDireccion(rs.getString(6));
+                em.setCorreo(rs.getString(7));
+                em.setUsuario(rs.getString(8));
+                em.setClave(rs.getString(9));
+                em.setIdTipo(rs.getInt(10));
+                em.setEstado(rs.getInt(11));
+                em.setImagen(rs.getString(12));
             }
 
         } catch (Exception e) {
