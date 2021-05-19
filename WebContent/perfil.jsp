@@ -124,6 +124,25 @@
                         </div>
                         <div class="row mb-3">
                           <div class="col-sm-3">
+                            <label for="txtDireccionEmpleado" class="mb-0"
+                              >Dirección</label
+                            >
+                          </div>
+                          <div class="col-sm-9 text-secondary">
+                            <textarea
+                              class="form-control"
+                              id="txtDireccionEmpleado"
+                              name="txtDireccionEmpleado"
+                              placeholder="Ingrese dirección"
+                              rows="2"
+                              minlength="0"
+                            >
+Buenos Aires 322 - Sicuani - Ate paralela a la fabrica Braedt</textarea
+                            >
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <div class="col-sm-3">
                             <label for="txtEmailEmpleado" class="mb-0"
                               >Email</label
                             >
