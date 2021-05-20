@@ -24,26 +24,7 @@
             <jsp:param name="accion" value="Registrar" />
           </jsp:include>
           <div class="row">
-            <div class="col-md-5 col-xxl-4 mx-auto">
-              <hr>
-              <div class="card border-top border-0 border-4 border-primary">
-                <div class="card-body product-upload-container">
-                  <figure class="snip1515">
-                    <div class="profile-image">
-                      <img
-                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample47.jpg"
-                        alt="sample47"
-                      />
-                    </div>
-                    <figcaption>
-                      <button class="btn btn-warning">Subir Imagen</button>
-                    </figcaption>
-                  </figure>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-7 col-xxl-8 mx-auto">
+            <div class="col-xl-9 mx-auto">
               <hr />
               <div class="card border-top border-0 border-4 border-primary">
                 <div class="card-body p-5">
@@ -59,8 +40,24 @@
                     action="#"
                     method="POST"
                     novalidate
-                  >
-                    <div class="col-12">
+                  >                  
+                  <div class="col-4">
+                    <figure class="snip1515">
+                    <div class="profile-image">
+                      <img
+                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample47.jpg"
+                        alt="sample47"
+                      />
+                    </div>
+                    <figcaption>
+                      <button class="btn btn-warning">Subir Imagen</button>
+                    </figcaption>
+                  </figure>                  
+                  </div>
+                  
+                  <div class="col-8">
+                    <div class="row">
+                      <div class="col-12">
                       <label for="txtDescripcionProd" class="form-label"
                         >Descripción :
                       </label>
@@ -89,7 +86,7 @@
                         Seleccione un categoría válido
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6">
                       <label for="txtPrecioProd" class="form-label"
                         >Precio Unitario :</label
                       >
@@ -105,7 +102,7 @@
                         Ingrese un precio válido
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6">
                       <label for="txtStockProd" class="form-label"
                         >Stock :</label
                       >
@@ -126,6 +123,8 @@
                         Registrar Producto
                       </button>
                     </div>
+                    </div>
+                  </div>
                   </form>
                 </div>
               </div>
