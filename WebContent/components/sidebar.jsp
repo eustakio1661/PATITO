@@ -80,7 +80,7 @@
       </a>
       <ul>
         <li>
-          <a href="content-grid-system.html"
+          <a href="crud-producto.jsp"
             ><i class="bx bx-right-arrow-alt"></i>Registro</a
           >
         </li>
