@@ -24,7 +24,26 @@
             <jsp:param name="accion" value="Registrar" />
           </jsp:include>
           <div class="row">
-            <div class="col-xl-7 mx-auto">
+            <div class="col-md-5 col-xxl-4 mx-auto">
+              <hr>
+              <div class="card border-top border-0 border-4 border-primary">
+                <div class="card-body product-upload-container">
+                  <figure class="snip1515">
+                    <div class="profile-image">
+                      <img
+                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample47.jpg"
+                        alt="sample47"
+                      />
+                    </div>
+                    <figcaption>
+                      <button class="btn btn-warning">Subir Imagen</button>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-7 col-xxl-8 mx-auto">
               <hr />
               <div class="card border-top border-0 border-4 border-primary">
                 <div class="card-body p-5">
@@ -35,7 +54,12 @@
                     <h5 class="mb-0 text-primary">Registro de Productos</h5>
                   </div>
                   <hr />
-                  <form class="row g-3 needs-validation" action="#" method="POST" novalidate>
+                  <form
+                    class="row g-3 needs-validation"
+                    action="#"
+                    method="POST"
+                    novalidate
+                  >
                     <div class="col-12">
                       <label for="txtDescripcionProd" class="form-label"
                         >Descripción :
@@ -50,7 +74,7 @@
                         required
                       />
                       <div class="invalid-feedback">
-                         Ingrese una descripción válida
+                        Ingrese una descripción válida
                       </div>
                     </div>
                     <div class="col-12">
@@ -62,7 +86,7 @@
                         <option>...</option>
                       </select>
                       <div class="invalid-feedback">
-                         Seleccione un categoría válido
+                        Seleccione un categoría válido
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -78,7 +102,7 @@
                         required
                       />
                       <div class="invalid-feedback">
-                         Ingrese un precio válido
+                        Ingrese un precio válido
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -94,9 +118,9 @@
                         required
                       />
                       <div class="invalid-feedback">
-                         El stock debe ser válido y mayor a 0
+                        El stock debe ser válido y mayor a 0
                       </div>
-                    </div>                   
+                    </div>
                     <div class="col-12">
                       <button type="submit" class="btn btn-primary px-5">
                         Registrar Producto
