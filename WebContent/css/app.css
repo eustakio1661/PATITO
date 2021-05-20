@@ -2428,8 +2428,10 @@ input.search-control-2::placeholder {
   font-family: 'Open Sans',sans-serif, Arial ;
   position: relative;
   margin: 10px;
+  /*
   min-width: 230px;
   max-width: 315px;
+  */
   width: 100%;
   color: #000000;
   text-align: center;
@@ -2458,12 +2460,13 @@ input.search-control-2::placeholder {
 }
 
 .snip1515 figcaption {
-  width: 100%;
+  width: 90%;
   background-color: #F2F2F2;
   color: #555;
-  padding: 125px 25px 25px;
-  margin-top: -100px;
+  padding: 10px;
+  margin-top: 10px;
   display: inline-block;
+  border-radius: 30px;
 }
 
 .snip1515 h3 {
