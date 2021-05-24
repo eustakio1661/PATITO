@@ -10,7 +10,7 @@ public class MySQLConexion8 {
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String URL = "jdbc:mysql://localhost/idk?useSSL=false&useTimezone=true&serverTimezone=UTC";
+            String URL = "jdbc:mysql://localhost/patito?useSSL=false&useTimezone=true&serverTimezone=UTC";
             String USER = "root";
             String PASSWORD = "mysql";
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
