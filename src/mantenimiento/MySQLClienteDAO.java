@@ -3,7 +3,6 @@ package mantenimiento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
@@ -28,7 +27,7 @@ public class MySQLClienteDAO implements ClienteDAO {
             listac = new ArrayList<ClienteDTO>();
             while (rs.next()) {
                 ClienteDTO c = new ClienteDTO();
-                c.setCodigo(rs.getString(1));
+                c.setCodigo(rs.getInt(1));
                 c.setCodigoDistrito(rs.getInt(2));
                 c.setDni(rs.getString(3));
                 c.setNombre(rs.getString(4));
@@ -59,7 +58,7 @@ public class MySQLClienteDAO implements ClienteDAO {
 	        con = MySQLConexion8.getConexion();
 	        String sql = "insert into cliente values(?,?,?,?,?,?,?)";
 	        pst = con.prepareStatement(sql);
-	        pst.setString(1, cli.getCodigo());
+	        pst.setInt(1, cli.getCodigo());
 	        pst.setInt(2, cli.getCodigoDistrito());
 	        pst.setString(3, cli.getDni());
 	        pst.setString(4, cli.getNombre());
@@ -87,7 +86,7 @@ public class MySQLClienteDAO implements ClienteDAO {
 			cn = MySQLConexion8.getConexion();
 			String sql = "update cliente set ID_DIST=?, DNI_CLI=?, NOM_CLI=?, APE_CLI=?, DIR_CLI=?, TELEF_CLI=? where ID_CLI=?";
 			pstm = cn.prepareStatement(sql);
-			pstm.setString(1, cli.getCodigo());
+			pstm.setInt(1, cli.getCodigo());
 			pstm.setInt(2, cli.getCodigoDistrito());
 			pstm.setString(3, cli.getDni());
 			pstm.setString(4, cli.getNombre());
@@ -111,7 +110,7 @@ public class MySQLClienteDAO implements ClienteDAO {
 	}
 
 	
-	public ClienteDTO buscarCliente(String cod) {
+	public ClienteDTO buscarCliente(int cod) {
 		
 		ClienteDTO c = null;
 		Connection cn = null;
@@ -121,11 +120,11 @@ public class MySQLClienteDAO implements ClienteDAO {
 			cn = MySQLConexion8.getConexion();
 			String sql = "select * from CLIENTE where ID_CLI=?";
 			pstm = cn.prepareStatement(sql);
-			pstm.setString(1, cod);
+			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
 			if (rs.next()) {
 				c = new ClienteDTO();
-				c.setCodigo(rs.getString(1));
+				c.setCodigo(rs.getInt(1));
 				c.setCodigoDistrito(rs.getInt(2));
 				c.setDni(rs.getString(3));
 				c.setNombre(rs.getString(4));
@@ -150,26 +149,5 @@ public class MySQLClienteDAO implements ClienteDAO {
 		return c;
 	}
 	
-	 public String generarCodigo() {
-	        String codigo = "C0001";
-	        Connection con = null;
-	        PreparedStatement pst = null;
-	        ResultSet rs = null;
-	        try {
-	            con = MySQLConexion8.getConexion();
-	            String sql = "select substring(ID_CLI,3)" + "from CLIENTE order by ID_CLI desc limit 1";
-	            pst = con.prepareStatement(sql);
-	            rs = pst.executeQuery();
-
-	            if (rs.next()) {
-	                codigo = "C" + new DecimalFormat("0000").format(Integer.parseInt(rs.getString(1)) + 1);
-	            }
-	        } catch (Exception e) {
-	            System.out.println("Error al generar codigo : " + e.getMessage());
-	        } finally {
-	            MySQLConexion8.closeConexion(con);
-	        }
-	        return codigo;
-	    }
 
 }

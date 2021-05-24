@@ -2,19 +2,19 @@ package beans;
 
 public class ClienteDTO {
 
-	private int codigoDistrito;
-	private String codigo, dni, nombre, apellido, direccion, telefono;
+	private int codigo, codigoDistrito;
+	private String  dni, nombre, apellido, direccion, telefono;
 
 	public String toString() {
 		return "ClienteDTO [codigo=" + codigo + ", codigoDistrito=" + codigoDistrito + ", dni=" + dni + ", nombre="
 				+ nombre + ", apellido=" + apellido + ", direccion=" + direccion + ", telefono=" + telefono + "]";
 	}
 
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 

@@ -9,6 +9,6 @@ public interface ClienteDAO {
 	public ArrayList<ClienteDTO> listarCliente();
 	public int registrarCliente(ClienteDTO cli);
 	public int actualizarCliente(ClienteDTO cli);
-	public ClienteDTO buscarCliente(String cod);
+	public ClienteDTO buscarCliente(int cod);
 	
 }
