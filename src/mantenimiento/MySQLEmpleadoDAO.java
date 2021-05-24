@@ -17,7 +17,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         PreparedStatement pst = null;
         try {
             con = MySQLConexion8.getConexion();
-            String sql = "insert into empleado values(null,?,?,?,?,?,?,?,?,?,default)";
+            String sql = "insert into empleado values(null,?,?,?,?,?,?,?,?,?,?,default)";
             pst = con.prepareStatement(sql);
             pst.setString(1, e.getDni());
             pst.setString(2, e.getNombre());
@@ -29,7 +29,6 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
             pst.setString(8, e.getClave());
             pst.setInt(9, e.getIdTipo());
             pst.setInt(10, e.getEstado());
-            pst.setString(11, e.getImagen());
             rs = pst.executeUpdate();
         } catch (Exception e2) {
             System.out.println("Error al registrar empleado: " + e2.getMessage());
@@ -111,13 +110,24 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         PreparedStatement pst = null;
         try {
             cn = MySQLConexion8.getConexion();
-            String sql = "{call usp_eliminarEmpleado(?)}";
+            String sql = "{call usp_eliminarEmpleado(?,?,?,?,?,?,?,?,?,?,?)}";
             pst = cn.prepareStatement(sql);
             pst.setInt(1, e.getId());
+            pst.setString(2, e.getDni());
+            pst.setString(3, e.getNombre());
+            pst.setString(4, e.getApellido());
+            pst.setString(5, e.getTelefono());
+            pst.setString(6, e.getDireccion());
+            pst.setString(7, e.getCorreo());
+            pst.setString(8, e.getUsuario());
+            pst.setString(9, e.getClave());
+            pst.setInt(10, e.getIdTipo());
+            pst.setInt(11, e.getEstado());
+            pst.setString(12, e.getImagen());
             rs = pst.executeUpdate();
 
         } catch (Exception ex) {
-            System.out.println("Error en eliminar empleado: " + ex.getMessage());
+            System.out.println("Error al actualizar empleado: " + ex.getMessage());
         } finally {
             MySQLConexion8.closeConexion(cn);
         }
