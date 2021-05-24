@@ -36,13 +36,13 @@
     </li>
     <li class="menu-label">Mantenimiento</li>
     <li>
-      <a href="javascript:;" class="has-arrow">
+      <a href="#" class="has-arrow">
         <div class="parent-icon"><i class="bx bx-id-card"></i></div>
         <div class="menu-title">Empleados</div>
       </a>
       <ul>
         <li>
-          <a href="ecommerce-products.html"
+          <a href="crud-empleado.jsp"
             ><i class="bx bx-right-arrow-alt"></i>Registro</a
           >
         </li>
@@ -62,7 +62,7 @@
       </a>
       <ul>
         <li>
-          <a href="component-alerts.html"
+          <a href="crud-cliente.jsp"
             ><i class="bx bx-right-arrow-alt"></i>Registro</a
           >
         </li>
@@ -80,7 +80,7 @@
       </a>
       <ul>
         <li>
-          <a href="content-grid-system.html"
+          <a href="crud-producto.jsp"
             ><i class="bx bx-right-arrow-alt"></i>Registro</a
           >
         </li>
