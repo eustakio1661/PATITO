@@ -48,7 +48,7 @@
                             src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/20190503-delish-pineapple-baked-salmon-horizontal-ehg-450-1557771120.jpg"
                             alt="sample47"
                           />
-                          <input type="file" name="fileImage" style="display:none">
+                          <input id="input-file" type="file" name="imgProducto" style="display:none">
                         </div>
                         <figcaption>
                           <button type="button" class="btn btn-warning">Subir Imagen</button>
