@@ -3,7 +3,7 @@ package beans;
 public class ClienteDTO {
 
 	private int codigo, codigoDistrito;
-	private String dni, nombre, apellido, direccion, telefono;
+	private String  dni, nombre, apellido, direccion, telefono;
 
 	public String toString() {
 		return "ClienteDTO [codigo=" + codigo + ", codigoDistrito=" + codigoDistrito + ", dni=" + dni + ", nombre="
