@@ -206,3 +206,37 @@ DELIMITER ;
 
 INSERT INTO TIPOEMPLEADO VALUES (1,'admin');
 INSERT INTO EMPLEADO VALUES (1,'99999999','Jhon','Doe','999999999','JhonDoe@gmail.com','99999','99999',1,1,'https://i.pinimg.com/originals/b0/82/c0/b082c01b099e8a0e8bd6a50c2b06e135.png');
+
+INSERT INTO DISTRITO values(1, 'Cercado de Lima');
+INSERT INTO DISTRITO values(2, 'Ate');
+INSERT INTO DISTRITO values(3, 'Barranco');
+INSERT INTO DISTRITO values(4, 'Breña');
+INSERT INTO DISTRITO values(5, 'Comas');
+INSERT INTO DISTRITO values(6, 'Chorrillos');
+INSERT INTO DISTRITO values(7, 'El Agustino');
+INSERT INTO DISTRITO values(8, 'Jesús María');
+INSERT INTO DISTRITO values(9, 'La Molina');
+INSERT INTO DISTRITO values(10, 'La Victoria');
+INSERT INTO DISTRITO values(11, 'Lince');
+INSERT INTO DISTRITO values(12, 'Magdalena del Mar');
+INSERT INTO DISTRITO values(13, 'Miraflores');
+INSERT INTO DISTRITO values(14, 'Pueblo Libre');
+INSERT INTO DISTRITO values(15, 'Puente Piedra');
+INSERT INTO DISTRITO values(16, 'Rimac');
+INSERT INTO DISTRITO values(17, 'San Isidro');
+INSERT INTO DISTRITO values(18, 'Independencia');
+INSERT INTO DISTRITO values(19, 'San Juan de Miraflores');
+INSERT INTO DISTRITO values(20, 'San Luis');
+INSERT INTO DISTRITO values(21, 'San Martin de Porres');
+INSERT INTO DISTRITO values(22, 'San Miguel');
+INSERT INTO DISTRITO values(23, 'Santiago de Surco');
+INSERT INTO DISTRITO values(24, 'Surquillo');
+INSERT INTO DISTRITO values(25, 'Villa María del Triunfo');
+INSERT INTO DISTRITO values(26, 'San Juan de Lurigancho');
+INSERT INTO DISTRITO values(27, 'Santa Rosa');
+INSERT INTO DISTRITO values(28, 'Los Olivos');
+INSERT INTO DISTRITO values(29, 'Los Olivos');
+INSERT INTO DISTRITO values(30, 'Villa El Savador');
+INSERT INTO DISTRITO values(31, 'Santa Anita');
+
+
