@@ -41,12 +41,13 @@
                         >DNI :
                       </label>
                       <input
-                        type="email"
+                        type="text"
                         class="form-control"
                         id="txtDNIEmpleado"
                         name="txtDNIEmpleado"
                         placeholder="Ingrese DNI"
                         required
+                        value=""
                       />
                       <div class="invalid-feedback">
                          Ingrese un DNI válido
