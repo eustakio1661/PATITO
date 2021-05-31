@@ -1,3 +1,5 @@
+<%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -106,8 +108,7 @@
                         >Tipo :</label
                       >
                       <select id="cboTipoEmpleado" class="form-select">
-                        <option selected>Seleccione tipo</option>
-                        <option>...</option>
+                        <tools:comboTipoEmp/>
                       </select>
                       <div class="invalid-feedback">
                          Seleccione un tipo válido
