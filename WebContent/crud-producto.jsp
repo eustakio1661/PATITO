@@ -1,3 +1,5 @@
+<%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -79,9 +81,8 @@
                           <label for="cboCategoriaProd" class="form-label"
                             >Categoría :</label
                           >
-                          <select id="cboCategoriaProd" class="form-select">
-                            <option selected>Seleccione categoría</option>
-                            <option>...</option>
+                          <select id="cboCategoriaProd" class="form-select" name="cboCategoriaProd" required>
+                            <tools:comboAuthor/>
                           </select>
                           <div class="invalid-feedback">
                             Seleccione un categoría válido
