@@ -82,7 +82,7 @@
                             >Categoría :</label
                           >
                           <select id="cboCategoriaProd" class="form-select" name="cboCategoriaProd" required>
-                            <tools:comboAuthor/>
+                            <tools:comboCategoria/>
                           </select>
                           <div class="invalid-feedback">
                             Seleccione un categoría válido
