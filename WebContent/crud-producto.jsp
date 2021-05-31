@@ -1,3 +1,5 @@
+<%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -48,6 +50,7 @@
                             src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/20190503-delish-pineapple-baked-salmon-horizontal-ehg-450-1557771120.jpg"
                             alt="sample47"
                           />
+                          <input id="input-file" type="file" name="imgProducto" style="display:none">
                         </div>
                         <figcaption>
                           <button type="button" class="btn btn-warning">Subir Imagen</button>
@@ -78,9 +81,8 @@
                           <label for="cboCategoriaProd" class="form-label"
                             >Categoría :</label
                           >
-                          <select id="cboCategoriaProd" class="form-select">
-                            <option selected>Seleccione categoría</option>
-                            <option>...</option>
+                          <select id="cboCategoriaProd" class="form-select" name="cboCategoriaProd" required>
+                            <tools:comboCategoria/>
                           </select>
                           <div class="invalid-feedback">
                             Seleccione un categoría válido
@@ -96,6 +98,8 @@
                             id="txtPrecioProd"
                             name="txtPrecioProd"
                             placeholder="0.00"
+                            min="0"
+                            step="any"
                             required
                           />
                           <div class="invalid-feedback">
@@ -112,6 +116,8 @@
                             id="txtStockProd"
                             name="txtStockProd"
                             placeholder="0"
+                            min="0"
+                            step="1"
                             required
                           />
                           <div class="invalid-feedback">

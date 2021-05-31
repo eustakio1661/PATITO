@@ -1,3 +1,5 @@
+<%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -41,12 +43,13 @@
                         >DNI :
                       </label>
                       <input
-                        type="email"
+                        type="text"
                         class="form-control"
                         id="txtDNIEmpleado"
                         name="txtDNIEmpleado"
                         placeholder="Ingrese DNI"
                         required
+                        value=""
                       />
                       <div class="invalid-feedback">
                          Ingrese un DNI válido
@@ -105,8 +108,7 @@
                         >Tipo :</label
                       >
                       <select id="cboTipoEmpleado" class="form-select">
-                        <option selected>Seleccione tipo</option>
-                        <option>...</option>
+                        <tools:comboTipoEmp/>
                       </select>
                       <div class="invalid-feedback">
                          Seleccione un tipo válido

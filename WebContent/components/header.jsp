@@ -42,10 +42,10 @@
             class="user-img"
             alt="user avatar"
           />
-          <div class="user-info ps-3">
-            <p class="user-name mb-0">Pauline Seitz</p>
-            <p class="designattion mb-0">Asistente de Ventas</p>
-          </div>
+          <span class="user-info ps-3">
+            <span class="user-name mb-0">Pauline Seitz</span><br>
+            <span class="designattion mb-0">Asistente de Ventas</span>
+          </span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
           <li>
