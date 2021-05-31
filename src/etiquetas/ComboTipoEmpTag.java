@@ -36,7 +36,7 @@ public class ComboTipoEmpTag extends TagSupport {
         try {
 
             out.println("<option selected disabled hidden value=\"\">");
-            out.println("Seleccione una categoría");
+            out.println("Seleccione un tipo");
             out.println("</option>");
 
              if (idTipoEmp == null || idTipoEmp.isEmpty())
