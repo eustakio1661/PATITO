@@ -6,12 +6,24 @@
   <shortname>Alias de la libreria</shortname>
 
   <tag>	
-    <name>comboAuthor</name>	
+    <name>comboCategoria</name>	
     <tagclass>etiquetas.ComboCategoriaTag</tagclass>	
     <bodycontent>empty</bodycontent>	
     <info>Muestra lista de categorias de producto</info>
     <attribute>
       <name>idCategoria</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>	
+  </tag>
+  
+  <tag>	
+    <name>comboTipoEmp</name>	
+    <tagclass>etiquetas.ComboTipoEmpTag</tagclass>	
+    <bodycontent>empty</bodycontent>	
+    <info>Muestra lista de tipos de empleados</info>
+    <attribute>
+      <name>idTipoEmp</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
     </attribute>	
