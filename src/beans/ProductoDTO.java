@@ -2,7 +2,7 @@ package beans;
 
 public class ProductoDTO {
 	private int idProducto,cantidad,idCategoria,estado;
-	private String descripcion,imagen;
+	private String descripcion,imagen,descCategoria;
 	private double precio;
 	
 	public ProductoDTO() {
@@ -64,5 +64,13 @@ public class ProductoDTO {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+	public String getDescCategoria() {
+		return descCategoria;
+	}
+
+	public void setDescCategoria(String descCategoria) {
+		this.descCategoria = descCategoria;
+	}
 
 }
