@@ -93,15 +93,14 @@ public class MySQLProductoDAO implements ProductoDAO {
 			rs = pst.executeQuery();
 			lista = new ArrayList<ProductoDTO>();
 			while (rs.next()) {
-				ProductoDTO e = new ProductoDTO();
-				e.setIdProducto(rs.getInt(1));
-				e.setDescripcion(rs.getString(2));
-				e.setPrecio(rs.getDouble(3));
-				e.setCantidad(rs.getInt(4));
-				e.setDescCategoria(rs.getString(5));
-				e.setImagen(rs.getString(6));
-				e.setEstado(rs.getInt(7));
-				lista.add(e);
+				ProductoDTO p = new ProductoDTO();
+				p.setIdProducto(rs.getInt(1));
+				p.setDescripcion(rs.getString(2));
+				p.setPrecio(rs.getDouble(3));
+				p.setCantidad(rs.getInt(4));
+				p.setIdCategoria(rs.getInt(5));
+				p.setDescCategoria(rs.getString(6));
+				lista.add(p);
 			}
 		} catch (Exception e) {
 			System.out.println("Error al listar productos:" + e.getMessage());
@@ -160,7 +159,7 @@ public class MySQLProductoDAO implements ProductoDAO {
 				p.setDescripcion(rs.getString(2));
 				p.setPrecio(rs.getDouble(3));
 				p.setCantidad(rs.getInt(4));
-				p.setDescCategoria(rs.getString(5));
+				p.setIdCategoria(rs.getInt(5));
 				p.setImagen(rs.getString(6));
 				p.setEstado(rs.getInt(7));
 
