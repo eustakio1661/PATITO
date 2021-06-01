@@ -12,5 +12,5 @@ public interface ProductoDAO {
     public int actualizar(ProductoDTO p);
     public ArrayList<ProductoDTO> listado();
     public ArrayList<CategoriaDTO> listadoCategoria();
-
+    public ProductoDTO buscar(int codigo);
 }
