@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,7 +21,7 @@ pageEncoding="ISO-8859-1"%>
       <div class="page-wrapper">
         <div class="page-content">
           <jsp:include page="components/breadcrumb.jsp">
-            <jsp:param name="pagina" value="Cliente" />
+            <jsp:param name="pagina" value="Producto" />
             <jsp:param name="accion" value="Listado" />
           </jsp:include>
           <div class="row">
@@ -41,46 +42,52 @@ pageEncoding="ISO-8859-1"%>
                     <table id="myTable" class="table align-middle mb-0">
                       <thead class="table-light">
                         <tr>
-                          <th>Número Cliente</th>
-                          <th>DNI</th>
-                          <th>Nombre</th>
-                          <th>Apellido</th>
-                          <th>Teléfono</th>
-                          <th>Distrito</th>
+                          <th>N&uacute;mero</th>
+                          <th>Descripci&oacute;n</th>
+                          <th>Categor&iacute;a</th>
+                          <th>Precio</th>
+                          <th>Stock</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>#01</td>
-                          <td>75886124</td>
-                          <td>Darly</td>
-                          <td>Gongora</td>
-                          <td>333-5555</td>
-                          <td>Miraflores</td>
-                          <td>
-                            <div class="d-flex order-actions">
-                              <a
-                                href="servlet?opcion=actualizar"
-                                class="btn btn-success"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="bottom"
-                                title="Editar Producto"
-                              >
-                                <i class="bx bx-edit mx-0"></i
-                              ></a>
-                              <a
-                                href="servlet?opcion=eliminar"
-                                class="ms-4 btn btn-danger"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="bottom"
-                                title="Eliminar Producto"
-                              >
-                                <i class="bx bx-trash mx-0"></i
-                              ></a>
-                            </div>
-                          </td>
-                        </tr>
+                        <c:forEach items="${ lstProductos }" var="prod">
+                          <tr>
+                            <td>${prod.idProducto}</td>
+                            <td>${prod.descripcion}</td>
+                            <td>${prod.descCategoria}</td>
+                            <td>
+                              <fmt:setLocale value="es_PE" />
+                              <fmt:formatNumber
+                                type="currency"
+                                value="${prod.precio}"
+                              />
+                            </td>
+                            <td>${prod.cantidad}</td>
+                            <td>
+                              <div class="d-flex order-actions">
+                                <a
+                                  href="cs?opcion=actualizar"
+                                  class="btn btn-success"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="bottom"
+                                  title="Editar Cliente"
+                                >
+                                  <i class="bx bx-edit mx-0"></i
+                                ></a>
+                                <a
+                                  href="cs?opcion=eliminar"
+                                  class="ms-4 btn btn-danger"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="bottom"
+                                  title="Eliminar Cliente"
+                                >
+                                  <i class="bx bx-trash mx-0"></i
+                                ></a>
+                              </div>
+                            </td>
+                          </tr>
+                        </c:forEach>
                       </tbody>
                     </table>
                   </div>
