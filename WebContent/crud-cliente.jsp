@@ -1,3 +1,5 @@
+<%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -132,13 +134,7 @@
                             aria-label="Estado de Productos"
                             required
                           >
-                            <option selected disabled hidden="hidden" value="">
-                              Seleccione...
-                            </option>
-                            <option value="1">Ate</option>
-                            <option value="2">Miraflores</option>
-                            <option value="3">San Isidro</option>
-                            <option value="4">La Molina</option>
+                            <tools:comboDistrito/>
                           </select>
                           <div class="invalid-feedback">
                             Seleccione un distrito
