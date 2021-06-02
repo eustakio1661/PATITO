@@ -11,5 +11,6 @@ public interface ClienteDAO {
 	public int actualizarCliente(ClienteDTO cli);
 	public ClienteDTO buscarCliente(int cod);
 	public ArrayList<ClienteDTO> listarClientexDistrito();
+	public int eliminarCliente(ClienteDTO c);
 	
 }
