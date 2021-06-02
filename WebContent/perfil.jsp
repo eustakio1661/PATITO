@@ -27,7 +27,7 @@
           <div class="container">
             <div class="main-body">
               <form
-                action="#"
+                action="emse"
                 method="POST"
                 class="needs-validation"
                 novalidate
@@ -45,18 +45,18 @@
                           "
                         >
                           <img
-                            src="img/avatars/avatar-2.png"
+                            src="${e.imagen }"
                             alt="Admin"
                             class="rounded-circle p-1 bg-primary"
                             width="110"
                           />
                           <div class="mt-3">
-                            <h4>John Doe</h4>
+                            <h4>${e.nombre }</h4>
                             <p class="text-secondary mb-1">
-                              Full Stack Developer
+                              ${e.descripcionTipoEmpleado }
                             </p>
                             <p class="text-muted font-size-sm">
-                              Bay Area, San Francisco, CA
+                              ${e.direccion }
                             </p>
                             <button
                               type="button"
@@ -86,7 +86,7 @@
                               name="txtNombreEmpleado"
                               type="text"
                               class="form-control"
-                              value="Diego"
+                              value="${e.nombre }"
                               placeholder="Ingrese nombre"
                               required
                             />
@@ -107,7 +107,7 @@
                               name="txtApellidoEmpleado"
                               type="text"
                               class="form-control"
-                              value="Gutarra"
+                              value="${e.apellido }"
                               placeholder="Ingrese apellido"
                               required
                             />
@@ -128,7 +128,7 @@
                               name="txtTelefonoEmpleado"
                               type="text"
                               class="form-control"
-                              value="(239) 816-9029"
+                              value="${e.telefono }"
                               placeholder="Fijo o celular"
                               required
                             />
@@ -151,8 +151,7 @@
                               placeholder="Ingrese dirección"
                               rows="2"
                               minlength="0"
-                            >
-Buenos Aires 322 - Sicuani - Ate paralela a la fabrica Braedt</textarea
+                            >${e.direccion }</textarea
                             >
                           </div>
                         </div>
@@ -168,7 +167,7 @@ Buenos Aires 322 - Sicuani - Ate paralela a la fabrica Braedt</textarea
                               name="txtEmailEmpleado"
                               type="text"
                               class="form-control"
-                              value="test@gmail.com"
+                              value="${e.correo }"
                               placeholder="Ingrese email"
                             />
                             <div class="invalid-feedback">
@@ -214,7 +213,7 @@ Buenos Aires 322 - Sicuani - Ate paralela a la fabrica Braedt</textarea
                         <div class="row">
                           <div class="col-sm-3"></div>
                           <div class="col-sm-9 text-secondary">
-                            <button type="submit" class="btn btn-primary px-4">
+                            <button type="submit" name="opcion" value="actualizar"class="btn btn-primary px-4">
                               Actualizar perfil
                             </button>
                           </div>
