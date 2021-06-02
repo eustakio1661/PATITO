@@ -41,7 +41,7 @@
                     <div class="form-body">
                       <form
                         class="row g-3 needs-validation"
-                        action="#"
+                        action="emse"
                         method="POST"
                         novalidate
                       >
@@ -112,7 +112,7 @@
                         </div>
                         <div class="col-12">
                           <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" name="opcion" value="login" class="btn btn-primary">
                               <i class="bx bxs-lock-open"></i>Iniciar sesión
                             </button>
                           </div>
