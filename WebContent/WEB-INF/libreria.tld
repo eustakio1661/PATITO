@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<taglib>
+
+	<tlibversion>1.0</tlibversion>
+
+	<jspversion>1.0</jspversion>
+
+	<shortname>tools</shortname>
+
+	<!-- Etiquetas -->
+	<tag>
+
+		<name>cboEmpleado</name>
+
+		<tagclass>tag.cboEmpleado</tagclass>
+
+		<bodycontent>empty</bodycontent>
+
+		<info>Muestra el combo del empleado</info>
+		
+	</tag>	
+</taglib>
