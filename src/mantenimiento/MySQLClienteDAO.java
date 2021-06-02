@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import beans.ClienteDTO;
+import beans.ProductoDTO;
 import interfaces.ClienteDAO;
 import utils.MySQLConexion8;
 
@@ -53,16 +54,15 @@ public class MySQLClienteDAO implements ClienteDAO {
 		PreparedStatement pst = null;
 		try {
 			con = MySQLConexion8.getConexion();
-			String sql = "insert into cliente values(null,?,?,?,?,?,?,?)";
+			String sql = "{USP_REGISTRARCLIENTE(?,?,?,?,?,?)}";
 			pst = con.prepareStatement(sql);
-			pst.setInt(1, cli.getCodigo());
-			pst.setInt(2, cli.getCodigoDistrito());
-			pst.setString(3, cli.getDni());
-			pst.setString(4, cli.getNombre());
-			pst.setString(5, cli.getApellido());
-			pst.setString(6, cli.getDireccion());
-			pst.setString(7, cli.getTelefono());
-			pst.setInt(8, cli.getEstado());
+			pst.setInt(1, cli.getCodigoDistrito());
+			pst.setString(2, cli.getDni());
+			pst.setString(3, cli.getNombre());
+			pst.setString(4, cli.getApellido());
+			pst.setString(5, cli.getDireccion());
+			pst.setString(6, cli.getTelefono());
+			
 			rs = pst.executeUpdate();
 		} catch (Exception e2) {
 			System.out.println("Error en registrar: " + e2.getMessage());
@@ -73,38 +73,53 @@ public class MySQLClienteDAO implements ClienteDAO {
 		return rs;
 	}
 
-	public int actualizarCliente(ClienteDTO cli) {
+	 public int actualizarCliente(ClienteDTO cli) {
+	        int rs = 0;
+	        Connection cn = null;
+	        PreparedStatement pst = null;
+	        try {
+	            cn = MySQLConexion8.getConexion();
+	            String sql = "{CALL USP_ACTUALIZARCLIENTE(?,?,?,?,?,?,?)}";
+	            pst = cn.prepareStatement(sql);
+	            pst.setInt(1, cli.getCodigo());
+	            pst.setString(2, cli.getNombre());
+	            pst.setString(3, cli.getApellido());
+	            pst.setString(4, cli.getTelefono());
+	            pst.setString(5, cli.getDni());
+	            pst.setInt(6, cli.getCodigoDistrito());
+	            pst.setString(7, cli.getDireccion());
+	            
+	            rs = pst.executeUpdate();
 
-		int estado = -1;
-		Connection cn = null;
-		PreparedStatement pstm = null;
-		try {
-			cn = MySQLConexion8.getConexion();
-			String sql = "update cliente set ID_DIST=?, DNI_CLI=?, NOM_CLI=?, APE_CLI=?, DIR_CLI=?, TELEF_CLI=?, ESTADO=? where ID_CLI=?";
-			pstm = cn.prepareStatement(sql);
-			pstm.setInt(1, cli.getCodigo());
-			pstm.setInt(2, cli.getCodigoDistrito());
-			pstm.setString(3, cli.getDni());
-			pstm.setString(4, cli.getNombre());
-			pstm.setString(5, cli.getApellido());
-			pstm.setString(6, cli.getDireccion());
-			pstm.setString(7, cli.getTelefono());
-			pstm.setInt(8, cli.getEstado());
-			estado = pstm.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (pstm != null)
-					pstm.close();
-				if (cn != null)
-					cn.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		return estado;
-	}
+	        } catch (Exception ex) {
+	            System.out.println("Error al actualizar clientes:" + ex.getMessage());
+	        } finally {
+	            MySQLConexion8.closeConexion(cn);
+	        }
+	        return rs;
+	    }
+	    
+
+	
+	
+	public int eliminarCliente(ClienteDTO c) {
+        int rs = 0;
+        Connection con = null;
+        PreparedStatement pst = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "{CALL USP_ELIMINARCLIENTE(?)}";
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, c.getCodigo());
+            rs = pst.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println("Error en eliminar cliente: " + ex.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(con);
+        }
+        return rs;
+    }
 
 	public ClienteDTO buscarCliente(int cod) {
 
