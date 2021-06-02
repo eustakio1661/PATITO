@@ -2,8 +2,8 @@ package beans;
 
 public class ClienteDTO {
 
-	private int codigo, codigoDistrito;
-	private String  dni, nombre, apellido, direccion, telefono;
+	private int codigo, codigoDistrito, estado;
+	private String  dni, nombre, apellido, direccion, telefono, nombreDistrito;
 
 	public String toString() {
 		return "ClienteDTO [codigo=" + codigo + ", codigoDistrito=" + codigoDistrito + ", dni=" + dni + ", nombre="
@@ -65,5 +65,23 @@ public class ClienteDTO {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
+	public String getNombreDistrito() {
+		return nombreDistrito;
+	}
+
+	public void setNombreDistrito(String nombreDistrito) {
+		this.nombreDistrito = nombreDistrito;
+	}
+	
+	
 
 }
