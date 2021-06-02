@@ -85,7 +85,7 @@
           >
         </li>
         <li>
-          <a href="content-typography.html"
+          <a href="ps?opcion=listado"
             ><i class="bx bx-right-arrow-alt"></i>Listado</a
           >
         </li>
