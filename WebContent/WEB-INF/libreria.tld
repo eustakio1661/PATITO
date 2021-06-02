@@ -29,4 +29,16 @@
     </attribute>	
   </tag>
   
+  <tag>	
+    <name>comboDistrito</name>	
+    <tagclass>etiquetas.ComboDistritoTag</tagclass>	
+    <bodycontent>empty</bodycontent>	
+    <info>Muestra lista de distritos</info>
+    <attribute>
+      <name>idDistrito</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>	
+  </tag>
+  
 </taglib>
