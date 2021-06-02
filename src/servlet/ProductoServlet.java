@@ -76,7 +76,7 @@ public class ProductoServlet extends HttpServlet {
         ArrayList<ProductoDTO> lista = dao.listado();
 
         request.setAttribute("lstProductos", lista);
-        request.getRequestDispatcher("").forward(request, response);
+        request.getRequestDispatcher("listado-productos.jsp").forward(request, response);
 
     }
 

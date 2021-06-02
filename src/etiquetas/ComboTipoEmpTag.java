@@ -6,7 +6,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import beans.CategoriaDTO;
 import beans.TipoEmpleadoDTO;
 import dao.DAOFactory;
 
@@ -29,9 +28,7 @@ public class ComboTipoEmpTag extends TagSupport {
         JspWriter out = pageContext.getOut();
 
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-        //ArrayList<TipoEmpleadoDTO> listaTipoEmp = factory.getEmpleadoDAO().X;
-
-        ArrayList<TipoEmpleadoDTO> listaTipoEmp = null;
+        ArrayList<TipoEmpleadoDTO> listaTipoEmp = factory.getEmpleadoDAO().listadoTipoEmpleado();
         
         try {
 

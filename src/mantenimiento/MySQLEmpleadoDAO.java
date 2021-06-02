@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import beans.EmpleadoDTO;
+import beans.TipoEmpleadoDTO;
 import interfaces.EmpleadoDAO;
 import utils.MySQLConexion8;
 
@@ -166,8 +167,8 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
     }
 
     @Override
-    public ArrayList<EmpleadoDTO> listadoTipoEmpleado() {
-        ArrayList<EmpleadoDTO> lista = null;
+    public ArrayList<TipoEmpleadoDTO> listadoTipoEmpleado() {
+        ArrayList<TipoEmpleadoDTO> lista = null;
         Connection con = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -176,15 +177,15 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
             String sql = "SELECT * FROM TIPOEMPLEADO";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
-            lista = new ArrayList<EmpleadoDTO>();
+            lista = new ArrayList<TipoEmpleadoDTO>();
             while (rs.next()) {
-                EmpleadoDTO e = new EmpleadoDTO();
-                e.setIdTipoEmpleado(rs.getInt(1));
-                e.setDescripcionTipoEmpleado(rs.getString(2));
-                lista.add(e);
+                TipoEmpleadoDTO t = new TipoEmpleadoDTO();
+                t.setId(rs.getInt(1));
+                t.setDescripcion(rs.getString(2));
+                lista.add(t);
             }
         } catch (Exception e) {
-            System.out.println("Error al listar empleados:" + e.getMessage());
+            System.out.println("Error al listar tipo empleado:" + e.getMessage());
         } finally {
             MySQLConexion8.closeConexion(con);
         }

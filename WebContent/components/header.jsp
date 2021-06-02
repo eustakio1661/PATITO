@@ -42,10 +42,10 @@
             class="user-img"
             alt="user avatar"
           />
-          <div class="user-info ps-3">
-            <p class="user-name mb-0">${e.nombre }</p>
-            <p class="designattion mb-0">${e.descripcionTipoEmpleado }</p>
-          </div>
+          <span class="user-info ps-3">
+            <span class="user-name mb-0">${e.nombre }</span><br>
+            <span class="designattion mb-0">${e.descripcionTipoEmpleado }</span>
+          </span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
           <li>

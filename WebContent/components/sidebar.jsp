@@ -47,7 +47,7 @@
           >
         </li>
         <li>
-          <a href="ecommerce-products-details.html"
+          <a href="emse?opcion=listar"
             ><i class="bx bx-right-arrow-alt"></i>Listado</a
           >
         </li>
@@ -67,7 +67,7 @@
           >
         </li>
         <li>
-          <a href="component-accordions.html"
+          <a href="cs?opcion=listado"
             ><i class="bx bx-right-arrow-alt"></i>Listado</a
           >
         </li>
@@ -85,7 +85,7 @@
           >
         </li>
         <li>
-          <a href="content-typography.html"
+          <a href="ps?opcion=listado"
             ><i class="bx bx-right-arrow-alt"></i>Listado</a
           >
         </li>

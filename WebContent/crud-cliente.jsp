@@ -1,3 +1,5 @@
+<%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -57,7 +59,7 @@
                             placeholder="Nombre del cliente"
                           />
                           <div class="invalid-feedback">
-                            Ingrese un nombre válido
+                            Ingrese un nombre v&aacute;lido
                           </div>
                         </div>
                       </div>
@@ -76,7 +78,7 @@
                             placeholder="Apellido del cliente"
                           />
                           <div class="invalid-feedback">
-                            Ingrese un apellido válido
+                            Ingrese un apellido v&aacute;lido
                           </div>
                         </div>
                       </div>
@@ -84,7 +86,7 @@
                         <label
                           for="txtTelefonoCliente"
                           class="col-sm-3 col-form-label"
-                          >Número telefónico:
+                          >Número tel&eacute;fonico:
                         </label>
                         <div class="col-sm-9">
                           <input
@@ -95,7 +97,7 @@
                             placeholder="Celular o fijo"
                           />
                           <div class="invalid-feedback">
-                            Ingrese un número telefónico válido
+                            Ingrese un número tel&eacute;fonico válido
                           </div>
                         </div>
                       </div>
@@ -114,7 +116,7 @@
                             placeholder="Dni del cliente"
                           />
                           <div class="invalid-feedback">
-                            Ingrese un DNI válido
+                            Ingrese un DNI v&aacute;lido
                           </div>
                         </div>
                       </div>
@@ -132,13 +134,7 @@
                             aria-label="Estado de Productos"
                             required
                           >
-                            <option selected disabled hidden="hidden" value="">
-                              Seleccione...
-                            </option>
-                            <option value="1">Ate</option>
-                            <option value="2">Miraflores</option>
-                            <option value="3">San Isidro</option>
-                            <option value="4">La Molina</option>
+                            <tools:comboDistrito/>
                           </select>
                           <div class="invalid-feedback">
                             Seleccione un distrito
@@ -149,17 +145,17 @@
                         <label
                           for="txtDireccionCliente"
                           class="col-sm-3 col-form-label"
-                          >Dirección :</label
+                          >Direcci&oacute;n :</label
                         >
                         <div class="col-sm-9">
                           <textarea
                             class="form-control"
                             id="txtDireccionCliente"
                             rows="3"
-                            placeholder="Dirección completa del cliente"
+                            placeholder="Direcci&oacute;n completa del cliente"
                           ></textarea>
                           <div class="invalid-feedback">
-                            El campo dirección es obligatorio
+                            El campo direcci&oacute;n es obligatorio
                           </div>
                         </div>
                       </div>

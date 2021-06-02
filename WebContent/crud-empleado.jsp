@@ -53,7 +53,7 @@
                         value=""
                       />
                       <div class="invalid-feedback">
-                         Ingrese un DNI v�lido
+                         Ingrese un DNI v&aacute;lido
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -69,7 +69,7 @@
                         required
                       />
                       <div class="invalid-feedback">
-                         Ingrese un nombre v�lido
+                         Ingrese un nombre v&aacute;lido
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -85,12 +85,12 @@
                         required
                       />
                       <div class="invalid-feedback">
-                         Ingrese un apellido v�lido
+                         Ingrese un apellido v&aacute;lido
                       </div>
                     </div>
                     <div class="col-md-6">
                       <label for="txtTelefonoEmpleado" class="form-label"
-                        >Tel�fono</label
+                        >Tel&eacute;fono</label
                       >
                       <input
                         type="text"
@@ -101,29 +101,29 @@
                         required
                       />
                       <div class="invalid-feedback">
-                         Ingrese un tel�fono v�lido
+                         Ingrese un tel&eacute;fono v&aacute;lido
                       </div>
                     </div>
                     <div class="col-md-6">
                       <label for="cboTipoEmpleado" class="form-label"
                         >Tipo :</label
                       >
-                      <select id="cboTipoEmpleado" class="form-select">
+                      <select id="cboTipoEmpleado" class="form-select" name="cboTipoEmpleado">
                         <tools:comboTipoEmp/>
                       </select>
                       <div class="invalid-feedback">
-                         Seleccione un tipo v�lido
+                         Seleccione un tipo v&aacute;lido
                       </div>
                     </div>
                     <div class="col-12">
                       <label for="txtDireccionEmpleado" class="form-label"
-                        >Direcci�n :
+                        >Direcci&oacute;n :
                       </label>
                       <textarea
                         class="form-control"
                         id="txtDireccionEmpleado"
                         name="txtDireccionEmpleado"
-                        placeholder="Ingrese direcci�n"
+                        placeholder="Ingrese direcci&oacute;n"
                         rows="3"
                         minlength="0"
                       ></textarea>

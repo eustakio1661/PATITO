@@ -2,28 +2,31 @@ package beans;
 
 public class TipoEmpleadoDTO {
 
-	private int id;
-	private String descripcion;
+    private int id;
+    private String descripcion;
 
-	public TipoEmpleadoDTO(int id, String descripcion) {
-		this.id = id;
-		this.descripcion = descripcion;
-	}
+    public TipoEmpleadoDTO() {
+    }
 
-	public int getId() {
-		return id;
-	}
+    public TipoEmpleadoDTO(int id, String descripcion) {
+        this.id = id;
+        this.descripcion = descripcion;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
 }

@@ -3,6 +3,7 @@ package interfaces;
 import java.util.ArrayList;
 
 import beans.EmpleadoDTO;
+import beans.TipoEmpleadoDTO;
 
 public interface EmpleadoDAO {
     
@@ -11,5 +12,5 @@ public interface EmpleadoDAO {
     public int actualizarEmpleado(EmpleadoDTO e);
     public int eliminar(EmpleadoDTO e);
     public EmpleadoDTO validarAcceso(String correo_usuario, String clave);
-    public ArrayList<EmpleadoDTO> listadoTipoEmpleado();
+    public ArrayList<TipoEmpleadoDTO> listadoTipoEmpleado();
 }
