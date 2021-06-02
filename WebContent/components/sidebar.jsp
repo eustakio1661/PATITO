@@ -67,7 +67,7 @@
           >
         </li>
         <li>
-          <a href="component-accordions.html"
+          <a href="cs?opcion=listado"
             ><i class="bx bx-right-arrow-alt"></i>Listado</a
           >
         </li>
