@@ -132,7 +132,7 @@ public class EmpleadoServlet extends HttpServlet {
         ArrayList<EmpleadoDTO> listado = f.getEmpleadoDAO().listado();
 
         request.setAttribute("listarEmpleado", listado);
-        request.getRequestDispatcher("#").forward(request, response);
+        request.getRequestDispatcher("listado-empleados.jsp").forward(request, response);
 
     }
 
