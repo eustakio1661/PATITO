@@ -13,18 +13,10 @@ import beans.ClienteDTO;
 import dao.DAOFactory;
 import interfaces.ClienteDAO;
 
-
-/**
- * Servlet implementation class ClienteServlet
- */
 @WebServlet(name = "cs", urlPatterns = { "/cs" })
 public class ClienteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
-     *      response)
-     */
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("Entró al Servlet de Cliente");
@@ -61,7 +53,6 @@ public class ClienteServlet extends HttpServlet {
     private void registrar(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Ingreso al proceso RegistrarCliente");
 
-        
         int codigoDistrito = Integer.parseInt(request.getParameter(""));
         String dni = request.getParameter("");
         String nombre = request.getParameter("");
@@ -70,14 +61,14 @@ public class ClienteServlet extends HttpServlet {
         String telefono = request.getParameter("");
 
         ClienteDTO c = new ClienteDTO();
-       
+
         c.setNombre(nombre);
         c.setApellido(apellido);
         c.setTelefono(telefono);
         c.setDni(dni);
         c.setCodigoDistrito(codigoDistrito);
         c.setDireccion(direccion);
-        
+
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDAO dao = fabrica.getClienteDAO();
 
@@ -118,10 +109,9 @@ public class ClienteServlet extends HttpServlet {
         String apellido = request.getParameter("");
         String direccion = request.getParameter("");
         String telefono = request.getParameter("");
-        
 
         ClienteDTO c = new ClienteDTO();
-        
+
         c.setCodigo(codigo);
         c.setNombre(nombre);
         c.setApellido(apellido);
@@ -129,7 +119,7 @@ public class ClienteServlet extends HttpServlet {
         c.setDni(dni);
         c.setCodigoDistrito(codigoDistrito);
         c.setDireccion(direccion);
-        
+
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDAO dao = fabrica.getClienteDAO();
 
@@ -147,7 +137,7 @@ public class ClienteServlet extends HttpServlet {
 
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDAO dao = fabrica.getClienteDAO();
-        ArrayList<ClienteDTO> lista = dao.listarCliente();
+        ArrayList<ClienteDTO> lista = dao.listarClientexDistrito();
 
         request.setAttribute("lstClientes", lista);
         request.getRequestDispatcher("listado-clientes.jsp").forward(request, response);
