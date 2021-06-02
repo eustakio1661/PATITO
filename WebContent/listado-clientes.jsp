@@ -1,7 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -53,38 +51,38 @@ pageEncoding="ISO-8859-1"%>
                         </tr>
                       </thead>
                       <tbody>
-                      <c:forEach items="${ lstClientes }" var="cli">
-                        <tr>
-                          <td>${cli.codigo}</td>
-                          <td>${cli.dni }</td>
-                          <td>${cli.nombre }</td>
-                          <td>${cli.apellido }</td>
-                          <td>${cli.telefono }</td>
-                          <td>${cli.nombreDistrito }</td>
-                          <td>
-                            <div class="d-flex order-actions">
-                              <a
-                                href="cs?opcion=actualizar"
-                                class="btn btn-success"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="bottom"
-                                title="Editar Cliente"
-                              >
-                                <i class="bx bx-edit mx-0"></i
-                              ></a>
-                              <a
-                                href="cs?opcion=eliminar"
-                                class="ms-4 btn btn-danger"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="bottom"
-                                title="Eliminar Cliente"
-                              >
-                                <i class="bx bx-trash mx-0"></i
-                              ></a>
-                            </div>
-                          </td>
-                        </tr>
-                      </c:forEach>
+                        <c:forEach items="${ lstClientes }" var="cli">
+                          <tr>
+                            <td>${cli.codigo}</td>
+                            <td>${cli.dni }</td>
+                            <td>${cli.nombre }</td>
+                            <td>${cli.apellido }</td>
+                            <td>${cli.telefono }</td>
+                            <td>${cli.nombreDistrito }</td>
+                            <td>
+                              <div class="d-flex order-actions">
+                                <a
+                                  href="cs?opcion=actualizar"
+                                  class="btn btn-success"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="bottom"
+                                  title="Editar Cliente"
+                                >
+                                  <i class="bx bx-edit mx-0"></i
+                                ></a>
+                                <a
+                                  href="cs?opcion=eliminar"
+                                  class="ms-4 btn btn-danger"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="bottom"
+                                  title="Eliminar Cliente"
+                                >
+                                  <i class="bx bx-trash mx-0"></i
+                                ></a>
+                              </div>
+                            </td>
+                          </tr>
+                        </c:forEach>
                       </tbody>
                     </table>
                   </div>
