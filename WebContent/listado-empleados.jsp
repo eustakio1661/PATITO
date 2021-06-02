@@ -46,7 +46,7 @@
                           <th>Nombre Completo</th>
                           <th>Tipo</th>
                           <th>Correo</th>
-                          <th>Usuario</th>  
+                          <th>Tel&eacute;fono</th>  
                           <th>Acciones</th>
                         </tr>
                       </thead>
@@ -58,7 +58,7 @@
                             <td>${emp.nombre} ${emp.apellido}</td>
                             <td>${emp.descripcionTipoEmpleado}</td>
                             <td>${emp.correo}</td>
-                            <td>${emp.usuario}</td>
+                            <td>${emp.telefono}</td>
                             <td>
                               <div class="d-flex order-actions">
                                 <a
