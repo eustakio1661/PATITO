@@ -14,11 +14,13 @@ public class EmpleadoDTO {
     private int idTipo;
     private int estado;
     private String imagen;
+    private int idTipoEmpleado;
+    private String descripcionTipoEmpleado;
 
     // 0 -> eliminado , 1 -> activo
 
     public EmpleadoDTO() {
-        
+
     }
 
     public int getId() {
@@ -60,7 +62,7 @@ public class EmpleadoDTO {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
+
     public String getDireccion() {
         return direccion;
     }
@@ -115,6 +117,21 @@ public class EmpleadoDTO {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
-    }    
+    }
 
+    public int getIdTipoEmpleado() {
+        return idTipoEmpleado;
+    }
+
+    public void setIdTipoEmpleado(int idTipoEmpleado) {
+        this.idTipoEmpleado = idTipoEmpleado;
+    }
+
+    public String getDescripcionTipoEmpleado() {
+        return descripcionTipoEmpleado;
+    }
+
+    public void setDescripcionTipoEmpleado(String descripcionTipoEmpleado) {
+        this.descripcionTipoEmpleado = descripcionTipoEmpleado;
+    }
 }
