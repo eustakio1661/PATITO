@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <jsp:include page="reusable/styles.jsp"></jsp:include>
+    <%@ taglib uri="/WEB-INF/libreria.tld" prefix="tools"%>
     <title>Registrar Empleado</title>
   </head>
   <body>
@@ -37,7 +38,7 @@
                     <h5 class="mb-0 text-primary">Registro de Empleados</h5>
                   </div>
                   <hr />
-                  <form class="row g-3 needs-validation" action="#" method="POST" novalidate>
+                  <form class="row g-3 needs-validation" action="emse" method="POST" novalidate>
                     <div class="col-12">
                       <label for="txtDNIEmpleado" class="form-label"
                         >DNI :
@@ -52,7 +53,7 @@
                         value=""
                       />
                       <div class="invalid-feedback">
-                         Ingrese un DNI válido
+                         Ingrese un DNI vï¿½lido
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -68,7 +69,7 @@
                         required
                       />
                       <div class="invalid-feedback">
-                         Ingrese un nombre válido
+                         Ingrese un nombre vï¿½lido
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -84,12 +85,12 @@
                         required
                       />
                       <div class="invalid-feedback">
-                         Ingrese un apellido válido
+                         Ingrese un apellido vï¿½lido
                       </div>
                     </div>
                     <div class="col-md-6">
                       <label for="txtTelefonoEmpleado" class="form-label"
-                        >Teléfono</label
+                        >Telï¿½fono</label
                       >
                       <input
                         type="text"
@@ -100,7 +101,7 @@
                         required
                       />
                       <div class="invalid-feedback">
-                         Ingrese un teléfono válido
+                         Ingrese un telï¿½fono vï¿½lido
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -111,24 +112,24 @@
                         <tools:comboTipoEmp/>
                       </select>
                       <div class="invalid-feedback">
-                         Seleccione un tipo válido
+                         Seleccione un tipo vï¿½lido
                       </div>
                     </div>
                     <div class="col-12">
                       <label for="txtDireccionEmpleado" class="form-label"
-                        >Dirección :
+                        >Direcciï¿½n :
                       </label>
                       <textarea
                         class="form-control"
                         id="txtDireccionEmpleado"
                         name="txtDireccionEmpleado"
-                        placeholder="Ingrese dirección"
+                        placeholder="Ingrese direcciï¿½n"
                         rows="3"
                         minlength="0"
                       ></textarea>
                     </div>                    
                     <div class="col-12">
-                      <button type="submit" class="btn btn-primary px-5">
+                      <button type="submit"   name="opcion" value="registro" class="btn btn-primary px-5">
                         Registrar Empleado
                       </button>
                     </div>

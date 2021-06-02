@@ -17,19 +17,14 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         PreparedStatement pst = null;
         try {
             con = MySQLConexion8.getConexion();
-            String sql = "insert into empleado values(null,?,?,?,?,?,?,?,?,?,default)";
+            String sql = "{CALL REGISTRAR_EMPLEADO(?,?,?,?,?,?)}";
             pst = con.prepareStatement(sql);
             pst.setString(1, e.getDni());
             pst.setString(2, e.getNombre());
             pst.setString(3, e.getApellido());
             pst.setString(4, e.getTelefono());
             pst.setString(5, e.getDireccion());
-            pst.setString(6, e.getCorreo());
-            pst.setString(7, e.getUsuario());
-            pst.setString(8, e.getClave());
-            pst.setInt(9, e.getIdTipo());
-            pst.setInt(10, e.getEstado());
-            pst.setString(11, e.getImagen());
+            pst.setInt(6, e.getIdTipo());
             rs = pst.executeUpdate();
         } catch (Exception e2) {
             System.out.println("Error al registrar empleado: " + e2.getMessage());
@@ -57,16 +52,12 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
                 e.setNombre(rs.getString(3));
                 e.setApellido(rs.getString(4));
                 e.setTelefono(rs.getString(5));
-                e.setDireccion(rs.getString(6));
-                e.setUsuario(rs.getString(7));
-                e.setClave(rs.getString(8));
-                e.setIdTipo(rs.getInt(9));
-                e.setEstado(rs.getInt(10));
-                e.setImagen(rs.getString(11));
+                e.setCorreo(rs.getString(6));
+                e.setDescripcionTipoEmpleado(rs.getString(7));
                 lista.add(e);
             }
         } catch (Exception e) {
-            System.out.println("Error al listar empleados:" + e.getMessage());
+            System.out.println("Error en el listado de empleados...:" + e.getMessage());
         } finally {
             MySQLConexion8.closeConexion(con);
         }
@@ -74,13 +65,40 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
     }
 
     @Override
-    public int actualizar(EmpleadoDTO e) {
+    public int actualizarEmpleado(EmpleadoDTO e) {
         int rs = 0;
         Connection cn = null;
         PreparedStatement pst = null;
         try {
             cn = MySQLConexion8.getConexion();
-            String sql = "{call usp_actualizarEmpleado(?,?,?,?,?,?,?,?,?,?,?)}";
+            String sql = "{CALL USP_ACTUALIZAREMPLEADO(?,?,?,?,?,?,?,?)}";
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, e.getNombre());
+            pst.setString(2, e.getApellido());
+            pst.setString(3, e.getTelefono());
+            pst.setString(4, e.getDireccion());
+            pst.setString(5, e.getCorreo());
+            pst.setString(6, e.getClave());
+            pst.setString(7, e.getImagen());
+            pst.setInt(8, e.getId());
+            rs = pst.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println("Error al actualizar empleado...: " + ex.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(cn);
+        }
+        return rs;
+    }
+
+    @Override
+    public int eliminar(EmpleadoDTO e) {
+        int rs = 0;
+        Connection cn = null;
+        PreparedStatement pst = null;
+        try {
+            cn = MySQLConexion8.getConexion();
+            String sql = "{call usp_eliminarEmpleado(?,?,?,?,?,?,?,?,?,?,?)}";
             pst = cn.prepareStatement(sql);
             pst.setInt(1, e.getId());
             pst.setString(2, e.getDni());
@@ -98,26 +116,6 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
 
         } catch (Exception ex) {
             System.out.println("Error al actualizar empleado: " + ex.getMessage());
-        } finally {
-            MySQLConexion8.closeConexion(cn);
-        }
-        return rs;
-    }
-
-    @Override
-    public int eliminar(EmpleadoDTO e) {
-        int rs = 0;
-        Connection cn = null;
-        PreparedStatement pst = null;
-        try {
-            cn = MySQLConexion8.getConexion();
-            String sql = "{call usp_eliminarEmpleado(?)}";
-            pst = cn.prepareStatement(sql);
-            pst.setInt(1, e.getId());
-            rs = pst.executeUpdate();
-
-        } catch (Exception ex) {
-            System.out.println("Error en eliminar empleado: " + ex.getMessage());
         } finally {
             MySQLConexion8.closeConexion(cn);
         }
@@ -155,6 +153,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
                 em.setIdTipo(rs.getInt(10));
                 em.setEstado(rs.getInt(11));
                 em.setImagen(rs.getString(12));
+                em.setDescripcionTipoEmpleado(rs.getString(13));
             }
 
         } catch (Exception e) {
@@ -164,6 +163,32 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         }
 
         return em;
+    }
+
+    @Override
+    public ArrayList<EmpleadoDTO> listadoTipoEmpleado() {
+        ArrayList<EmpleadoDTO> lista = null;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "SELECT * FROM TIPOEMPLEADO";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            lista = new ArrayList<EmpleadoDTO>();
+            while (rs.next()) {
+                EmpleadoDTO e = new EmpleadoDTO();
+                e.setIdTipoEmpleado(rs.getInt(1));
+                e.setDescripcionTipoEmpleado(rs.getString(2));
+                lista.add(e);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al listar empleados:" + e.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(con);
+        }
+        return lista;
     }
 
 }
