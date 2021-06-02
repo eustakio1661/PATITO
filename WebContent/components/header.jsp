@@ -38,13 +38,13 @@
           aria-expanded="false"
         >
           <img
-            src="img/avatars/avatar-2.png"
+            src="${e.imagen }"
             class="user-img"
             alt="user avatar"
           />
           <div class="user-info ps-3">
-            <p class="user-name mb-0">Pauline Seitz</p>
-            <p class="designattion mb-0">Asistente de Ventas</p>
+            <p class="user-name mb-0">${e.nombre }</p>
+            <p class="designattion mb-0">${e.descripcionTipoEmpleado }</p>
           </div>
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
@@ -67,7 +67,7 @@
             <div class="dropdown-divider mb-0"></div>
           </li>
           <li>
-            <a class="dropdown-item" href="javascript:;"
+            <a class="dropdown-item" href="emse?opcion=cerrar"
               ><i class="bx bx-log-out-circle"></i
               ><span>Cerrar Sesion</span></a
             >
