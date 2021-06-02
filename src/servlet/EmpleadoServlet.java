@@ -98,8 +98,7 @@ public class EmpleadoServlet extends HttpServlet {
         String direccion = request.getParameter("txtDireccionEmpleado");
         String correo = request.getParameter("txtEmailEmpleado");
         String clave = request.getParameter("txtClaveEmpleado");
-        
-        
+
         EmpleadoDTO em = new EmpleadoDTO();
         em.setNombre(nombre);
         em.setApellido(apellido);
@@ -122,7 +121,7 @@ public class EmpleadoServlet extends HttpServlet {
     }
 
     private void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {   
+            throws ServletException, IOException {
 
     }
 
