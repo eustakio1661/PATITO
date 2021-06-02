@@ -150,7 +150,7 @@ public class ClienteServlet extends HttpServlet {
         ArrayList<ClienteDTO> lista = dao.listarCliente();
 
         request.setAttribute("lstClientes", lista);
-        request.getRequestDispatcher("").forward(request, response);
+        request.getRequestDispatcher("listado-clientes.jsp").forward(request, response);
 
     }
 
