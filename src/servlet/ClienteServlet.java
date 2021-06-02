@@ -19,16 +19,15 @@ import interfaces.ClienteDAO;
  */
 @WebServlet(name = "cs", urlPatterns = { "/cs" })
 public class ClienteServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		System.out.println("Entró al Servlet de Cliente");
+    /**
+     * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void service(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        System.out.println("Entró al Servlet de Cliente");
         String opcion = request.getParameter("opcion") != null ? request.getParameter("opcion") : "error";
 
         try {
@@ -39,7 +38,9 @@ public class ClienteServlet extends HttpServlet {
             case "actualizar":
                 actualizar(request, response);
                 break;
-            
+            case "eliminar":
+                eliminar(request, response);
+                break;
             case "listado":
                 listar(request, response);
                 break;
@@ -54,31 +55,29 @@ public class ClienteServlet extends HttpServlet {
             // response.sendRedirect("error.jsp");
             System.out.println("Error inesperado en el Cliente Servlet");
         }
-	
-	}
-	
-	private void registrar(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
+    private void registrar(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Ingreso al proceso RegistrarCliente");
-		
-		int codigo = Integer.parseInt(request.getParameter(""));
+
+        
         int codigoDistrito = Integer.parseInt(request.getParameter(""));
         String dni = request.getParameter("");
-		String nombre = request.getParameter("");
-		String apellido = request.getParameter("");
-		String direccion = request.getParameter("");
-		String telefono = request.getParameter("");
-		int estado = Integer.parseInt(request.getParameter(""));
-		
+        String nombre = request.getParameter("");
+        String apellido = request.getParameter("");
+        String direccion = request.getParameter("");
+        String telefono = request.getParameter("");
 
         ClienteDTO c = new ClienteDTO();
-        c.setCodigo(codigo);
-        c.setCodigoDistrito(codigoDistrito);
-        c.setDni(dni);
+       
         c.setNombre(nombre);
         c.setApellido(apellido);
-		c.setDireccion(direccion);
-		c.setTelefono(telefono);
-		c.setEstado(estado);
+        c.setTelefono(telefono);
+        c.setDni(dni);
+        c.setCodigoDistrito(codigoDistrito);
+        c.setDireccion(direccion);
+        
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDAO dao = fabrica.getClienteDAO();
 
@@ -88,29 +87,49 @@ public class ClienteServlet extends HttpServlet {
         } else {
 
         }
-	}
-	
-	private void actualizar(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("Ingreso al proceso Actualizar Cliente");
-		
-		int codigo = Integer.parseInt(request.getParameter(""));
-        int codigoDistrito = Integer.parseInt(request.getParameter(""));
-        String dni = request.getParameter("");
-		String nombre = request.getParameter("");
-		String apellido = request.getParameter("");
-		String direccion = request.getParameter("");
-		String telefono = request.getParameter("");
-		int estado = Integer.parseInt(request.getParameter(""));
+    }
+
+    private void eliminar(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("Ingreso al proceso ActualizarCliente");
+
+        int codigo = Integer.parseInt(request.getParameter(""));
 
         ClienteDTO c = new ClienteDTO();
         c.setCodigo(codigo);
-        c.setCodigoDistrito(codigoDistrito);
-        c.setDni(dni);
+        DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        ClienteDAO dao = fabrica.getClienteDAO();
+
+        int ok = dao.eliminarCliente(c);
+        if (ok != 0) {
+
+        } else {
+
+        }
+
+    }
+
+    private void actualizar(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("Ingreso al proceso Actualizar Cliente");
+
+        int codigo = Integer.parseInt(request.getParameter(""));
+        int codigoDistrito = Integer.parseInt(request.getParameter(""));
+        String dni = request.getParameter("");
+        String nombre = request.getParameter("");
+        String apellido = request.getParameter("");
+        String direccion = request.getParameter("");
+        String telefono = request.getParameter("");
+        
+
+        ClienteDTO c = new ClienteDTO();
+        
+        c.setCodigo(codigo);
         c.setNombre(nombre);
         c.setApellido(apellido);
-		c.setDireccion(direccion);
-		c.setTelefono(telefono);
-		c.setEstado(estado);
+        c.setTelefono(telefono);
+        c.setDni(dni);
+        c.setCodigoDistrito(codigoDistrito);
+        c.setDireccion(direccion);
+        
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDAO dao = fabrica.getClienteDAO();
 
@@ -122,8 +141,8 @@ public class ClienteServlet extends HttpServlet {
         }
 
     }
-	
-	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Ingreso al proceso ListarProducto");
 
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
@@ -134,8 +153,8 @@ public class ClienteServlet extends HttpServlet {
         request.getRequestDispatcher("").forward(request, response);
 
     }
-	
-	private void buscar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    private void buscar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Ingreso al proceso BuscarCliente");
 
         int codigo = Integer.parseInt(request.getParameter(""));
