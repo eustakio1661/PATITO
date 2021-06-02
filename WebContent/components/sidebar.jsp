@@ -47,7 +47,7 @@
           >
         </li>
         <li>
-          <a href="ecommerce-products-details.html"
+          <a href="emse?opcion=listar"
             ><i class="bx bx-right-arrow-alt"></i>Listado</a
           >
         </li>
