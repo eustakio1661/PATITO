@@ -18,8 +18,8 @@
   <ul class="metismenu" id="menu">
     <li>
       <a href="#" class="has-arrow">
-        <div class="parent-icon"><i class="bx bx-home-circle"></i></div>
-        <div class="menu-title">Dashboard</div>
+        <span class="parent-icon"><i class="bx bx-home-circle"></i></span>
+        <span class="menu-title">Dashboard</span>
       </a>
       <ul>
         <li>
@@ -37,8 +37,8 @@
     <li class="menu-label">Mantenimiento</li>
     <li>
       <a href="#" class="has-arrow">
-        <div class="parent-icon"><i class="bx bx-id-card"></i></div>
-        <div class="menu-title">Empleados</div>
+        <span class="parent-icon"><i class="bx bx-id-card"></i></span>
+        <span class="menu-title">Empleados</span>
       </a>
       <ul>
         <li>
@@ -55,10 +55,10 @@
     </li>
     <li>
       <a class="has-arrow" href="javascript:;">
-        <div class="parent-icon">
+        <span class="parent-icon">
           <i class="bx bx-user-circle"></i>
-        </div>
-        <div class="menu-title">Clientes</div>
+        </span>
+        <span class="menu-title">Clientes</span>
       </a>
       <ul>
         <li>
@@ -75,8 +75,8 @@
     </li>
     <li>
       <a class="has-arrow" href="javascript:;">
-        <div class="parent-icon"><i class="bx bx-package"></i></div>
-        <div class="menu-title">Productos</div>
+        <span class="parent-icon"><i class="bx bx-package"></i></span>
+        <span class="menu-title">Productos</span>
       </a>
       <ul>
         <li>
@@ -95,17 +95,17 @@
     <li class="menu-label">Transacciones</li>
     <li>
       <a href="javascript:;">
-        <div class="parent-icon">
+        <span class="parent-icon">
           <i class="bx bx-cart"></i>
-        </div>
-        <div class="menu-title">Nuevo Pedido</div>
+        </span>
+        <span class="menu-title">Nuevo Pedido</span>
       </a>
     </li>
     <li class="menu-label">Reportes</li>
     <li>
       <a href="user-profile.html">
-        <div class="parent-icon"><i class="bx bx-receipt"></i></div>
-        <div class="menu-title">Reporte de Ventas</div>
+        <span class="parent-icon"><i class="bx bx-receipt"></i></span>
+        <span class="menu-title">Reporte de Ventas</span>
       </a>
     </li>
   </ul>

@@ -1,4 +1,6 @@
-	<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,15 +44,16 @@
                         >DNI :
                       </label>
                       <input
-                        type="email"
+                        type="text"
                         class="form-control"
                         id="txtDNIEmpleado"
                         name="txtDNIEmpleado"
                         placeholder="Ingrese DNI"
                         required
+                        value=""
                       />
                       <div class="invalid-feedback">
-                         Ingrese un DNI válido
+                         Ingrese un DNI vï¿½lido
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -66,7 +69,7 @@
                         required
                       />
                       <div class="invalid-feedback">
-                         Ingrese un nombre válido
+                         Ingrese un nombre vï¿½lido
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -82,12 +85,12 @@
                         required
                       />
                       <div class="invalid-feedback">
-                         Ingrese un apellido válido
+                         Ingrese un apellido vï¿½lido
                       </div>
                     </div>
                     <div class="col-md-6">
                       <label for="txtTelefonoEmpleado" class="form-label"
-                        >Teléfono</label
+                        >Telï¿½fono</label
                       >
                       <input
                         type="text"
@@ -98,30 +101,29 @@
                         required
                       />
                       <div class="invalid-feedback">
-                         Ingrese un teléfono válido
+                         Ingrese un telï¿½fono vï¿½lido
                       </div>
                     </div>
                     <div class="col-md-6">
                       <label for="cboTipoEmpleado" class="form-label"
                         >Tipo :</label
                       >
-                      <select id="cboTipoEmpleado" class="form-select" name="cboTipoEmpleado">
-                        <option selected>Seleccione...</option>
-                        <tools:cboEmpleado/>
+                      <select id="cboTipoEmpleado" class="form-select">
+                        <tools:comboTipoEmp/>
                       </select>
                       <div class="invalid-feedback">
-                         Seleccione un tipo válido
+                         Seleccione un tipo vï¿½lido
                       </div>
                     </div>
                     <div class="col-12">
                       <label for="txtDireccionEmpleado" class="form-label"
-                        >Dirección :
+                        >Direcciï¿½n :
                       </label>
                       <textarea
                         class="form-control"
                         id="txtDireccionEmpleado"
                         name="txtDireccionEmpleado"
-                        placeholder="Ingrese dirección"
+                        placeholder="Ingrese direcciï¿½n"
                         rows="3"
                         minlength="0"
                       ></textarea>

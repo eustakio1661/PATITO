@@ -5,9 +5,9 @@ public class DistritoDTO {
 	private int id;
 	private String descripcion;
 
-	public DistritoDTO(int id, String descripcion) {
-		this.id = id;
-		this.descripcion = descripcion;
+	@Override
+	public String toString() {
+		return "DistritoDTO [id=" + id + ", descripcion=" + descripcion + "]";
 	}
 
 	public int getId() {

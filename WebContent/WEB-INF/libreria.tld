@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <taglib>
+  <tlibversion>1.0</tlibversion>
+  <jspversion>1.0</jspversion>
+  <shortname>Alias de la libreria</shortname>
 
-	<tlibversion>1.0</tlibversion>
-
-	<jspversion>1.0</jspversion>
-
-	<shortname>tools</shortname>
-
-	<!-- Etiquetas -->
-	<tag>
-
-		<name>cboEmpleado</name>
-
-		<tagclass>tag.cboEmpleado</tagclass>
-
-		<bodycontent>empty</bodycontent>
-
-		<info>Muestra el combo del empleado</info>
-		
-	</tag>	
+  <tag>	
+    <name>comboCategoria</name>	
+    <tagclass>etiquetas.ComboCategoriaTag</tagclass>	
+    <bodycontent>empty</bodycontent>	
+    <info>Muestra lista de categorias de producto</info>
+    <attribute>
+      <name>idCategoria</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>	
+  </tag>
+  
+  <tag>	
+    <name>comboTipoEmp</name>	
+    <tagclass>etiquetas.ComboTipoEmpTag</tagclass>	
+    <bodycontent>empty</bodycontent>	
+    <info>Muestra lista de tipos de empleados</info>
+    <attribute>
+      <name>idTipoEmp</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>	
+  </tag>
+  
 </taglib>
