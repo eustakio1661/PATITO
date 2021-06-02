@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <jsp:include page="reusable/styles.jsp"></jsp:include>
+    <%@ taglib uri="/WEB-INF/libreria.tld" prefix="tools"%>
     <title>Registrar Empleado</title>
   </head>
   <body>
@@ -35,7 +36,7 @@
                     <h5 class="mb-0 text-primary">Registro de Empleados</h5>
                   </div>
                   <hr />
-                  <form class="row g-3 needs-validation" action="#" method="POST" novalidate>
+                  <form class="row g-3 needs-validation" action="emse" method="POST" novalidate>
                     <div class="col-12">
                       <label for="txtDNIEmpleado" class="form-label"
                         >DNI :
@@ -104,9 +105,9 @@
                       <label for="cboTipoEmpleado" class="form-label"
                         >Tipo :</label
                       >
-                      <select id="cboTipoEmpleado" class="form-select">
-                        <option selected>Seleccione tipo</option>
-                        <option>...</option>
+                      <select id="cboTipoEmpleado" class="form-select" name="cboTipoEmpleado">
+                        <option selected>Seleccione...</option>
+                        <tools:cboEmpleado/>
                       </select>
                       <div class="invalid-feedback">
                          Seleccione un tipo válido
@@ -126,7 +127,7 @@
                       ></textarea>
                     </div>                    
                     <div class="col-12">
-                      <button type="submit" class="btn btn-primary px-5">
+                      <button type="submit"   name="opcion" value="registro" class="btn btn-primary px-5">
                         Registrar Empleado
                       </button>
                     </div>
