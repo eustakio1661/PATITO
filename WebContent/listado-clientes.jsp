@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -51,17 +53,18 @@ pageEncoding="ISO-8859-1"%>
                         </tr>
                       </thead>
                       <tbody>
+                      <c:forEach items="${ lstClientes }" var="cli">
                         <tr>
-                          <td>#01</td>
-                          <td>75886124</td>
-                          <td>Darly</td>
-                          <td>Gongora</td>
-                          <td>333-5555</td>
-                          <td>Miraflores</td>
+                          <td>${cli.codigo}</td>
+                          <td>${cli.dni }</td>
+                          <td>${cli.nombre }</td>
+                          <td>${cli.apellido }</td>
+                          <td>${cli.telefono }</td>
+                          <td>${cli.nombreDistrito }</td>
                           <td>
                             <div class="d-flex order-actions">
                               <a
-                                href="servlet?opcion=actualizar"
+                                href="cs?opcion=actualizar"
                                 class="btn btn-success"
                                 data-bs-toggle="tooltip"
                                 data-bs-placement="bottom"
@@ -70,7 +73,7 @@ pageEncoding="ISO-8859-1"%>
                                 <i class="bx bx-edit mx-0"></i
                               ></a>
                               <a
-                                href="servlet?opcion=eliminar"
+                                href="cs?opcion=eliminar"
                                 class="ms-4 btn btn-danger"
                                 data-bs-toggle="tooltip"
                                 data-bs-placement="bottom"
@@ -81,6 +84,7 @@ pageEncoding="ISO-8859-1"%>
                             </div>
                           </td>
                         </tr>
+                      </c:forEach>
                       </tbody>
                     </table>
                   </div>
