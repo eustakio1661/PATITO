@@ -197,6 +197,7 @@
                                 minlength="6"
                                 maxlength="30"
                                 required
+                                value="${e.clave }"
                               />
                               <a
                                 href="#"
