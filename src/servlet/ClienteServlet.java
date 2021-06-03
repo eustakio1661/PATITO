@@ -78,16 +78,11 @@ public class ClienteServlet extends HttpServlet {
         c.setDni(dni);
         c.setCodigoDistrito(codigoDistrito);
         c.setDireccion(direccion);
-        
-        System.out.println(c);
 
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDAO dao = fabrica.getClienteDAO();
 
         int ok = dao.registrarCliente(c);
-        
-        System.out.println(ok);
-
 
         Map<String, Object> data = new LinkedHashMap<String, Object>();
 
