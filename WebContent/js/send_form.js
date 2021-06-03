@@ -9,7 +9,10 @@ const enviarFormulario = (form) => {
     method,
     body: formData,
   })
-  .then((resp) => resp.json())
+  .then((resp) => {
+    console.log(resp);
+    return resp.json()
+  })
   .then(data => {
     console.log(data);
   })
