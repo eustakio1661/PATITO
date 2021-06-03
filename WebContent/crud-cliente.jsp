@@ -42,6 +42,7 @@
             <div class="col-xl-9 mx-auto">
               <hr />
               <form
+                id="myForm"
                 action="<%=action%>"
                 class="needs-validation"
                 method="POST"
@@ -202,5 +203,7 @@
     </div>
 
     <jsp:include page="reusable/scripts.jsp"></jsp:include>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="js/send_form.js"></script>
   </body>
 </html>
