@@ -58,7 +58,10 @@ $(function () {
         o = o.parent('').addClass('mm-show').parent('').addClass('mm-active');
     }),
     $(function () {
-      $('#menu').metisMenu();
-      //MetisMenu.attach('#menu');
-    });
+      $("#menu").metisMenu()
+	}), $(".switcher-btn").on("click", function() {
+		$(".switcher-wrapper").toggleClass("switcher-toggled")
+	}), $(".close-switcher").on("click", function() {
+		$(".switcher-wrapper").removeClass("switcher-toggled")
+	});
 });
