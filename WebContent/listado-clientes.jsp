@@ -62,7 +62,7 @@
                             <td>
                               <div class="d-flex order-actions">
                                 <a
-                                  href="cs?opcion=actualizar"
+                                  href="cs?opcion=buscar&codigo=${cli.codigo}"
                                   class="btn btn-success"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
