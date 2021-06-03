@@ -2,17 +2,23 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import beans.ClienteDTO;
 import dao.DAOFactory;
 import interfaces.ClienteDAO;
 
+@MultipartConfig
 @WebServlet(name = "cs", urlPatterns = { "/cs" })
 public class ClienteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -46,19 +52,23 @@ public class ClienteServlet extends HttpServlet {
         } catch (Exception e) {
             // response.sendRedirect("error.jsp");
             System.out.println("Error inesperado en el Cliente Servlet");
+            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
     }
 
-    private void registrar(HttpServletRequest request, HttpServletResponse response) {
+    private void registrar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         System.out.println("Ingreso al proceso RegistrarCliente");
 
-        int codigoDistrito = Integer.parseInt(request.getParameter(""));
-        String dni = request.getParameter("");
-        String nombre = request.getParameter("");
-        String apellido = request.getParameter("");
-        String direccion = request.getParameter("");
-        String telefono = request.getParameter("");
+        int codigoDistrito = Integer.parseInt(request.getParameter("cboDistritoCliente"));
+        String dni = request.getParameter("txtDNICliente");
+        String nombre = request.getParameter("txtNombreCliente");
+        String apellido = request.getParameter("txtApellidoCliente");
+        String direccion = request.getParameter("txtDireccionCliente");
+        String telefono = request.getParameter("txtTelefonoCliente");
 
         ClienteDTO c = new ClienteDTO();
 
@@ -68,16 +78,36 @@ public class ClienteServlet extends HttpServlet {
         c.setDni(dni);
         c.setCodigoDistrito(codigoDistrito);
         c.setDireccion(direccion);
+        
+        System.out.println(c);
 
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDAO dao = fabrica.getClienteDAO();
 
         int ok = dao.registrarCliente(c);
+        
+        System.out.println(ok);
+
+
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+
         if (ok != 0) {
-
+            data.put("ok", true);
+            data.put("titulo", "Registrado");
+            data.put("mensaje", "Se ah registrado el cliente " + nombre + " " + apellido + " correctamente");
+            data.put("tipo", "success");
         } else {
-
+            data.put("ok", false);
+            data.put("titulo", "Error");
+            data.put("mensaje", "No se pudo registrar al cliente");
+            data.put("tipo", "error");
         }
+
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
+   
     }
 
     private void eliminar(HttpServletRequest request, HttpServletResponse response) {
