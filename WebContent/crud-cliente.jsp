@@ -12,13 +12,9 @@
     <title>Registrar Cliente</title>
   </head>
   <body>
-    <!--wrapper-->
     <div class="wrapper">
-      <!--sidebar wrapper -->
       <jsp:include page="components/sidebar.jsp"></jsp:include>
-      <!--start header -->
       <jsp:include page="components/header.jsp"></jsp:include>
-      <!--start page wrapper -->
       <div class="page-wrapper">
         <div class="page-content">
           <jsp:include page="components/breadcrumb.jsp">
@@ -57,6 +53,7 @@
                             id="txtNombreCliente"
                             name="txtNombreCliente"
                             placeholder="Nombre del cliente"
+                            value="${ clienteEncontrado.nombre }"
                           />
                           <div class="invalid-feedback">
                             Ingrese un nombre v&aacute;lido
@@ -76,6 +73,7 @@
                             id="txtApellidoCliente"
                             name="txtApellidoCliente"
                             placeholder="Apellido del cliente"
+                            value="${ clienteEncontrado.apellido }"
                           />
                           <div class="invalid-feedback">
                             Ingrese un apellido v&aacute;lido
@@ -95,6 +93,7 @@
                             id="txtTelefonoCliente"
                             name="txtTelefonoCliente"
                             placeholder="Celular o fijo"
+                            value="${ clienteEncontrado.telefono }"
                           />
                           <div class="invalid-feedback">
                             Ingrese un número tel&eacute;fonico válido
@@ -114,6 +113,7 @@
                             id="txtDNICliente"
                             name="txtDNICliente"
                             placeholder="Dni del cliente"
+                            value="${ clienteEncontrado.dni }"
                           />
                           <div class="invalid-feedback">
                             Ingrese un DNI v&aacute;lido
@@ -131,10 +131,10 @@
                             id="cboDistritoCliente"
                             name="cboDistritoCliente"
                             class="form-select"
-                            aria-label="Estado de Productos"
+                            aria-label="Distrito del Cliente"
                             required
                           >
-                            <tools:comboDistrito/>
+                            <tools:comboDistrito idDistrito="${ clienteEncontrado.codigoDistrito }"/>
                           </select>
                           <div class="invalid-feedback">
                             Seleccione un distrito
@@ -153,7 +153,7 @@
                             id="txtDireccionCliente"
                             rows="3"
                             placeholder="Direcci&oacute;n completa del cliente"
-                          ></textarea>
+                          >${ clienteEncontrado.direccion }</textarea>
                           <div class="invalid-feedback">
                             El campo direcci&oacute;n es obligatorio
                           </div>
@@ -175,18 +175,14 @@
           </div>
         </div>
       </div>
-      <!--end page wrapper -->
-      <!--start overlay-->
+
       <div class="overlay toggle-icon"></div>
-      <!--end overlay-->
-      <!--Start Back To Top Button-->
       <a href="javaScript:;" class="back-to-top"
         ><i class="bx bxs-up-arrow-alt"></i
       ></a>
-      <!--End Back To Top Button-->
+
       <jsp:include page="components/footer.jsp"></jsp:include>
     </div>
-    <!--end wrapper-->
 
     <jsp:include page="reusable/scripts.jsp"></jsp:include>
   </body>
