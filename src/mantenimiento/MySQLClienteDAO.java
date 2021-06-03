@@ -53,7 +53,7 @@ public class MySQLClienteDAO implements ClienteDAO {
         PreparedStatement pst = null;
         try {
             con = MySQLConexion8.getConexion();
-            String sql = "{USP_REGISTRARCLIENTE(?,?,?,?,?,?)}";
+            String sql = "{call USP_REGISTRARCLIENTE(?,?,?,?,?,?)}";
             pst = con.prepareStatement(sql);
             pst.setInt(1, cli.getCodigoDistrito());
             pst.setString(2, cli.getDni());
