@@ -147,12 +147,12 @@ public class ClienteServlet extends HttpServlet {
     private void buscar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Ingreso al proceso BuscarCliente");
 
-        int codigo = Integer.parseInt(request.getParameter(""));
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
 
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDTO c = factory.getClienteDAO().buscarCliente(codigo);
-        request.setAttribute("c", c);
+        request.setAttribute("clienteEncontrado", c);
 
-        request.getRequestDispatcher("").forward(request, response);
+        request.getRequestDispatcher("crud-cliente.jsp").forward(request, response);
     }
 }
