@@ -39,6 +39,9 @@ public class ClienteServlet extends HttpServlet {
             case "buscar":
                 buscar(request, response);
                 break;
+            case "seleccionar":
+                seleccionar(request, response);
+                break;
             default:
                 System.out.println("Error en la opcion");
                 break;
@@ -48,6 +51,17 @@ public class ClienteServlet extends HttpServlet {
             System.out.println("Error inesperado en el Cliente Servlet");
         }
 
+    }
+
+    private void seleccionar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Ingreso al proceso SeleccionarCliente");
+        int codigo = Integer.parseInt(request.getParameter("cod"));
+
+        DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        ClienteDTO c = factory.getClienteDAO().buscarCliente(codigo);
+        request.getSession().setAttribute("c", c);
+
+        request.getRequestDispatcher("/listado-productos.jsp").forward(request, response);
     }
 
     private void registrar(HttpServletRequest request, HttpServletResponse response) {
