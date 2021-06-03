@@ -1,7 +1,24 @@
+<%@page import="beans.ClienteDTO"%>
 <%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%
+   ClienteDTO existeCliente = (ClienteDTO) request.getAttribute("clienteEncontrado");
+   String action = "cs?opcion=registrar";
+   String typeColor = "primary";
+   String opcion = "Registrar";
+   String tituloForm = "Registro de Clientes";
+              
+   if (existeCliente != null) {
+       action = "cs?opcion=actualizar";
+       typeColor = "success";
+       opcion="Actualizar";
+       tituloForm = "Actualizar un cliente";
+     }     
+%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +26,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <jsp:include page="reusable/styles.jsp"></jsp:include>
-    <title>Registrar Cliente</title>
+    <title><%=opcion%> Cliente</title>
   </head>
   <body>
     <div class="wrapper">
@@ -19,25 +36,25 @@
         <div class="page-content">
           <jsp:include page="components/breadcrumb.jsp">
             <jsp:param name="pagina" value="Cliente"/>
-            <jsp:param name="accion" value="Registrar"/>
+            <jsp:param name="accion" value="<%=opcion%>"/>
           </jsp:include>
           <div class="row">
             <div class="col-xl-9 mx-auto">
               <hr />
               <form
-                action="#"
+                action="<%=action%>"
                 class="needs-validation"
                 method="POST"
                 novalidate
               >
-                <div class="card border-top border-0 border-4 border-primary">
+                <div class="card border-top border-0 border-4 border-<%=typeColor%>">
                   <div class="card-body">
                     <div class="border p-4 rounded">
                       <div class="card-title d-flex align-items-center">
                         <div>
-                          <i class="bx bxs-user me-1 font-22 text-primary"></i>
+                          <i class="bx bxs-user me-1 font-22 text-<%=typeColor%>"></i>
                         </div>
-                        <h5 class="mb-0 text-primary">Registro de Clientes</h5>
+                        <h5 class="mb-0 text-<%=typeColor%>"><%=tituloForm %></h5>
                       </div>
                       <hr />
                       <div class="row mb-3">
@@ -162,8 +179,8 @@
                       <div class="row">
                         <label class="col-sm-3 col-form-label"></label>
                         <div class="col-sm-9">
-                          <button type="submit" class="btn btn-primary px-5">
-                            Registrar Cliente
+                          <button type="submit" class="btn btn-<%=typeColor%> px-5">
+                            <%=opcion%> Cliente
                           </button>
                         </div>
                       </div>
