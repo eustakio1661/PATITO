@@ -98,6 +98,7 @@
         ><i class="bx bxs-up-arrow-alt"></i
       ></a>
       <jsp:include page="components/footer.jsp"></jsp:include>
+      
     </div>
 
     <jsp:include page="reusable/scripts.jsp"></jsp:include>
