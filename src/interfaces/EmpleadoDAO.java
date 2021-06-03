@@ -13,4 +13,5 @@ public interface EmpleadoDAO {
     public int eliminar(EmpleadoDTO e);
     public EmpleadoDTO validarAcceso(String correo_usuario, String clave);
     public ArrayList<TipoEmpleadoDTO> listadoTipoEmpleado();
+    public EmpleadoDTO buscarEmpleado(int codigo);
 }

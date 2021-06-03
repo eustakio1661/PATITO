@@ -37,10 +37,24 @@ public class EmpleadoServlet extends HttpServlet {
         case "login":
             loginEmpleado(request, response);
             break;
+        case "buscar":
+            buscarEmpleado(request, response);
+            break;
         default:
             request.getSession().invalidate();
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
+    }
+
+    private void buscarEmpleado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int codigo = Integer.parseInt(request.getParameter("idEmp"));
+
+        DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        EmpleadoDTO e = factory.getEmpleadoDAO().buscarEmpleado(codigo);
+        request.setAttribute("empleadoEncontrado", e);
+
+        request.getRequestDispatcher("crud-empleado.jsp").forward(request, response);
+        
     }
 
     private void loginEmpleado(HttpServletRequest request, HttpServletResponse response)
@@ -122,7 +136,22 @@ public class EmpleadoServlet extends HttpServlet {
 
     private void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       int codigo = Integer.parseInt(request.getParameter("codigo"));
+       
+       EmpleadoDTO e = new EmpleadoDTO();
+       e.setId(codigo);       
+        
+        DAOFactory f = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        int ok = f.getEmpleadoDAO().eliminar(e);
 
+        if (ok == 0) {
+            System.out.println("Error al eliminar empleado");
+        } else {
+            System.out.println("Empleado eliminado con éxito!");
+        }
+        request.getRequestDispatcher("crud-empleado.jsp").forward(request, response);
+        request.getRequestDispatcher("listado-empleados.jsp").forward(request, response);
+        
     }
 
     private void listarEmpleado(HttpServletRequest request, HttpServletResponse response)

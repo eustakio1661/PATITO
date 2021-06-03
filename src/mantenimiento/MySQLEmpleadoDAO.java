@@ -99,24 +99,13 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         PreparedStatement pst = null;
         try {
             cn = MySQLConexion8.getConexion();
-            String sql = "{call usp_eliminarEmpleado(?,?,?,?,?,?,?,?,?,?,?)}";
+            String sql = "{call usp_eliminarEmpleado(?)}";
             pst = cn.prepareStatement(sql);
             pst.setInt(1, e.getId());
-            pst.setString(2, e.getDni());
-            pst.setString(3, e.getNombre());
-            pst.setString(4, e.getApellido());
-            pst.setString(5, e.getTelefono());
-            pst.setString(6, e.getDireccion());
-            pst.setString(7, e.getCorreo());
-            pst.setString(8, e.getUsuario());
-            pst.setString(9, e.getClave());
-            pst.setInt(10, e.getIdTipo());
-            pst.setInt(11, e.getEstado());
-            pst.setString(12, e.getImagen());
             rs = pst.executeUpdate();
 
         } catch (Exception ex) {
-            System.out.println("Error al actualizar empleado: " + ex.getMessage());
+            System.out.println("Error al eliminar empleado...: " + ex.getMessage());
         } finally {
             MySQLConexion8.closeConexion(cn);
         }
@@ -190,6 +179,42 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
             MySQLConexion8.closeConexion(con);
         }
         return lista;
+    }
+
+    @Override
+    public EmpleadoDTO buscarEmpleado(int codigo) {
+        EmpleadoDTO e = null;        
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;        
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "SELECT * FROM EMPLEADO WHERE ID_EM=?";
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, codigo);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                e = new EmpleadoDTO();
+                e.setId(rs.getInt(1));
+                e.setDni(rs.getString(2));
+                e.setNombre(rs.getString(3));
+                e.setApellido(rs.getString(4));
+                e.setTelefono(rs.getString(5));    
+                e.setDireccion(rs.getString(6));
+                e.setCorreo(rs.getString(7));
+                e.setUsuario(rs.getString(8));
+                e.setClave(rs.getString(9));
+                e.setIdTipo(rs.getInt(10));
+                e.setEstado(rs.getInt(11));
+                e.setImagen(rs.getString(12));
+               
+            }
+        } catch (Exception ex) {
+            System.out.println("Error al buscar empleado...:" + ex.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(con);
+        }
+        return e;
     }
 
 }
