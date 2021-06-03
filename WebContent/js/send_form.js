@@ -5,16 +5,15 @@ const enviarFormulario = (form) => {
   const action = form.getAttribute('action');
   const method = form.method;
 
-  fetch(action, {
+  return fetch(action, {
     method,
     body: formData,
   })
-  .then((resp) => {
-    console.log(resp);
-    return resp.json()
-  })
-  .then(data => {
-    console.log(data);
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return response.json()
   })
   .catch(err => {
     console.log(err);
@@ -30,10 +29,13 @@ const mostrarAlertRegistro = (form) => {
     showCancelButton: true,
     confirmButtonText: 'Aceptar',
     cancelButtonText: 'Cancelar',
-  }).then(boton => {
-    if (boton.value) {
-      enviarFormulario(form);
-    }
+    showLoaderOnConfirm: true,
+    preConfirm: () => {
+      return enviarFormulario(form);
+    },
+    allowOutsideClick: () => !Swal.isLoading()
+  }).then(result => {
+    console.log(result);
   })
 }
 
