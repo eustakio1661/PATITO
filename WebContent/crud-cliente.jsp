@@ -126,7 +126,7 @@
                         >
                         <div class="col-sm-9">
                           <input
-                            type="email"
+                            type="text"
                             class="form-control"
                             id="txtDNICliente"
                             name="txtDNICliente"
@@ -169,6 +169,7 @@
                           <textarea
                             class="form-control"
                             id="txtDireccionCliente"
+                            name="txtDireccionCliente"
                             rows="3"
                             placeholder="Direcci&oacute;n completa del cliente"
                           >${ clienteEncontrado.direccion }</textarea>
