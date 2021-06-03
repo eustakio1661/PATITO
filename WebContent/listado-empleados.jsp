@@ -62,7 +62,7 @@
                             <td>
                               <div class="d-flex order-actions">
                                 <a
-                                  href="cs?opcion=actualizar"
+                                  href="emse?opcion=buscar&idEmp=${emp.id}"
                                   class="btn btn-success"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
@@ -71,7 +71,7 @@
                                   <i class="bx bx-edit mx-0"></i
                                 ></a>
                                 <a
-                                  href="cs?opcion=eliminar"
+                                  href="emse?opcion=eliminar"
                                   class="ms-4 btn btn-danger"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"

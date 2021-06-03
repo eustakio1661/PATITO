@@ -67,20 +67,20 @@
                             <td>
                               <div class="d-flex order-actions">
                                 <a
-                                  href="cs?opcion=actualizar"
+                                  href="ps?opcion=buscar&codigo=${prod.idProducto}"
                                   class="btn btn-success"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
-                                  title="Editar Cliente"
+                                  title="Editar Producto"
                                 >
                                   <i class="bx bx-edit mx-0"></i
                                 ></a>
                                 <a
-                                  href="cs?opcion=eliminar"
+                                  href="ps?opcion=eliminar&codigo=${prod.idProducto}"
                                   class="ms-4 btn btn-danger"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
-                                  title="Eliminar Cliente"
+                                  title="Eliminar Producto"
                                 >
                                   <i class="bx bx-trash mx-0"></i
                                 ></a>
