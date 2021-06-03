@@ -9,15 +9,16 @@ const enviarFormulario = (form) => {
     method,
     body: formData,
   })
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    return response.json()
-  })
-  .catch(err => {
-    console.log(err);
-  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .catch((err) => {
+      console.log(err);
+      Swal.fire('Error', `Oops, sucedi\u00F3 un error inesperado`, 'error');
+    });
 };
 
 // ${objeto} ${txtDescripcionProd.value}
@@ -33,11 +34,22 @@ const mostrarAlertRegistro = (form) => {
     preConfirm: () => {
       return enviarFormulario(form);
     },
-    allowOutsideClick: () => !Swal.isLoading()
-  }).then(result => {
-    console.log(result);
-  })
-}
+    allowOutsideClick: () => !Swal.isLoading(),
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const data = result.value;
+
+      if (data.ok) form.reset();
+
+      Swal.fire(data.titulo, data.mensaje, data.tipo);
+
+      if (form.classList.contains('was-validated')) {
+        form.classList.remove('was-validated');
+        return;
+      }
+    }
+  });
+};
 
 // Valida los formularios
 (function () {
