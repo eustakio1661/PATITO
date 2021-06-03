@@ -36,7 +36,7 @@ public class ComboDistritoTag extends TagSupport {
             out.println("Seleccione un distrito");
             out.println("</option>");
 
-             if (listaDistrito == null || listaDistrito.isEmpty())
+             if (idDistrito == null || idDistrito.isEmpty())
                  idDistrito = "-1";
 
             for (DistritoDTO d : listaDistrito) {

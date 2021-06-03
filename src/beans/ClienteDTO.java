@@ -2,86 +2,84 @@ package beans;
 
 public class ClienteDTO {
 
-	private int codigo, codigoDistrito, estado;
-	private String  dni, nombre, apellido, direccion, telefono, nombreDistrito;
+    private int codigo, codigoDistrito, estado;
+    private String dni, nombre, apellido, direccion, telefono, nombreDistrito;
 
-	public String toString() {
-		return "ClienteDTO [codigo=" + codigo + ", codigoDistrito=" + codigoDistrito + ", dni=" + dni + ", nombre="
-				+ nombre + ", apellido=" + apellido + ", direccion=" + direccion + ", telefono=" + telefono + "]";
-	}
+    public String toString() {
+        return "ClienteDTO [codigo=" + codigo + ", codigoDistrito=" + codigoDistrito + ", dni=" + dni + ", nombre="
+                + nombre + ", apellido=" + apellido + ", direccion=" + direccion + ", telefono=" + telefono + "]";
+    }
 
-	public int getCodigo() {
-		return codigo;
-	}
+    public int getCodigo() {
+        return codigo;
+    }
 
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
 
-	public int getCodigoDistrito() {
-		return codigoDistrito;
-	}
+    public int getCodigoDistrito() {
+        return codigoDistrito;
+    }
 
-	public void setCodigoDistrito(int codigoDistrito) {
-		this.codigoDistrito = codigoDistrito;
-	}
+    public void setCodigoDistrito(int codigoDistrito) {
+        this.codigoDistrito = codigoDistrito;
+    }
 
-	public String getDni() {
-		return dni;
-	}
+    public String getDni() {
+        return dni;
+    }
 
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public String getApellido() {
-		return apellido;
-	}
+    public String getApellido() {
+        return apellido;
+    }
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-	public String getDireccion() {
-		return direccion;
-	}
+    public String getDireccion() {
+        return direccion;
+    }
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 
-	public String getTelefono() {
-		return telefono;
-	}
+    public String getTelefono() {
+        return telefono;
+    }
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
-	public int getEstado() {
-		return estado;
-	}
+    public int getEstado() {
+        return estado;
+    }
 
-	public void setEstado(int estado) {
-		this.estado = estado;
-	}
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
 
-	public String getNombreDistrito() {
-		return nombreDistrito;
-	}
+    public String getNombreDistrito() {
+        return nombreDistrito;
+    }
 
-	public void setNombreDistrito(String nombreDistrito) {
-		this.nombreDistrito = nombreDistrito;
-	}
-	
-	
+    public void setNombreDistrito(String nombreDistrito) {
+        this.nombreDistrito = nombreDistrito;
+    }
 
 }

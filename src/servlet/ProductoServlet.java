@@ -59,13 +59,13 @@ public class ProductoServlet extends HttpServlet {
     private void buscar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Ingreso al proceso BuscarProducto");
 
-        int codigo = Integer.parseInt(request.getParameter(""));
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
 
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ProductoDTO p = factory.getProductoDAO().buscar(codigo);
-        request.setAttribute("p", p);
+        request.setAttribute("productoEncontrado", p);
 
-        request.getRequestDispatcher("").forward(request, response);
+        request.getRequestDispatcher("crud-producto.jsp").forward(request, response);
     }
 
     private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -83,7 +83,7 @@ public class ProductoServlet extends HttpServlet {
     private void eliminar(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Ingreso al proceso ActualizarProducto");
 
-        int codigo = Integer.parseInt(request.getParameter(""));
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
 
         ProductoDTO p = new ProductoDTO();
         p.setIdProducto(codigo);
