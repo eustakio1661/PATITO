@@ -7,13 +7,13 @@ const titleCase = (str) => {
 };
 
 let inputHidden = document.getElementById('input-hidden');
+let palabra = 'registrar';
 let entidad = '';
 let sweetTitle = '';
 let sweetText = '';
 
 if (inputHidden) {
   entidad = inputHidden.dataset.entidad.trim();
-  let palabra = 'registrar';
   if (inputHidden.value.trim()) {
     palabra = 'actualizar';
   }
@@ -61,7 +61,14 @@ const mostrarAlertRegistro = (form) => {
 
       if (data.ok) form.reset();
 
-      Swal.fire(data.titulo, data.mensaje, data.tipo);
+      Swal.fire(data.titulo, data.mensaje, data.tipo).then((result) => {
+        if (
+          (result.isConfirmed || result.isDismissed) &&
+          palabra === 'actualizar'
+        ) {
+          window.location.reload();
+        }
+      });
 
       if (form.classList.contains('was-validated')) {
         form.classList.remove('was-validated');
