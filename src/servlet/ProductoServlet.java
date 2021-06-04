@@ -102,12 +102,12 @@ public class ProductoServlet extends HttpServlet {
 
         System.out.println("Ingreso al proceso ActualizarProducto");
 
-        int codigo = Integer.parseInt(request.getParameter(""));
-        String descripcion = request.getParameter("");
-        double precio = Double.parseDouble(request.getParameter(""));
-        int cantidad = Integer.parseInt(request.getParameter(""));
-        int idcategoria = Integer.parseInt(request.getParameter(""));
-        String imagen = request.getParameter("");
+        int codigo = Integer.parseInt(request.getParameter("txtCodigoProd"));
+        String descripcion = request.getParameter("txtDescripcionProd");
+        double precio = Double.parseDouble(request.getParameter("txtPrecioProd"));
+        int cantidad = Integer.parseInt(request.getParameter("txtStockProd"));
+        int idcategoria = Integer.parseInt(request.getParameter("cboCategoriaProd"));
+        String imagen = request.getParameter("imgProducto");
 
         ProductoDTO p = new ProductoDTO();
         p.setIdProducto(codigo);
