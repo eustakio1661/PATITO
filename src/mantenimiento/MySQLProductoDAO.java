@@ -146,7 +146,7 @@ public class MySQLProductoDAO implements ProductoDAO {
 
         try {
             cn = MySQLConexion8.getConexion();
-            String sql = "select * from tb_producto where ID_PRO = ?";
+            String sql = "select * from producto where ID_PRO = ?";
             pst = cn.prepareStatement(sql);
 
             pst.setInt(1, codigo);
