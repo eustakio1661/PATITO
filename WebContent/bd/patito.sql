@@ -212,7 +212,6 @@ END WHILE;
 UPDATE EMPLEADO SET IMAGEN = IMAGEN, NOMBRE = NOMBRE, APELLIDO = APELLIDO, TELEFONO = TELEFONO, DIRECCION = DIRECCION, CORREO = CORREO, CLAVE = CLAVE WHERE ID_EM=ID;
 END$$
 DELIMITER ;
-SELECT * FROM EMPLEADO;
 /*--------------------------------------------------------------------------------------------------*/
 
 /*PROCEDIMIENTO ALMACENADO PARA EL REGISTRO DE LOS PRODUCTOS*/	
@@ -418,6 +417,3 @@ CALL USP_REGISTRARCLIENTE(7, '78237832', 'Jose', 'Lurita', 'Av. Perú 1240 Km 12
 CALL USP_REGISTRARCLIENTE(8, '98438934', 'Daniel', 'Esteban', 'Calle Los Naranjos 174', '934438974');
 CALL USP_REGISTRARCLIENTE(9, '23982389', 'Matias', 'Sosa', 'Jr. Belén 555', '948347384');
 CALL USP_REGISTRARCLIENTE(10, '23289389', 'Ricardo', 'Robles', 'Los Algarrobos 253', '974337344');
-
-select * from empleado;
-update empleado set estado=1 where id_em=2;
