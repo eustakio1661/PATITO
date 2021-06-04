@@ -32,6 +32,11 @@
             ><i class="bx bx-right-arrow-alt"></i>Pedidos Pendientes</a
           >
         </li>
+        <li>
+          <a href="venser?opcion=listados"
+            ><i class="bx bx-right-arrow-alt"></i>Catalogo</a
+          >
+        </li>
       </ul>
     </li>
     <li class="menu-label">Mantenimiento</li>
