@@ -10,6 +10,7 @@
   String typeColor = "primary";
   String opcion = "Registrar";
   String tituloForm = "Registro de Empleados";
+  String entidad = "empleado";
            
   if (existeEmpleado != null) {
       action = "emse?opcion=actualizar";
@@ -59,6 +60,14 @@
                     method="POST"
                     novalidate
                   >
+                    <input
+                      type="hidden"
+                      class="input-hidden"
+                      id="input-hidden"
+                      name="txtIdEmpleado"
+                      data-entidad="<%=entidad %>"
+                      value="${ empleadoEncontrado.id }"
+                    />
                     <div class="col-12">
                       <label for="txtDNIEmpleado" class="form-label"
                         >DNI :
@@ -179,5 +188,7 @@
     </div>
 
     <jsp:include page="reusable/scripts.jsp"></jsp:include>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="js/send_form.js"></script>
   </body>
 </html>
