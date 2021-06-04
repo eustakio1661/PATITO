@@ -2,16 +2,22 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import beans.EmpleadoDTO;
 import dao.DAOFactory;
 
+@MultipartConfig
 @WebServlet(name = "emse", urlPatterns = { "/emse" })
 public class EmpleadoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -77,6 +83,7 @@ public class EmpleadoServlet extends HttpServlet {
 
     private void registrarEmpleado(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String dni = request.getParameter("txtDNIEmpleado");
         String nombre = request.getParameter("txtNombreEmpleado");
         String apellido = request.getParameter("txtApellidoEmpleado");
@@ -96,12 +103,24 @@ public class EmpleadoServlet extends HttpServlet {
 
         int ok = f.getEmpleadoDAO().registrar(e);
 
-        if (ok == 0) {
-            System.out.println("Error al registrar empleado");
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+
+        if (ok != 0) {
+            data.put("ok", true);
+            data.put("titulo", "Registrado");
+            data.put("mensaje", "Se ah registrado al empleado(a) " + nombre + " " + apellido + " correctamente");
+            data.put("tipo", "success");
         } else {
-            System.out.println("Empleado registrado con éxito");
+            data.put("ok", false);
+            data.put("titulo", "Error");
+            data.put("mensaje", "No se pudo registrar al empleado(a)");
+            data.put("tipo", "error");
         }
-        request.getRequestDispatcher("crud-empleado.jsp").forward(request, response);
+
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
     }
 
     private void actualizarEmpleado(HttpServletRequest request, HttpServletResponse response)

@@ -10,6 +10,7 @@
   String typeColor = "primary";
   String opcion = "Registrar";
   String tituloForm = "Registro de Productos";
+  String entidad = "producto";
            
   if (existeProducto != null) {
       action = "ps?opcion=actualizar";
@@ -84,6 +85,14 @@
 
                     <div class="col-xs-6 col-md-8">
                       <div class="row">
+                        <input
+                          type="hidden"
+                          class="input-hidden"
+                          id="input-hidden"
+                          name="txtCodigoProd"
+                          data-entidad="<%=entidad %>"
+                          value="${ productoEncontrado.idProducto }"
+                        />
                         <div class="col-12 mb-3">
                           <label for="txtDescripcionProd" class="form-label"
                             >Descripci&oacute;n :
@@ -185,6 +194,8 @@
     </div>
 
     <jsp:include page="reusable/scripts.jsp"></jsp:include>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="js/send_form.js"></script>
   </body>
 </html>
     
