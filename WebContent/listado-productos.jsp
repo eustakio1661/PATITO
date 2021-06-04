@@ -103,37 +103,7 @@
         ><i class="bx bxs-up-arrow-alt"></i
       ></a>
       <jsp:include page="components/footer.jsp"></jsp:include>
-      <div class="switcher-wrapper">
-		<div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>
-		</div>
-		<div class="switcher-body">
-			<div class="d-flex align-items-center">
-				<h5 class="mb-0 text-uppercase">Bolsa</h5>
-				<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
-			</div>
-			<hr/>
-			<h6 class="mb-0">Cliente</h6>
-			<hr/>
-			<div>
-				${c.nombre }
-				${c.apellido }
-			</div>
-			<hr/>
-			<h6 class="mb-0">Productos</h6>
-			<hr/>
-			<div>
-				
-			</div>
-
-			<hr/>
-			<h6 class="mb-0">Subtotal</h6>
-			<hr/>
-			<div >
-				
-			</div>
-
-		</div>
-	</div>
+ 
     </div>
 
     <jsp:include page="reusable/scripts.jsp"></jsp:include>
