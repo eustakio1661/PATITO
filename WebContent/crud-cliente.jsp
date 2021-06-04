@@ -10,6 +10,7 @@
    String typeColor = "primary";
    String opcion = "Registrar";
    String tituloForm = "Registro de Clientes";
+   String entidad = "cliente";
               
    if (existeCliente != null) {
        action = "cs?opcion=actualizar";
@@ -35,8 +36,8 @@
       <div class="page-wrapper">
         <div class="page-content">
           <jsp:include page="components/breadcrumb.jsp">
-            <jsp:param name="pagina" value="Cliente"/>
-            <jsp:param name="accion" value="<%=opcion%>"/>
+            <jsp:param name="pagina" value="Cliente" />
+            <jsp:param name="accion" value="<%=opcion%>" />
           </jsp:include>
           <div class="row">
             <div class="col-xl-9 mx-auto">
@@ -48,16 +49,33 @@
                 method="POST"
                 novalidate
               >
-                <div class="card border-top border-0 border-4 border-<%=typeColor%>">
+                <div
+                  class="
+                    card
+                    border-top border-0 border-4 border-<%=typeColor%>
+                  "
+                >
                   <div class="card-body">
                     <div class="border p-4 rounded">
                       <div class="card-title d-flex align-items-center">
                         <div>
-                          <i class="bx bxs-user me-1 font-22 text-<%=typeColor%>"></i>
+                          <i
+                            class="bx bxs-user me-1 font-22 text-<%=typeColor%>"
+                          ></i>
                         </div>
-                        <h5 class="mb-0 text-<%=typeColor%>"><%=tituloForm %></h5>
+                        <h5 class="mb-0 text-<%=typeColor%>">
+                          <%=tituloForm %>
+                        </h5>
                       </div>
                       <hr />
+                      <input
+                        type="hidden"
+                        class="input-hidden"
+                        id="input-hidden"
+                        name="txtCodigoCliente"
+                        data-entidad="<%=entidad %>"
+                        value="${ clienteEncontrado.codigo }"
+                      />
                       <div class="row mb-3">
                         <label
                           for="txtNombreCliente"
@@ -152,7 +170,9 @@
                             aria-label="Distrito del Cliente"
                             required
                           >
-                            <tools:comboDistrito idDistrito="${ clienteEncontrado.codigoDistrito }"/>
+                            <tools:comboDistrito
+                              idDistrito="${ clienteEncontrado.codigoDistrito }"
+                            />
                           </select>
                           <div class="invalid-feedback">
                             Seleccione un distrito
@@ -172,7 +192,8 @@
                             name="txtDireccionCliente"
                             rows="3"
                             placeholder="Direcci&oacute;n completa del cliente"
-                          >${ clienteEncontrado.direccion }</textarea>
+                          >${ clienteEncontrado.direccion }</textarea
+                          >
                           <div class="invalid-feedback">
                             El campo direcci&oacute;n es obligatorio
                           </div>
@@ -181,7 +202,10 @@
                       <div class="row">
                         <label class="col-sm-3 col-form-label"></label>
                         <div class="col-sm-9">
-                          <button type="submit" class="btn btn-<%=typeColor%> px-5">
+                          <button
+                            type="submit"
+                            class="btn btn-<%=typeColor%> px-5"
+                          >
                             <%=opcion%> Cliente
                           </button>
                         </div>
