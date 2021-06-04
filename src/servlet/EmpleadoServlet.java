@@ -56,38 +56,39 @@ public class EmpleadoServlet extends HttpServlet {
     }
 
     private void actualizarPerfil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        int codigo = Integer.parseInt(request.getParameter("txtIdEmpleado"));
-        String imagen = request.getParameter("");
+             
+        String imagen = request.getParameter("imgEmpleado");
         String nombre = request.getParameter("txtNombreEmpleado");
         String apellido = request.getParameter("txtApellidoEmpleado");
         String telefono = request.getParameter("txtTelefonoEmpleado");
         String direccion = request.getParameter("txtDireccionEmpleado");
         String correo = request.getParameter("txtEmailEmpleado");
         String clave = request.getParameter("txtClaveEmpleado");
+        int codigo = Integer.parseInt(request.getParameter("txtIdEmpleado"));
 
-        EmpleadoDTO e = new EmpleadoDTO();
-        e.setId(codigo);
-        e.setImagen(imagen);
-        e.setNombre(nombre);
-        e.setApellido(apellido);
-        e.setTelefono(telefono);
-        e.setDireccion(direccion);
-        e.setCorreo(correo);
-        e.setClave(clave);
+        EmpleadoDTO em = new EmpleadoDTO();        
+        em.setImagen(imagen);
+        em.setNombre(nombre);
+        em.setApellido(apellido);
+        em.setTelefono(telefono);
+        em.setDireccion(direccion);
+        em.setCorreo(correo);
+        em.setClave(clave);
+        em.setId(codigo);
 
 
         DAOFactory f = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
 
-        int ok = f.getEmpleadoDAO().actualizarPerfilEmpleado(e);
+        int ok = f.getEmpleadoDAO().actualizarPerfilEmpleado(em);
 
         if (ok == 0) {
             System.out.println("Error al actualizar perfil del empleado...");
         } else {
             System.out.println("Empleado actualizado con éxito...!");
-        }
-        request.getSession().setAttribute("e", e);
+        }        
+        
         request.getRequestDispatcher("perfil.jsp").forward(request, response);
+        
         
     }
 
@@ -164,7 +165,6 @@ public class EmpleadoServlet extends HttpServlet {
 
     private void actualizarEmpleado(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Entró a actualizar");
         
         int codigo = Integer.parseInt(request.getParameter("txtIdEmpleado"));
         String dni = request.getParameter("txtDNIEmpleado");
@@ -187,21 +187,32 @@ public class EmpleadoServlet extends HttpServlet {
         DAOFactory f = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
 
         int ok = f.getEmpleadoDAO().actualizarEmpleado(e);
+        
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
 
-        if (ok == 0) {
-            System.out.println("Error al actualizar empleado...");
+        if (ok != 0) {
+            data.put("ok", true);
+            data.put("titulo", "Actualizado");
+            data.put("mensaje", "Se ha actualizado el empleado " + nombre + " " + apellido + " correctamente");
+            data.put("tipo", "success");         
         } else {
-            System.out.println("Empleado actualizado con éxito...!");
+            data.put("ok", false);
+            data.put("titulo", "Error");
+            data.put("mensaje", "No se pudo actualizar al empleado");
+            data.put("tipo", "error");
         }
-        request.getRequestDispatcher("listado-empleados.jsp").forward(request, response);
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
+
 
     }
 
     private void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-       int codigo = Integer.parseInt(request.getParameter("idEmpleado"));
-       String url = "";
+       int codigo = Integer.parseInt(request.getParameter("id"));
        
        EmpleadoDTO e = new EmpleadoDTO();
        
@@ -214,9 +225,8 @@ public class EmpleadoServlet extends HttpServlet {
             System.out.println("Error al eliminar empleado");
         } else {
             System.out.println("Empleado eliminado con éxito!");
-            url="listado-empleados.jsp";
         }
-        request.getRequestDispatcher(url).forward(request, response);
+        listarEmpleado(request,response);
         
     }
 

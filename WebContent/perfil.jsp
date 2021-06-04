@@ -40,7 +40,7 @@
                             text-center
                           ">
 												<img src="${e.imagen }" alt="Admin"
-													class="rounded-circle p-1 bg-primary" width="110"/>
+													class="rounded-circle p-1 bg-primary" width="110" name="ImgEmpleado"/>
 												<div class="mt-3">
 													<h4>${e.nombre }</h4>
 													<p class="text-secondary mb-1">

@@ -71,7 +71,7 @@
                                   <i class="bx bx-edit mx-0"></i
                                 ></a>
                                 <a
-                                  href="emse?opcion=eliminar&idEmpleado=${emp.id}"
+                                  href="emse?opcion=eliminar&id=${emp.id}"
                                   class="ms-4 btn btn-danger"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
