@@ -95,11 +95,12 @@ public class MySQLProductoDAO implements ProductoDAO {
             while (rs.next()) {
                 ProductoDTO p = new ProductoDTO();
                 p.setIdProducto(rs.getInt(1));
-                p.setDescripcion(rs.getString(2));
-                p.setPrecio(rs.getDouble(3));
-                p.setCantidad(rs.getInt(4));
-                p.setIdCategoria(rs.getInt(5));
-                p.setDescCategoria(rs.getString(6));
+                p.setImagen(rs.getString(2));
+                p.setDescripcion(rs.getString(3));
+                p.setPrecio(rs.getDouble(4));
+                p.setCantidad(rs.getInt(5));
+                p.setIdCategoria(rs.getInt(6));
+                p.setDescCategoria(rs.getString(7));
                 lista.add(p);
             }
         } catch (Exception e) {
@@ -146,7 +147,7 @@ public class MySQLProductoDAO implements ProductoDAO {
 
         try {
             cn = MySQLConexion8.getConexion();
-            String sql = "select * from tb_producto where ID_PRO = ?";
+            String sql = "select * from PRODUCTO where ID_PRO = ?";
             pst = cn.prepareStatement(sql);
 
             pst.setInt(1, codigo);
