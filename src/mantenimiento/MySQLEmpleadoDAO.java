@@ -72,16 +72,15 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         PreparedStatement pst = null;
         try {
             cn = MySQLConexion8.getConexion();
-            String sql = "{CALL USP_ACTUALIZAREMPLEADO(?,?,?,?,?,?,?,?)}";
+            String sql = "{CALL USP_ACTUALIZAREMPLEADO(?,?,?,?,?,?,?)}";
             pst = cn.prepareStatement(sql);
-            pst.setString(1, e.getNombre());
-            pst.setString(2, e.getApellido());
-            pst.setString(3, e.getTelefono());
-            pst.setString(4, e.getDireccion());
-            pst.setString(5, e.getCorreo());
-            pst.setString(6, e.getClave());
-            pst.setString(7, e.getImagen());
-            pst.setInt(8, e.getId());
+            pst.setString(1, e.getDni());
+            pst.setString(2, e.getNombre());
+            pst.setString(3, e.getApellido());
+            pst.setString(4, e.getTelefono());
+            pst.setString(5, e.getDireccion());
+            pst.setInt(6, e.getIdTipo());
+            pst.setInt(7,e.getId());
             rs = pst.executeUpdate();
 
         } catch (Exception ex) {
