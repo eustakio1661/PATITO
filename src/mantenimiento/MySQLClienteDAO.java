@@ -81,12 +81,12 @@ public class MySQLClienteDAO implements ClienteDAO {
             String sql = "{CALL USP_ACTUALIZARCLIENTE(?,?,?,?,?,?,?)}";
             pst = cn.prepareStatement(sql);
             pst.setInt(1, cli.getCodigo());
-            pst.setString(2, cli.getNombre());
-            pst.setString(3, cli.getApellido());
-            pst.setString(4, cli.getTelefono());
-            pst.setString(5, cli.getDni());
-            pst.setInt(6, cli.getCodigoDistrito());
-            pst.setString(7, cli.getDireccion());
+            pst.setInt(2, cli.getCodigoDistrito());
+            pst.setString(3, cli.getDni());
+            pst.setString(4, cli.getNombre());
+            pst.setString(5, cli.getApellido());
+            pst.setString(6, cli.getDireccion());
+            pst.setString(7, cli.getTelefono());
 
             rs = pst.executeUpdate();
 
