@@ -1,4 +1,25 @@
-const myForm = document.getElementById('myForm');
+const titleCase = (str) => {
+  return str
+    .split(' ')
+    .map((w) => w[0].toUpperCase() + w.substr(1).toLowerCase())
+    .join(' ')
+    .trim();
+};
+
+let inputHidden = document.getElementById('input-hidden');
+let entidad = '';
+let sweetTitle = '';
+let sweetText = '';
+
+if (inputHidden) {
+  entidad = inputHidden.dataset.entidad.trim();
+  let palabra = 'registrar';
+  if (inputHidden.value.trim()) {
+    palabra = 'actualizar';
+  }
+  sweetTitle = titleCase(`${palabra} ${entidad}`);
+  sweetText = `\u00bfDesea ${palabra} el ${entidad} a la BD?`;
+}
 
 const enviarFormulario = (form) => {
   const formData = new FormData(form);
@@ -21,11 +42,10 @@ const enviarFormulario = (form) => {
     });
 };
 
-// ${objeto} ${txtDescripcionProd.value}
 const mostrarAlertRegistro = (form) => {
   Swal.fire({
-    title: `Registrar Cliente`,
-    text: `\u00bfDesea registrar el Cliente a la BD?`,
+    title: sweetTitle,
+    text: sweetText,
     icon: 'question',
     showCancelButton: true,
     confirmButtonText: 'Aceptar',
@@ -51,7 +71,6 @@ const mostrarAlertRegistro = (form) => {
   });
 };
 
-// Valida los formularios
 (function () {
   'use strict';
 
