@@ -331,68 +331,48 @@ INSERT INTO TIPOEMPLEADO VALUES (3,'Chef');
 INSERT INTO TIPOEMPLEADO VALUES (4,'Mesero(a)');
 INSERT INTO TIPOEMPLEADO VALUES (5,'Repartidor(a)');
 
-INSERT INTO DISTRITO
-values (1, 'Cercado de Lima');
-INSERT INTO DISTRITO
-values (2, 'Ate');
-INSERT INTO DISTRITO
-values (3, 'Barranco');
-INSERT INTO DISTRITO
-values (4, 'Breña');
-INSERT INTO DISTRITO
-values (5, 'Comas');
-INSERT INTO DISTRITO
-values (6, 'Chorrillos');
-INSERT INTO DISTRITO
-values (7, 'El Agustino');
-INSERT INTO DISTRITO
-values (8, 'Jesús María');
-INSERT INTO DISTRITO
-values (9, 'La Molina');
-INSERT INTO DISTRITO
-values (10, 'La Victoria');
-INSERT INTO DISTRITO
-values (11, 'Lince');
-INSERT INTO DISTRITO
-values (12, 'Magdalena del Mar');
-INSERT INTO DISTRITO
-values (13, 'Miraflores');
-INSERT INTO DISTRITO
-values (14, 'Pueblo Libre');
-INSERT INTO DISTRITO
-values (15, 'Puente Piedra');
-INSERT INTO DISTRITO
-values (16, 'Rimac');
-INSERT INTO DISTRITO
-values (17, 'San Isidro');
-INSERT INTO DISTRITO
-values (18, 'Independencia');
-INSERT INTO DISTRITO
-values (19, 'San Juan de Miraflores');
-INSERT INTO DISTRITO
-values (20, 'San Luis');
-INSERT INTO DISTRITO
-values (21, 'San Martin de Porres');
-INSERT INTO DISTRITO
-values (22, 'San Miguel');
-INSERT INTO DISTRITO
-values (23, 'Santiago de Surco');
-INSERT INTO DISTRITO
-values (24, 'Surquillo');
-INSERT INTO DISTRITO
-values (25, 'Villa María del Triunfo');
-INSERT INTO DISTRITO
-values (26, 'San Juan de Lurigancho');
-INSERT INTO DISTRITO
-values (27, 'Santa Rosa');
-INSERT INTO DISTRITO
-values (28, 'Los Olivos');
-INSERT INTO DISTRITO
-values (29, 'Los Olivos');
-INSERT INTO DISTRITO
-values (30, 'Villa El Savador');
-INSERT INTO DISTRITO
-values (31, 'Santa Anita');
+CALL REGISTRAR_EMPLEADO('89438934','Darick','Leroy','983498345','Calle Honolulu . Mz U Lt. 17',2);
+CALL REGISTRAR_EMPLEADO('23898932','Leo','Martinez','984389438','Mz. 25 Lt. 9,Urb. Arriba Peru',5);
+CALL REGISTRAR_EMPLEADO('47833478','Luis','Zapata','934334438','Los Algarrobos 563',5);
+CALL REGISTRAR_EMPLEADO('23782378','Maria','Cerron','934477443','Avenida Peru,3210,SMP',2);
+CALL REGISTRAR_EMPLEADO('43787843','Luz Elena','Medrano','984378343','Malachowscky 209 Of. 301',2);
+CALL REGISTRAR_EMPLEADO('32782738','David','Gutarra','947374342','Av Republica Del Peru Nro 830',3);
+CALL REGISTRAR_EMPLEADO('43879348','Rebeca','Mendoza','934438734','Mz. I Lote 12',4);
+CALL REGISTRAR_EMPLEADO('43783478','Elva','Tasilla','934727334','Cdra. 46 Mza D4 Lt9 Bocanegra',4);
+CALL REGISTRAR_EMPLEADO('32789237','Daniel','Castillo','934773423','Avenida Bellavista, 301',4);
+CALL REGISTRAR_EMPLEADO('74374343','Kiara','Sullivan','934873474','Paruro 1369 Tda 135',3);
+
+INSERT INTO DISTRITO values (1, 'Cercado de Lima');
+INSERT INTO DISTRITO values (2, 'Ate');
+INSERT INTO DISTRITO values (3, 'Barranco');
+INSERT INTO DISTRITO values (4, 'Breña');
+INSERT INTO DISTRITO values (5, 'Comas');
+INSERT INTO DISTRITO values (6, 'Chorrillos');
+INSERT INTO DISTRITO values (7, 'El Agustino');
+INSERT INTO DISTRITO values (8, 'Jesús María');
+INSERT INTO DISTRITO values (9, 'La Molina');
+INSERT INTO DISTRITO values (10, 'La Victoria');
+INSERT INTO DISTRITO values (11, 'Lince');
+INSERT INTO DISTRITO values (12, 'Magdalena del Mar');
+INSERT INTO DISTRITO values (13, 'Miraflores');
+INSERT INTO DISTRITO values (14, 'Pueblo Libre');
+INSERT INTO DISTRITO values (15, 'Puente Piedra');
+INSERT INTO DISTRITO values (16, 'Rimac');
+INSERT INTO DISTRITO values (17, 'San Isidro');
+INSERT INTO DISTRITO values (18, 'Independencia');
+INSERT INTO DISTRITO values (19, 'San Juan de Miraflores');
+INSERT INTO DISTRITO values (20, 'San Luis');
+INSERT INTO DISTRITO values (21, 'San Martin de Porres');
+INSERT INTO DISTRITO values (22, 'San Miguel');
+INSERT INTO DISTRITO values (23, 'Santiago de Surco');
+INSERT INTO DISTRITO values (24, 'Surquillo');
+INSERT INTO DISTRITO values (25, 'Villa María del Triunfo');
+INSERT INTO DISTRITO values (26, 'San Juan de Lurigancho');
+INSERT INTO DISTRITO values (27, 'Santa Rosa');
+INSERT INTO DISTRITO values (28, 'Los Olivos');
+INSERT INTO DISTRITO values (29, 'Los Olivos');
+INSERT INTO DISTRITO values (30, 'Villa El Savador');
+INSERT INTO DISTRITO values (31, 'Santa Anita');
 
 CALL USP_REGISTRARCLIENTE(1, '72571636', 'Andres', 'Cervantes', 'Av. Bolivar 112', '945894384');
 CALL USP_REGISTRARCLIENTE(2, '34982382', 'Julio', 'Garcia', 'Av. Buckingham V Lt5', '934348544');
@@ -404,3 +384,26 @@ CALL USP_REGISTRARCLIENTE(7, '78237832', 'Jose', 'Lurita', 'Av. Perú 1240 Km 12
 CALL USP_REGISTRARCLIENTE(8, '98438934', 'Daniel', 'Esteban', 'Calle Los Naranjos 174', '934438974');
 CALL USP_REGISTRARCLIENTE(9, '23982389', 'Matias', 'Sosa', 'Jr. Belén 555', '948347384');
 CALL USP_REGISTRARCLIENTE(10, '23289389', 'Ricardo', 'Robles', 'Los Algarrobos 253', '974337344');
+
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('BEBIDAS');
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('COMBOS');
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('CHIFA');
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('OFERTAS');
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('SOPAS');
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('HAMBURGUESAS');
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('MARISCOS');
+
+CALL USP_REGISTRARPRODUCTO('MARACUYA',5.99,14,1,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
+CALL USP_REGISTRARPRODUCTO('CHICHA MORADA',5.99,13,1,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
+CALL USP_REGISTRARPRODUCTO('COMBO CLASICO',14.99,5,2,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
+CALL USP_REGISTRARPRODUCTO('COMBO FAMILIAR',42.00,5,2,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
+CALL USP_REGISTRARPRODUCTO('ARROZ CHAUFA DE POLLO',10.99,20,3,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
+CALL USP_REGISTRARPRODUCTO('AEROPUERTO DE POLLO',11.99,10,3,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
+CALL USP_REGISTRARPRODUCTO('1 POLLO ENTERO + 1/4 DE POLLO + CHAUFA + PAPAS + GASEOSA 1 1/2L',64.99,5,4,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
+CALL USP_REGISTRARPRODUCTO('1 POLLO ENTERO + 1/4 POLLO + PAPAS',49.99,4,4,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
+CALL USP_REGISTRARPRODUCTO('SOPA DE DIETA',10,20,5,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
+CALL USP_REGISTRARPRODUCTO('CALDO DE POLLO',15,10,5,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
+CALL USP_REGISTRARPRODUCTO('SIMPLE',5.99,12,6,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
+CALL USP_REGISTRARPRODUCTO('CHEESEBURGER',7.99,23,6,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
+CALL USP_REGISTRARPRODUCTO('CEVICHE DE PESCADO',12.99,15,7,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
+CALL USP_REGISTRARPRODUCTO('CEVICHE + CHICHARRON',17.99,14,7,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png');
