@@ -102,7 +102,7 @@ public class ClienteServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
-   
+
     }
 
     private void eliminar(HttpServletRequest request, HttpServletResponse response) {
@@ -124,16 +124,18 @@ public class ClienteServlet extends HttpServlet {
 
     }
 
-    private void actualizar(HttpServletRequest request, HttpServletResponse response) {
+    private void actualizar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         System.out.println("Ingreso al proceso Actualizar Cliente");
 
-        int codigo = Integer.parseInt(request.getParameter(""));
-        int codigoDistrito = Integer.parseInt(request.getParameter(""));
-        String dni = request.getParameter("");
-        String nombre = request.getParameter("");
-        String apellido = request.getParameter("");
-        String direccion = request.getParameter("");
-        String telefono = request.getParameter("");
+        int codigo = Integer.parseInt(request.getParameter("txtCodigoCliente"));
+        int codigoDistrito = Integer.parseInt(request.getParameter("cboDistritoCliente"));
+        String dni = request.getParameter("txtDNICliente");
+        String nombre = request.getParameter("txtNombreCliente");
+        String apellido = request.getParameter("txtApellidoCliente");
+        String direccion = request.getParameter("txtDireccionCliente");
+        String telefono = request.getParameter("txtTelefonoCliente");
 
         ClienteDTO c = new ClienteDTO();
 
@@ -149,11 +151,25 @@ public class ClienteServlet extends HttpServlet {
         ClienteDAO dao = fabrica.getClienteDAO();
 
         int ok = dao.actualizarCliente(c);
+
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+
         if (ok != 0) {
-
+            data.put("ok", true);
+            data.put("titulo", "Actualizado");
+            data.put("mensaje", "Se ah actualizado el cliente " + nombre + " " + apellido + " correctamente");
+            data.put("tipo", "success");
         } else {
-
+            data.put("ok", false);
+            data.put("titulo", "Error");
+            data.put("mensaje", "No se pudo actualizar al cliente");
+            data.put("tipo", "error");
         }
+
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
 
     }
 
