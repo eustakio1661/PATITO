@@ -216,4 +216,31 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         return e;
     }
 
+    @Override
+    public int actualizarPerfilEmpleado(EmpleadoDTO e) {
+        int rs = 0;
+        Connection cn = null;
+        PreparedStatement pst = null;
+        try {
+            cn = MySQLConexion8.getConexion();
+            String sql = "{CALL USP_ACTUALIZARPERFILEMPLEADO(?,?,?,?,?,?,?,?)}";
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, e.getImagen());
+            pst.setString(2, e.getNombre());
+            pst.setString(3, e.getApellido());
+            pst.setString(4, e.getTelefono());
+            pst.setString(5, e.getDireccion());
+            pst.setString(6, e.getCorreo());
+            pst.setString(7, e.getClave());
+            pst.setInt(8,e.getId());
+            rs = pst.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println("Error al actualizar perfil del empleado...: " + ex.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(cn);
+        }
+        return rs;
+    }
+
 }
