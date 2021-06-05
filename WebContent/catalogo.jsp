@@ -51,7 +51,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${ lstClientes }" var="cli">
+											<c:forEach items="${lstClientes}" var="cli">
 												<tr>
 													<td>${cli.codigo}</td>
 													<td>${cli.dni }</td>
@@ -77,8 +77,8 @@
 						</div>
 
 						<div class="container">
-							<form class="row g-2 needs-validation" action="venser" method="post"
-								novalidate>
+							<form class="row g-2 needs-validation" action="venser"
+								method="post" novalidate>
 
 
 								<div class="col-xs-6">
@@ -97,13 +97,15 @@
 										<div class="col-12 mb-3">
 											<label for="txtDescripcionProd" class="form-label">ID
 												: </label> <input type="text" class="form-control" id="txtIdProd"
-												name="txtIdProd" value="${productoEncontrado.idProducto }" readonly="readonly" />
+												name="txtIdProd" value="${productoEncontrado.idProducto }"
+												readonly="readonly" />
 
 										</div>
 										<div class="col-12 mb-3">
 											<label for="txtDescripcionProd" class="form-label">Descripci&oacute;n
 												: </label> <input type="text" class="form-control"
-												id="txtDescripcionProd" name="txtDescripcionProd" value="${productoEncontrado.descripcion }"
+												id="txtDescripcionProd" name="txtDescripcionProd"
+												value="${productoEncontrado.descripcion }"
 												readonly="readonly" />
 
 										</div>
@@ -111,8 +113,8 @@
 										<div class="col-6 mb-3">
 											<label for="txtPrecioProd" class="form-label">Precio
 												Unitario :</label> <input type="number" class="form-control"
-												id="txtPrecioProd" name="txtPrecioProd" value="${productoEncontrado.precio }"
-												readonly="readonly" />
+												id="txtPrecioProd" name="txtPrecioProd"
+												value="${productoEncontrado.precio }" readonly="readonly" />
 
 										</div>
 										<div class="col-6 mb-3">
@@ -123,9 +125,9 @@
 										</div>
 										<div class="col-12">
 											<div class="modal-footer">
-												<button class="btn btn-primary" name="opcion" value="agrCompra">Agregar
-													Compra</button>
-											
+												<button class="btn btn-primary" name="opcion"
+													value="agrCompra">Agregar Compra</button>
+
 
 											</div>
 
@@ -151,22 +153,24 @@
 										<thead class="table-light">
 											<tr>
 												<th>N&uacute;mero</th>
-												<th>Imagen</th>
+
 												<th>Descripci&oacute;n</th>
+												<th>Categoria</th>
 												<th>Precio</th>
 												<th>Stock</th>
 												<th>Acciones</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${ lstProductos }" var="prod">
+											<c:forEach items="${lstProductos}" var="prod">
 												<tr>
 													<td>${prod.idProducto}</td>
-													<td><img alt="" src="${prod.imagen}" width="50px"
-														height="50px"></td>
+
 													<td>${prod.descripcion}</td>
+													<td>${prod.descCategoria}</td>
 													<td><fmt:setLocale value="es_PE" /> <fmt:formatNumber
 															type="currency" value="${prod.precio}" /></td>
+
 													<td>${prod.cantidad}</td>
 													<td>
 														<div class="d-flex order-actions">
@@ -251,13 +255,14 @@
 																	</div>
 																</div>
 															</div>
-															<a href="venser?opcion=cargProducto&codigo=${prod.idProducto}"
+															<a
+																href="venser?opcion=cargProducto&codigo=${prod.idProducto}"
 																class="ms-4 btn btn-success" data-bs-toggle="tooltip"
 																data-bs-placement="bottom" title="Agregar Cliente">
 																<i class="bx bx-edit mx-0"></i>
 															</a>
 														</div>
-													
+
 													</td>
 												</tr>
 											</c:forEach>
@@ -287,44 +292,42 @@
 						aria-label="Close"></button>
 				</div>
 				<hr />
-				<h6 class="mb-0">Cliente</h6>
-				<hr />
-				<div>${clienteEncontrado.codigo }${clienteEncontrado.nombre }${clienteEncontrado.apellido }</div>
-				<hr />
-				<h6 class="mb-0">Productos</h6>
-				<hr />
-				<div class="container">
-		
-				<c:forEach items="${carro }" var="d">
-				${d.nombreProd }
-				<br>
-				${d.cantidad }
-				<br>
-				${d.precio }
-				<br>
-				${d.importe }
-				<div class="d-flex order-actions">
-                       
-                                <a
-                                  href="venser?opcion=eliCompra&codigo=${d.id_pro}"
-                                  class="ms-4 btn btn-danger"
-                                  data-bs-toggle="tooltip"
-                                  data-bs-placement="bottom"
-                                  title="Eliminar Producto"
-                                >
-                                  <i class="bx bx-trash mx-0"></i
-                                ></a>
-                              </div>
-				</c:forEach>
-				</div>
+				<form action="venser" method="post">
+					<h6 class="mb-0">Cliente</h6>
+					<hr />
+					<div>${clienteEncontrado.codigo }|${clienteEncontrado.nombre }
+						| ${clienteEncontrado.apellido }</div>
+					<hr />
+					<h6 class="mb-0">Productos</h6>
+					<hr />
+					<div class="container">
 
-				<hr />
-				<h6 class="mb-0">Subtotal (${cantidadProductos })</h6>
-				<hr />
-				<div>
-					S/. ${subTotalVentas }
-				</div>
+						<c:forEach items="${carro }" var="d">
+				${d.id_pro }|${d.nombreProd }|${d.cantidad }|${d.precio }| <fmt:setLocale
+								value="es_PE" />
+							<fmt:formatNumber type="currency" value="${d.importe }" />
 
+							<div class="d-flex order-actions">
+
+								<a href="venser?opcion=eliCompra&codigo=${d.id_pro}"
+									class="ms-4 btn btn-danger" data-bs-toggle="tooltip"
+									data-bs-placement="bottom" title="Eliminar Producto"> <i
+									class="bx bx-trash mx-0"></i>
+								</a>
+							</div>
+						</c:forEach>
+					</div>
+
+					<hr />
+					<h6 class="mb-0">Subtotal (${cantidadProductos })</h6>
+					<hr />
+					<div>
+						<fmt:setLocale value="es_PE" />
+						<fmt:formatNumber type="currency" value="${subTotalVentas }" />
+					</div>
+					<button class="btn btn-primary" name="opcion" value="procCompra">Procesar
+						Compra</button>
+				</form>
 			</div>
 		</div>
 	</div>
