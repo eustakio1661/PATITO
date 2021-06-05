@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import beans.Detalle_PedidoDTO;
+import beans.DetallePedidoDTO;
 
 /**
  * Application Lifecycle Listener implementation class VentaListener
@@ -31,7 +31,7 @@ public class VentaListener implements HttpSessionListener {
         System.out.println("ID Session: " + arg0.getSession().getId());
         System.out.println("----------------------------");
         //Variables Globales
-        ArrayList<Detalle_PedidoDTO> carro = new ArrayList<Detalle_PedidoDTO>();
+        ArrayList<DetallePedidoDTO> carro = new ArrayList<DetallePedidoDTO>();
         int cantidadProductos = 0;
         double subTotalVentas = 0.0;
         
