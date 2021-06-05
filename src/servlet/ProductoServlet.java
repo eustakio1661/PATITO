@@ -78,8 +78,8 @@ public class ProductoServlet extends HttpServlet {
 
     }
 
-    private void eliminar(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("Ingreso al proceso ActualizarProducto");
+    private void eliminar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Ingreso al proceso EliminarProducto");
 
         int codigo = Integer.parseInt(request.getParameter("codigo"));
 
@@ -89,11 +89,25 @@ public class ProductoServlet extends HttpServlet {
         ProductoDAO dao = fabrica.getProductoDAO();
 
         int ok = dao.eliminar(p);
+
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+
         if (ok != 0) {
-
+            data.put("ok", true);
+            data.put("titulo", "Eliminado");
+            data.put("mensaje", "Se elimino el producto correctamente");
+            data.put("tipo", "success");
         } else {
-
+            data.put("ok", false);
+            data.put("titulo", "Error");
+            data.put("mensaje", "No se pudo eliminar el producto");
+            data.put("tipo", "error");
         }
+
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
 
     }
 

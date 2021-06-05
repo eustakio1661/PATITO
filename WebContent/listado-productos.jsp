@@ -75,15 +75,18 @@
                                 >
                                   <i class="bx bx-edit mx-0"></i
                                 ></a>
-                                <a
-                                  href="ps?opcion=eliminar&codigo=${prod.idProducto}"
-                                  class="ms-4 btn btn-danger"
+                                <button
+                                  type="button"
+                                  data-entidad="producto"
+                                  data-nombre="${ prod.descripcion }"
+                                  data-action="ps?opcion=eliminar&codigo=${prod.idProducto}"
+                                  class="ms-4 btn btn-danger btnEliminarEntidad"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
                                   title="Eliminar Producto"
                                 >
                                   <i class="bx bx-trash mx-0"></i
-                                ></a>
+                                ></button>
                               </div>
                             </td>
                           </tr>
@@ -107,5 +110,7 @@
 
     <jsp:include page="reusable/scripts.jsp"></jsp:include>
     <jsp:include page="reusable/datatable_scripts.jsp"></jsp:include>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="js/delete_data.js"></script>
   </body>
 </html>
