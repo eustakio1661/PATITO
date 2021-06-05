@@ -221,12 +221,24 @@ public class EmpleadoServlet extends HttpServlet {
         DAOFactory f = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         int ok = f.getEmpleadoDAO().eliminar(e);
 
-        if (ok == 0) {
-            System.out.println("Error al eliminar empleado");
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+
+        if (ok != 0) {
+            data.put("ok", true);
+            data.put("titulo", "Eliminado");
+            data.put("mensaje", "Se elimino al empleado correctamente");
+            data.put("tipo", "success");
         } else {
-            System.out.println("Empleado eliminado con éxito!");
+            data.put("ok", false);
+            data.put("titulo", "Error");
+            data.put("mensaje", "No se pudo eliminar al empleado");
+            data.put("tipo", "error");
         }
-        listarEmpleado(request,response);
+
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
         
     }
 

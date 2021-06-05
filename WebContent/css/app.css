@@ -596,7 +596,8 @@ a {
 	color: #2b2a2a
 }
 
-.order-actions a {
+.order-actions a,
+.order-actions button {
 	font-size: 18px;
 	width: 34px;
 	height: 34px;
