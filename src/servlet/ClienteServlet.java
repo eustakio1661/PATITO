@@ -105,10 +105,12 @@ public class ClienteServlet extends HttpServlet {
 
     }
 
-    private void eliminar(HttpServletRequest request, HttpServletResponse response) {
+    private void eliminar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         System.out.println("Ingreso al proceso ActualizarCliente");
 
-        int codigo = Integer.parseInt(request.getParameter(""));
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
 
         ClienteDTO c = new ClienteDTO();
         c.setCodigo(codigo);
@@ -116,11 +118,25 @@ public class ClienteServlet extends HttpServlet {
         ClienteDAO dao = fabrica.getClienteDAO();
 
         int ok = dao.eliminarCliente(c);
+
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+
         if (ok != 0) {
-
+            data.put("ok", true);
+            data.put("titulo", "Eliminado");
+            data.put("mensaje", "Se elimino al cliente correctamente");
+            data.put("tipo", "success");
         } else {
-
+            data.put("ok", false);
+            data.put("titulo", "Error");
+            data.put("mensaje", "No se pudo eliminar al cliente");
+            data.put("tipo", "error");
         }
+
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
 
     }
 
