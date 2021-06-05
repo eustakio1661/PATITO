@@ -1,6 +1,6 @@
 package beans;
 
-public class Detalle_PedidoDTO {
+public class DetallePedidoDTO {
     private int id_pe;
     private int id_pro;
     private double precio;
@@ -8,7 +8,7 @@ public class Detalle_PedidoDTO {
     private String nombreProd;
     private double importe;
     
-    public Detalle_PedidoDTO() {
+    public DetallePedidoDTO() {
         
     }
     
