@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import beans.EmpleadoDTO;
 import dao.DAOFactory;
 
+
 @MultipartConfig
 @WebServlet(name = "emse", urlPatterns = { "/emse" })
 public class EmpleadoServlet extends HttpServlet {
@@ -141,7 +142,7 @@ public class EmpleadoServlet extends HttpServlet {
 
     private void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+       
     }
 
     private void listarEmpleado(HttpServletRequest request, HttpServletResponse response)
