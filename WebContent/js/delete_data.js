@@ -1,3 +1,19 @@
+const eliminarEntidad = (action) => {
+  return fetch(action, {
+    method: 'DELETE',
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .catch((err) => {
+      console.log(err);
+      Swal.fire('Error', `Oops, sucedi\u00F3 un error inesperado`, 'error');
+    });
+};
+
 const mostrarAlerta = (action, titulo, entidad, nombre) => {
   console.log(action);
   Swal.fire({
@@ -8,10 +24,16 @@ const mostrarAlerta = (action, titulo, entidad, nombre) => {
     confirmButtonColor: '#d33',
     cancelButtonColor: '#3085d6',
     confirmButtonText: 'Eliminar',
-    cancelButtonText: 'Cancelar'
+    cancelButtonText: 'Cancelar',
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire('Eliminado!', 'Se elimino correctamente', 'success');
+      eliminarEntidad(action).then((data) => {
+        Swal.fire(data.titulo, data.mensaje, data.tipo).then((result) => {
+          if (result.isConfirmed || result.isDismissed) {
+            window.location.reload();
+          }
+        });
+      });
     }
   });
 };

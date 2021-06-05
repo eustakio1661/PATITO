@@ -108,7 +108,7 @@ public class ClienteServlet extends HttpServlet {
     private void eliminar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("Ingreso al proceso ActualizarCliente");
+        System.out.println("Ingreso al proceso EliminarCliente");
 
         int codigo = Integer.parseInt(request.getParameter("codigo"));
 
