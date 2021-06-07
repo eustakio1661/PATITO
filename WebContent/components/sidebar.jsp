@@ -94,7 +94,7 @@
 
     <li class="menu-label">Transacciones</li>
     <li>
-      <a href="javascript:;">
+      <a href="ps?opcion=catalogo">
         <span class="parent-icon">
           <i class="bx bx-cart"></i>
         </span>
