@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,6 +49,7 @@
                             alt="Admin"
                             class="rounded-circle p-1 bg-primary"
                             width="110"
+                            name="ImgEmpleado"
                           />
                           <div class="mt-3">
                             <h4>${e.nombre }</h4>
@@ -76,6 +77,13 @@
                       <div class="card-body">
                         <div class="row mb-3">
                           <div class="col-sm-3">
+                            <input
+                              type="hidden"
+                              class="input-hidden"
+                              id="input-hidden"
+                              name="txtIdEmpleado"
+                              value="${ e.id }"
+                            />
                             <label for="txtNombreEmpleado" class="mb-0"
                               >Nombre</label
                             >
@@ -151,8 +159,7 @@
                               placeholder="Ingrese dirección"
                               rows="2"
                               minlength="0"
-                            >${e.direccion }</textarea
-                            >
+                            >${e.direccion }</textarea>
                           </div>
                         </div>
                         <div class="row mb-3">
@@ -214,7 +221,12 @@
                         <div class="row">
                           <div class="col-sm-3"></div>
                           <div class="col-sm-9 text-secondary">
-                            <button type="submit" name="opcion" value="actualizar"class="btn btn-primary px-4">
+                            <button
+                              type="submit"
+                              name="opcion"
+                              value="perfil"
+                              class="btn btn-primary px-4"
+                            >
                               Actualizar perfil
                             </button>
                           </div>
