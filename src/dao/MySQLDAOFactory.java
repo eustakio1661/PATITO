@@ -10,7 +10,7 @@ import mantenimiento.MySQLEmpleadoDAO;
 import mantenimiento.MySQLProductoDAO;
 import mantenimiento.MySQLVentaDAO;
 import mantenimiento.MySQLClienteDAO;
-import mantenimiento.MySQLDistrito;
+import mantenimiento.MySQLDistritoDAO;
 
 public class MySQLDAOFactory extends DAOFactory {
 
@@ -29,7 +29,7 @@ public class MySQLDAOFactory extends DAOFactory {
     }
     
     public DistritoDAO getDistritoDAO() {
-    	return new MySQLDistrito();
+    	return new MySQLDistritoDAO();
     }
 
     @Override
