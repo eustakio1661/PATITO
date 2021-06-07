@@ -45,6 +45,8 @@ public class ProductoServlet extends HttpServlet {
             case "buscar":
                 buscar(request, response);
                 break;
+            case "catalogo":
+                listarCatalogo(request, response);
             default:
                 System.out.println("Error en la opcion");
                 break;
@@ -78,7 +80,8 @@ public class ProductoServlet extends HttpServlet {
 
     }
 
-    private void eliminar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void eliminar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         System.out.println("Ingreso al proceso EliminarProducto");
 
         int codigo = Integer.parseInt(request.getParameter("codigo"));
@@ -195,6 +198,20 @@ public class ProductoServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
+
+    }
+
+    private void listarCatalogo(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        System.out.println("Ingreso al proceso ListarCatalogo");
+
+        DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        ProductoDAO dao = factory.getProductoDAO();
+        ArrayList<ProductoDTO> lista = dao.listado();
+
+        request.setAttribute("lstProductos", lista);
+        request.getRequestDispatcher("catalogo.jsp").forward(request, response);
 
     }
 
