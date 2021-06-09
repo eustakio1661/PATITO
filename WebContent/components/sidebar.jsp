@@ -103,10 +103,16 @@
     </li>
     <li class="menu-label">Reportes</li>
     <li>
-      <a href="user-profile.html">
+      <a class="has-arrow" href="javascript:;">
         <span class="parent-icon"><i class="bx bx-receipt"></i></span>
         <span class="menu-title">Reporte de Ventas</span>
       </a>
+      <ul>
+        <li>
+          <a href="rese?opcion=listado"
+            ><i class="bx bx-right-arrow-alt"></i>Reporte entre Fechas</a>
+        </li>
+      </ul>
     </li>
   </ul>
   <!--end navigation-->

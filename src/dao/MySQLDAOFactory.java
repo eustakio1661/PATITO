@@ -3,12 +3,14 @@ package dao;
 
 import interfaces.EmpleadoDAO;
 import interfaces.ProductoDAO;
+import interfaces.ReporteDAO;
 import interfaces.ClienteDAO;
 import interfaces.DistritoDAO;
 import mantenimiento.MySQLEmpleadoDAO;
 import mantenimiento.MySQLProductoDAO;
 import mantenimiento.MySQLClienteDAO;
 import mantenimiento.MySQLDistrito;
+import mantenimiento.MySQLReporteDAO;
 
 public class MySQLDAOFactory extends DAOFactory {
 
@@ -28,5 +30,9 @@ public class MySQLDAOFactory extends DAOFactory {
     
     public DistritoDAO getDistritoDAO() {
     	return new MySQLDistrito();
+    }
+
+    public ReporteDAO getReporteDAO() {
+        return new MySQLReporteDAO();
     }
 }
