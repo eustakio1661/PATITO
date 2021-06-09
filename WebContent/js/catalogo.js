@@ -13,7 +13,6 @@ const getDatosXFila = (btnFila) => {
     image: imageUrl,
   };
 
-  console.log(objProducto);
   return objProducto;
 };
 
@@ -51,15 +50,15 @@ const mostrarAlertProducto = (btn) => {
           </div>
         </div>
         <div class="row mb">
-          <label for="txtCantidad" class="col-5 col-form-label text-end"
+          <label for="txtCantidadComprar" class="col-5 col-form-label text-end"
             >Cantidad :</label
           >
           <div class="col-7 text-start">
             <input
               type="number"
               class="form-control"
-              name="txtCantidad"
-              id="txtCantidad"
+              name="txtCantidadComprar"
+              id="txtCantidadComprar"
               value="0"
               required
               min="0"
@@ -80,6 +79,19 @@ const mostrarAlertProducto = (btn) => {
     showCancelButton: true,
     confirmButtonText: 'Agregar al carrito',
     cancelButtonText: 'Cancelar',
+    didOpen: () => {
+      Swal.getConfirmButton().disabled = true;
+      const txtCantidadComprar = document.getElementById('txtCantidadComprar');
+      if (txtCantidadComprar) {
+        txtCantidadComprar.addEventListener('input', (e) => {
+          if (e.target.value === '' || (Number(e.target.value) <= 0 || Number(e.target.value) > objProducto.stock)) {
+            Swal.getConfirmButton().disabled = true;
+          } else {            
+            Swal.getConfirmButton().disabled = false;
+          }
+        })
+      }
+    }
   });
 };
 
@@ -92,3 +104,5 @@ if (btnsSelectProd.length > 0) {
     });
   });
 }
+
+Swal.getConfirmButton()
