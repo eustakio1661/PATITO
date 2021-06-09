@@ -3,6 +3,7 @@ package interfaces;
 import java.util.ArrayList;
 
 import beans.ClienteDTO;
+import beans.ReporteClienteDTO;
 
 public interface ClienteDAO {
 
@@ -12,5 +13,7 @@ public interface ClienteDAO {
 	public ClienteDTO buscarCliente(int cod);
 	public ArrayList<ClienteDTO> listarClientexDistrito();
 	public int eliminarCliente(ClienteDTO c);
+	public ArrayList<ReporteClienteDTO> reporteCliente();
+	public ClienteDTO descuento(int codigo);
 	
 }
