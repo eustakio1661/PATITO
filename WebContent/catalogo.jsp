@@ -153,7 +153,7 @@
 										<thead class="table-light">
 											<tr>
 												<th>N&uacute;mero</th>
-
+												<th>Imagen</th>
 												<th>Descripci&oacute;n</th>
 												<th>Categoria</th>
 												<th>Precio</th>
@@ -165,7 +165,8 @@
 											<c:forEach items="${lstProductos}" var="prod">
 												<tr>
 													<td>${prod.idProducto}</td>
-
+													<td><img alt="" src="${prod.imagen}" width="50px"
+														height="50px"></td>
 													<td>${prod.descripcion}</td>
 													<td>${prod.descCategoria}</td>
 													<td><fmt:setLocale value="es_PE" /> <fmt:formatNumber
@@ -317,14 +318,34 @@
 							</div>
 						</c:forEach>
 					</div>
+					<fmt:setLocale value="es_PE" />
 
+					<c:if
+						test="${ClienteDescuento.descuento != 0 && ClienteDescuento.descuento != null}">
+						<h6 class="mb-0">Descuento</h6>
+						<fmt:formatNumber type="percent"
+							value="${ClienteDescuento.descuento }" />
+
+					</c:if>
 					<hr />
 					<h6 class="mb-0">Subtotal (${cantidadProductos })</h6>
 					<hr />
 					<div>
-						<fmt:setLocale value="es_PE" />
-						<fmt:formatNumber type="currency" value="${subTotalVentas }" />
+						<c:if
+							test="${ClienteDescuento.descuento != 0 && ClienteDescuento.descuento != null}">
+							<c:if test="${subTotalVentas >0}">
+								<del>
+									<fmt:formatNumber type="currency" value="${subTotalVentas }" />
+								</del>
+								<br>
+							</c:if>
+
+						</c:if>
+						
+						<fmt:formatNumber type="currency"
+							value="${subTotalVentas-(subTotalVentas * ClienteDescuento.descuento) }" />
 					</div>
+
 					<button class="btn btn-primary" name="opcion" value="procCompra">Procesar
 						Compra</button>
 				</form>
