@@ -50,7 +50,7 @@
                           <th>Acciones</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody class="tbody">
                         <c:forEach items="${ lstProductos }" var="prod">
                           <tr>
                             <td>
@@ -65,7 +65,7 @@
                                 value="${prod.precio}"
                               />
                             </td>
-                            <td>${prod.cantidad}</td>
+                            <td id="fila-id-prod-${ prod.idProducto }">${prod.cantidad}</td>
                             <td>
                               <div class="d-flex">
                                 <button
