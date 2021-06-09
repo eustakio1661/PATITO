@@ -10,20 +10,45 @@ const obtenerCarritoLocalStorage = () => {
 let carritoProductos = obtenerCarritoLocalStorage();
 
 const actualizarGuardarCarrito = (compraProd) => {
-  carritoProductos.push(compraProd);
+  if (carritoProductos.length > 0) {
+    let newCarrito = carritoProductos.filter(
+      (prod) => prod.id !== compraProd.id
+    );
+    newCarrito.push(compraProd);
+    carritoProductos = [...newCarrito];
+  } else {
+    carritoProductos.push(compraProd);
+  }
+
   localStorage.setItem('carrito', JSON.stringify(carritoProductos));
 };
 
-const actualizarStockFilaProd = (idProd, cantidadComprar, operacion) => {
-  const cellStockProd = document.getElementById(`fila-id-prod-${idProd}`);
+const actualizarStockFilaProd = (objProducto, cantidadComprar, operacion) => {
+  const cellStockProd = document.getElementById(
+    `fila-id-prod-${objProducto.id}`
+  );
   let stock = Number(cellStockProd.innerText.trim());
+
+  let prodEncontrado = obtenerCarritoLocalStorage().find(
+    (prod) => prod.id === objProducto.id
+  );
+
+  if (prodEncontrado) {
+    objProducto = { ...prodEncontrado };
+  }
+
   if (operacion == 'sumar') {
     stock += cantidadComprar;
+    objProducto.cantidadComprada -= cantidadComprar;
+    objProducto.stock += cantidadComprar;
   } else {
     stock -= cantidadComprar;
+    objProducto.cantidadComprada += cantidadComprar;
+    objProducto.stock -= cantidadComprar;
   }
 
   cellStockProd.innerHTML = stock;
+  return { ...objProducto };
 };
 
 const getDatosXFila = (btnFila) => {
@@ -38,6 +63,7 @@ const getDatosXFila = (btnFila) => {
     categoria: datos[1],
     precio: datos[2],
     stock: datos[3],
+    cantidadComprada: 0,
     image: imageUrl,
   };
 
@@ -64,7 +90,7 @@ const Toast = Swal.mixin({
 });
 
 const mostrarAlertProducto = (btn) => {
-  const objProducto = getDatosXFila(btn);
+  let objProducto = getDatosXFila(btn);
 
   const card = `
   <div class="card card-block bg-faded">
@@ -148,9 +174,13 @@ const mostrarAlertProducto = (btn) => {
       const txtCantidadComprar = document.getElementById('txtCantidadComprar');
       const cantidadComprar = Number(txtCantidadComprar.value.trim());
 
+      objProducto = actualizarStockFilaProd(
+        objProducto,
+        cantidadComprar,
+        'resta'
+      );
       actualizarGuardarCarrito(objProducto);
-      actualizarStockFilaProd(objProducto.id, cantidadComprar, 'resta');
-      enviarProductoServlet('servlet').then( e => console.log).catch( err => console.log);
+      enviarProductoServlet('servlet').then(console.log).catch(console.log);
 
       Toast.fire({
         icon: 'success',
