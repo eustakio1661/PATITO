@@ -198,8 +198,10 @@ public class VentaServlet extends HttpServlet {
 
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDTO c = factory.getClienteDAO().buscarCliente(codigo);
-        
+        ClienteDTO des =factory.getClienteDAO().descuento(codigo);
         request.getSession().setAttribute("clienteEncontrado", c);
+        request.getSession().setAttribute("ClienteDescuento", des);
+        
         
         listadoClienteyProducto(request, response);
     }
