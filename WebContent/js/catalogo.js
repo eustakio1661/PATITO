@@ -1,3 +1,29 @@
+const actualizarGuardarCarrito = (carrito = [], compraProd) => {
+  carrito.push(compraProd);
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
+const obtenerCarritoLocalStorage = () => {
+  let arr = localStorage.getItem('carrito');
+
+  if (arr) {
+    return JSON.parse(arr);
+  }
+  return [];
+}
+
+const actualizarStockFilaProd = (idProd, cantidadComprar, operacion) => {
+  const cellStockProd = document.getElementById(`fila-id-prod-${idProd}`);
+  let stock = Number(cellStockProd.innerHTML.trim());
+  if (operacion == 'sumar') {
+    stock += cantidadComprar;
+  } else{
+    stock -= cantidadComprar;
+  }
+
+  cellStockProd.innerHTML = stock;
+}
+
 const getDatosXFila = (btnFila) => {
   let idProd = btnFila.dataset.idprod.trim();
   const filaElement = btnFila.parentElement.parentElement.parentElement;
