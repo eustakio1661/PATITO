@@ -1,8 +1,3 @@
-const actualizarGuardarCarrito = (carrito = [], compraProd) => {
-  carrito.push(compraProd);
-  localStorage.setItem('carrito', JSON.stringify(carrito));
-}
-
 const obtenerCarritoLocalStorage = () => {
   let arr = localStorage.getItem('carrito');
 
@@ -10,19 +5,26 @@ const obtenerCarritoLocalStorage = () => {
     return JSON.parse(arr);
   }
   return [];
-}
+};
+
+let carritoProductos = obtenerCarritoLocalStorage();
+
+const actualizarGuardarCarrito = (compraProd) => {
+  carritoProductos.push(compraProd);
+  localStorage.setItem('carrito', JSON.stringify(carritoProductos));
+};
 
 const actualizarStockFilaProd = (idProd, cantidadComprar, operacion) => {
   const cellStockProd = document.getElementById(`fila-id-prod-${idProd}`);
-  let stock = Number(cellStockProd.innerHTML.trim());
+  let stock = Number(cellStockProd.innerText.trim());
   if (operacion == 'sumar') {
     stock += cantidadComprar;
-  } else{
+  } else {
     stock -= cantidadComprar;
   }
 
   cellStockProd.innerHTML = stock;
-}
+};
 
 const getDatosXFila = (btnFila) => {
   let idProd = btnFila.dataset.idprod.trim();
@@ -41,6 +43,25 @@ const getDatosXFila = (btnFila) => {
 
   return objProducto;
 };
+
+const enviarProductoServlet = (servlet, idProd, cantidadComprar) => {
+  let formData = new FormData();
+  formData.append('txtIdProdCarrito', idProd);
+  formData.append('txtCantComprarCarrito', cantidadComprar);
+
+  return fetch(servlet, {
+    method: 'POST',
+    body: formData,
+  });
+};
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'bottom-end',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+});
 
 const mostrarAlertProducto = (btn) => {
   const objProducto = getDatosXFila(btn);
@@ -110,13 +131,31 @@ const mostrarAlertProducto = (btn) => {
       const txtCantidadComprar = document.getElementById('txtCantidadComprar');
       if (txtCantidadComprar) {
         txtCantidadComprar.addEventListener('input', (e) => {
-          if (e.target.value === '' || (Number(e.target.value) <= 0 || Number(e.target.value) > objProducto.stock)) {
+          if (
+            e.target.value === '' ||
+            Number(e.target.value) <= 0 ||
+            Number(e.target.value) > objProducto.stock
+          ) {
             Swal.getConfirmButton().disabled = true;
-          } else {            
+          } else {
             Swal.getConfirmButton().disabled = false;
           }
-        })
+        });
       }
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const txtCantidadComprar = document.getElementById('txtCantidadComprar');
+      const cantidadComprar = Number(txtCantidadComprar.value.trim());
+
+      actualizarGuardarCarrito(objProducto);
+      actualizarStockFilaProd(objProducto.id, cantidadComprar, 'resta');
+      enviarProductoServlet('servlet').then( e => console.log).catch( err => console.log);
+
+      Toast.fire({
+        icon: 'success',
+        title: 'Se agrego al carrito',
+      });
     }
   });
 };
@@ -130,5 +169,3 @@ if (btnsSelectProd.length > 0) {
     });
   });
 }
-
-Swal.getConfirmButton()
