@@ -42,7 +42,7 @@
                     <table id="myTable" class="table align-middle mb-0">
                       <thead class="table-light">
                         <tr>
-                          <th>N&uacute;mero</th>
+                          <th></th>
                           <th>Descripci&oacute;n</th>
                           <th>Categor&iacute;a</th>
                           <th>Precio</th>
@@ -53,7 +53,9 @@
                       <tbody>
                         <c:forEach items="${ lstProductos }" var="prod">
                           <tr>
-                            <td>${prod.idProducto}</td>
+                            <td>
+                              <img src="${ prod.imagen }" alt="${ prod.descripcion }" width="100">
+                            </td>
                             <td>${prod.descripcion}</td>
                             <td>${prod.descCategoria}</td>
                             <td>
@@ -69,6 +71,7 @@
                                 <button
                                   type="button"
                                   class="ms-4 btn btn-link select-prod"
+                                  data-idprod="${ prod.idProducto }"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
                                   title="Seleccionar Producto"
