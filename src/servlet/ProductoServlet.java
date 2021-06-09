@@ -47,6 +47,7 @@ public class ProductoServlet extends HttpServlet {
                 break;
             case "catalogo":
                 listarCatalogo(request, response);
+                break;
             default:
                 System.out.println("Error en la opcion");
                 break;
