@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import beans.ClienteDTO;
+import beans.EmpleadoDTO;
+import beans.ReporteClienteDTO;
 import interfaces.ClienteDAO;
 import utils.MySQLConexion8;
 
@@ -188,6 +190,68 @@ public class MySQLClienteDAO implements ClienteDAO {
         }
 
         return listacd;
+    }
+
+    @Override
+    public ArrayList<ReporteClienteDTO> reporteCliente() {
+        ArrayList<ReporteClienteDTO> lista = null;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "{call USP_CATEGORIZACIONCLIENTES()}";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            lista = new ArrayList<ReporteClienteDTO>();
+            while (rs.next()) {
+                ReporteClienteDTO r = new ReporteClienteDTO();
+                r.setId_cli(rs.getInt(1));
+                r.setNombreCompleto(rs.getString(2));
+                r.setCantidadCompras(rs.getInt(3));
+                r.setSegmentacion(rs.getString(4));
+                lista.add(r);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en listar segmentacion de Cliente: " + e.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(con);
+        }
+
+        return lista;
+    }
+
+    @Override
+    public ClienteDTO descuento(int codigo) {
+        ClienteDTO cl = null;
+
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            cn = MySQLConexion8.getConexion();
+            String sql = "{call USP_DESCUENTOCLIENTE(?)}";
+            pst = cn.prepareStatement(sql);
+            pst.setInt(1, codigo);
+
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                cl = new ClienteDTO();
+                cl.setCodigo(rs.getInt(1));
+                cl.setNombreCompleto(rs.getString(3));
+                cl.setCantidad(rs.getInt(4));
+                cl.setDescuento(rs.getDouble(4));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error validar acceso " + e.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(cn);
+        }
+
+        return cl;
     }
 
 }
