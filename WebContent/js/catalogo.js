@@ -1,29 +1,94 @@
 const getDatosXFila = (btnFila) => {
-
   let idProd = btnFila.dataset.idprod.trim();
   const filaElement = btnFila.parentElement.parentElement.parentElement;
   const imageUrl = filaElement.cells[0].firstElementChild.src;
-  const celdas = Array.from(filaElement.cells).slice(1,-1);
-  const datos = celdas.map( celda => celda.innerText );
+  const celdas = Array.from(filaElement.cells).slice(1, -1);
+  const datos = celdas.map((celda) => celda.innerText);
   let objProducto = {
-    id : idProd,
-    descripcion : datos[0],
-    categoria : datos[1],
-    precio : datos[2],
-    stock : datos[3],
-    image : imageUrl
+    id: idProd,
+    descripcion: datos[0],
+    categoria: datos[1],
+    precio: datos[2],
+    stock: datos[3],
+    image: imageUrl,
   };
 
   console.log(objProducto);
   return objProducto;
-}
+};
 
-const btnsSelectProd  = document.querySelectorAll('.select-prod');
+const mostrarAlertProducto = (btn) => {
+  const objProducto = getDatosXFila(btn);
+
+  const card = `
+  <div class="card card-block bg-faded">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-5">
+        <img src="${objProducto.image}" alt="${objProducto.descripcion}" class="rounded img-fluid" />
+      </div>
+      <div class="col-7">
+        <h5 class="card-title">${objProducto.descripcion}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          ID : <span id="txtIdProducto">${objProducto.id}</span>
+        </h6>
+        <div class="row mb-2">
+          <div class="col-5 text-end">Categoria :</div>
+          <div class="col-7 text-start">
+            <span>${objProducto.categoria}</span>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-5 text-end">Precio :</div>
+          <div class="col-7 text-start">
+            <span>${objProducto.precio}</span>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-5 text-end">Stock :</div>
+          <div class="col-7 text-start">
+            <span>${objProducto.stock}</span>
+          </div>
+        </div>
+        <div class="row mb">
+          <label for="txtCantidad" class="col-5 col-form-label text-end"
+            >Cantidad :</label
+          >
+          <div class="col-7 text-start">
+            <input
+              type="number"
+              class="form-control"
+              name="txtCantidad"
+              id="txtCantidad"
+              value="0"
+              required
+              min="0"
+              max="${objProducto.stock}"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+  Swal.fire({
+    html: card,
+    position: 'top',
+    width: 700,
+    showCancelButton: true,
+    confirmButtonText: 'Agregar al carrito',
+    cancelButtonText: 'Cancelar',
+  });
+};
+
+const btnsSelectProd = document.querySelectorAll('.select-prod');
 
 if (btnsSelectProd.length > 0) {
   btnsSelectProd.forEach((btn) => {
     btn.addEventListener('click', () => {
-      getDatosXFila(btn);
+      mostrarAlertProducto(btn);
     });
   });
 }
