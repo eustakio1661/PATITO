@@ -100,6 +100,7 @@ public class MySQLProductoDAO implements ProductoDAO {
                 p.setCantidad(rs.getInt(4));
                 p.setIdCategoria(rs.getInt(5));
                 p.setDescCategoria(rs.getString(6));
+                p.setImagen(rs.getString(7));
                 lista.add(p);
             }
         } catch (Exception e) {
