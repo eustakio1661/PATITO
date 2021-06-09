@@ -254,28 +254,8 @@
     <!--end wrapper-->
 
     <jsp:include page="reusable/scripts.jsp"></jsp:include>
-
+	
     <script>
-      (function () {
-        'use strict';
-        var forms = document.querySelectorAll('.needs-validation');
-
-        Array.prototype.slice.call(forms).forEach(function (form) {
-          form.addEventListener(
-            'submit',
-            function (event) {
-              if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-
-              form.classList.add('was-validated');
-            },
-            false
-          );
-        });
-      })();
-
       $(document).ready(function () {
         $('#show_hide_password a').on('click', function (event) {
           event.preventDefault();
