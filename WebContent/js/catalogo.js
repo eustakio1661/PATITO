@@ -1,3 +1,19 @@
+const formBuscarCliente = document.getElementById('formBuscarCliente');
+if (formBuscarCliente) {
+  formBuscarCliente.addEventListener(
+    'submit',
+    (e) => {
+      if (!formBuscarCliente.checkValidity()) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      formBuscarCliente.classList.add('was-validated');
+    },
+    true
+  );
+}
+
 const obtenerCarritoLocalStorage = () => {
   let arr = localStorage.getItem('carrito');
 
@@ -93,57 +109,56 @@ const mostrarAlertProducto = (btn) => {
   let objProducto = getDatosXFila(btn);
 
   const card = `
-  <div class="card card-block bg-faded">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-5">
-        <img src="${objProducto.image}" alt="${objProducto.descripcion}" class="rounded img-fluid" />
+    <div class="card card-block bg-faded">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-5">
+            <img src="${objProducto.image}" alt="${objProducto.descripcion}" class="rounded img-fluid" />
+          </div>
+          <div class="col-7">
+            <h5 class="card-title">${objProducto.descripcion}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              ID : <span id="txtIdProducto">${objProducto.id}</span>
+            </h6>
+            <div class="row mb-2">
+              <div class="col-5 text-end">Categoria :</div>
+              <div class="col-7 text-start">
+                <span>${objProducto.categoria}</span>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-5 text-end">Precio :</div>
+              <div class="col-7 text-start">
+                <span>${objProducto.precio}</span>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-5 text-end">Stock :</div>
+              <div class="col-7 text-start">
+                <span>${objProducto.stock}</span>
+              </div>
+            </div>
+            <div class="row mb">
+              <label for="txtCantidadComprar" class="col-5 col-form-label text-end"
+                >Cantidad :</label
+              >
+              <div class="col-7 text-start">
+                <input
+                  type="number"
+                  class="form-control"
+                  name="txtCantidadComprar"
+                  id="txtCantidadComprar"
+                  value="0"
+                  required
+                  min="0"
+                  max="${objProducto.stock}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-7">
-        <h5 class="card-title">${objProducto.descripcion}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">
-          ID : <span id="txtIdProducto">${objProducto.id}</span>
-        </h6>
-        <div class="row mb-2">
-          <div class="col-5 text-end">Categoria :</div>
-          <div class="col-7 text-start">
-            <span>${objProducto.categoria}</span>
-          </div>
-        </div>
-        <div class="row mb-2">
-          <div class="col-5 text-end">Precio :</div>
-          <div class="col-7 text-start">
-            <span>${objProducto.precio}</span>
-          </div>
-        </div>
-        <div class="row mb-2">
-          <div class="col-5 text-end">Stock :</div>
-          <div class="col-7 text-start">
-            <span>${objProducto.stock}</span>
-          </div>
-        </div>
-        <div class="row mb">
-          <label for="txtCantidadComprar" class="col-5 col-form-label text-end"
-            >Cantidad :</label
-          >
-          <div class="col-7 text-start">
-            <input
-              type="number"
-              class="form-control"
-              name="txtCantidadComprar"
-              id="txtCantidadComprar"
-              value="0"
-              required
-              min="0"
-              max="${objProducto.stock}"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
+    </div>`;
 
   Swal.fire({
     html: card,
