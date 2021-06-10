@@ -1,4 +1,35 @@
+const llenarInputsCliente = (nombreCompleto, distrito, direccion) => {
+  const txtNombreCliente = document.getElementById('txtNombreCli');
+  const txtDistritoCliente = document.getElementById('txtDistritoCli');
+  const txtDireccionCliente = document.getElementById('txtDireccionCli');
+
+  txtNombreCliente.value = nombreCompleto;
+  txtDistritoCliente.value = distrito;
+  txtDireccionCliente.value = direccion;
+}
+
+const realizarPeticionCliente = (form) => {
+  const formData = new FormData(form);
+
+  // TODO: Falta el Action y que servlet retorne un json con la data
+  return fetch('', {
+    method: 'GET',
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .catch((err) => {
+      console.log(err);
+      Swal.fire('Error', `Oops, sucedi\u00F3 un error inesperado`, 'error');
+    });
+};
+
 const formBuscarCliente = document.getElementById('formBuscarCliente');
+
 if (formBuscarCliente) {
   formBuscarCliente.addEventListener(
     'submit',
@@ -7,6 +38,8 @@ if (formBuscarCliente) {
         e.preventDefault();
         e.stopPropagation();
       }
+
+      // TODO: Cuando se obtenga al cliente se va al local storage por seguridad
 
       formBuscarCliente.classList.add('was-validated');
     },
