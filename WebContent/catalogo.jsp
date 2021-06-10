@@ -22,8 +22,85 @@
         <div class="page-content">
           <jsp:include page="components/breadcrumb.jsp">
             <jsp:param name="pagina" value="Ventas" />
-            <jsp:param name="accion" value="Catalago" />
+            <jsp:param name="accion" value="Nuevo Pedido" />
           </jsp:include>
+
+          <div class="row">
+            <div class="col mx-auto">
+              <hr />
+              <div class="card radius-10 mb-2 box-shadow">
+                <div class="card-body">
+                  <div class="d-flex align-items-center">
+                    <div>
+                      <h5 class="mb-0">Buscar Cliente</h5>
+                    </div>
+                    <div class="font-22 ms-auto">
+                      <i class="bx bx-dots-horizontal-rounded"></i>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row g-3">
+                    <form id="formBuscarCliente" class="needs-validation g-3 mt-2 row" novalidate>                      
+                      <div class="col-md-4">                        
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txtDNICli"
+                          name="txtDNICli"
+                          placeholder="Ingrese DNI del cliente"
+                          required
+                          pattern="[0-9]{8}"
+                        />
+                        <div class="invalid-feedback">
+                          Se requiere de un DNI v&aacute;lido
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <button class="btn btn-primary" type="submit">
+                          <i class="bx bx-search-alt"></i> Buscar Cliente
+                        </button>
+                      </div>
+                    </form>
+                    <div class="col-md-3">
+                      <label for="txtNombreCli" class="form-label"
+                        >Nombre Completo</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="txtNombreCliente"
+                        placeholder="Nombre del Cliente"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-md-3">
+                      <label for="txtDistritoCli" class="form-label"
+                        >Distrito</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="txtDistritoCliente"
+                        placeholder="Distrito del Cliente"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="txtDireccionCli" class="form-label"
+                        >Direcci&oacute;n</label
+                      ><input
+                        type="text"
+                        class="form-control"
+                        id="txtDireccionCli"
+                        placeholder="Direcci&oacute;n del Cliente"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="row">
             <div class="col mx-auto">
               <hr />
@@ -65,7 +142,9 @@
                                 value="${prod.precio}"
                               />
                             </td>
-                            <td id="fila-id-prod-${ prod.idProducto }">${prod.cantidad}</td>
+                            <td id="fila-id-prod-${ prod.idProducto }">
+                              ${prod.cantidad}
+                            </td>
                             <td>
                               <div class="d-flex">
                                 <button
@@ -75,7 +154,9 @@
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
                                   title="Seleccionar Producto"
-                                >Seleccionar Producto</button>
+                                >
+                                  Seleccionar Producto
+                                </button>
                               </div>
                             </td>
                           </tr>
@@ -91,9 +172,9 @@
       </div>
 
       <div class="overlay toggle-icon"></div>
-      <a href="javaScript:;" class="back-to-top"
-        ><i class="bx bxs-up-arrow-alt"></i
-      ></a>
+      <a href="javaScript:;" class="back-to-top">
+        <i class="bx bxs-up-arrow-alt"></i>
+      </a>
       <jsp:include page="components/footer.jsp"></jsp:include>
     </div>
 
