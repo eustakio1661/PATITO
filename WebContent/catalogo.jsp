@@ -68,7 +68,7 @@
                       <input
                         type="text"
                         class="form-control"
-                        id="txtNombreCliente"
+                        id="txtNombreCli"
                         placeholder="Nombre del Cliente"
                         readonly
                       />
@@ -80,7 +80,7 @@
                       <input
                         type="text"
                         class="form-control"
-                        id="txtDistritoCliente"
+                        id="txtDistritoCli"
                         placeholder="Distrito del Cliente"
                         readonly
                       />
