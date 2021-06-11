@@ -3,12 +3,14 @@ package dao;
 
 import interfaces.EmpleadoDAO;
 import interfaces.ProductoDAO;
+import interfaces.VentaDAO;
 import interfaces.ClienteDAO;
 import interfaces.DistritoDAO;
 import mantenimiento.MySQLEmpleadoDAO;
 import mantenimiento.MySQLProductoDAO;
+import mantenimiento.MySQLVentaDAO;
 import mantenimiento.MySQLClienteDAO;
-import mantenimiento.MySQLDistrito;
+import mantenimiento.MySQLDistritoDAO;
 
 public class MySQLDAOFactory extends DAOFactory {
 
@@ -27,6 +29,12 @@ public class MySQLDAOFactory extends DAOFactory {
     }
     
     public DistritoDAO getDistritoDAO() {
-    	return new MySQLDistrito();
+    	return new MySQLDistritoDAO();
+    }
+
+    @Override
+    public VentaDAO getVentaDao() {
+        // TODO Auto-generated method stub
+        return new MySQLVentaDAO();
     }
 }
