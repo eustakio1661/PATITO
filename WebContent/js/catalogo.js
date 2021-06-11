@@ -1,3 +1,103 @@
+// CANASTA
+
+const crearCardCanastaProd = () => {
+  const switcherBody = document.querySelector('.switcher-body');
+
+  const card = document.createElement('div');
+  card.classList.add('card', 'card-block', 'bg-faded');
+
+  const cardBody = document.createElement('div');
+  cardBody.classList.add('card-body');
+  cardBody.setAttribute('id', 'canasta');
+
+  card.appendChild(cardBody);
+
+  switcherBody.appendChild(card);
+};
+
+const crearFilaCanastaProd = (objProducto) => {
+  const canasta = document.getElementById('canasta');
+
+  if (canasta) {
+    // Si existe fila
+    if (document.getElementById(`row-id-${objProducto.id}`)) {
+      const spanCantidad = document.getElementById(`span-cc-${objProducto.id}`);
+      spanCantidad.innerText = objProducto.cantidadComprada;
+    } else {
+      // Creando row
+      const row = document.createElement('div');
+      row.classList.add('row', 'mt-2');
+      row.setAttribute('id', `row-id-${objProducto.id}`);
+
+      const col4 = document.createElement('div');
+      col4.classList.add('col-4');
+
+      const img = document.createElement('img');
+      img.classList.add('rounded', 'img-fluid');
+      img.setAttribute('src', objProducto.image);
+      img.setAttribute('alt', objProducto.descripcion);
+
+      col4.appendChild(img);
+      row.appendChild(col4);
+
+      const col6 = document.createElement('div');
+      col6.classList.add('col-6');
+
+      const pCardTitle = document.createElement('p');
+      pCardTitle.classList.add('card-title');
+      const b = document.createElement('b');
+      b.innerText = objProducto.descripcion;
+      pCardTitle.appendChild(b);
+
+      const p = document.createElement('p');
+      p.innerHTML = `Cantidad : <span id="span-cc-${objProducto.id}">${objProducto.cantidadComprada}</span>`;
+
+      col6.appendChild(pCardTitle);
+      col6.appendChild(p);
+      row.appendChild(col6);
+
+      const col2 = document.createElement('div');
+      col2.classList.add('col-2');
+
+      const button = document.createElement('button');
+      button.classList.add(
+        'btn',
+        'btn-outline-danger',
+        'btn-close',
+        'ms-auto',
+        'btn-quitar-producto'
+      );
+      button.setAttribute('type', 'button');
+      button.setAttribute('aria-label', 'Close');
+      button.setAttribute('data-idprod', objProducto.id);
+      button.setAttribute(
+        'data-canticomprada',
+        `${objProducto.cantidadComprada}`
+      );
+
+      col2.appendChild(button);
+      row.appendChild(col2);
+
+      canasta.appendChild(row);
+    }
+  }
+
+  return canasta;
+
+};
+
+const llenarCanasta = () => {
+  const listaProductos = obtenerCarritoLocalStorage();
+
+  if (listaProductos.length == 0) {
+    crearCardCanastaProd();
+  } else {
+    // TODO: Aplicar for of para llenar la canasta y eso 
+  }
+};
+
+// INPUT CLIENTE
+
 const llenarInputsCliente = (nombreCompleto, distrito, direccion) => {
   const txtNombreCliente = document.getElementById('txtNombreCli');
   const txtDistritoCliente = document.getElementById('txtDistritoCli');
@@ -6,7 +106,7 @@ const llenarInputsCliente = (nombreCompleto, distrito, direccion) => {
   txtNombreCliente.value = nombreCompleto;
   txtDistritoCliente.value = distrito;
   txtDireccionCliente.value = direccion;
-}
+};
 
 const realizarPeticionCliente = (form) => {
   const formData = new FormData(form);
@@ -46,6 +146,8 @@ if (formBuscarCliente) {
     true
   );
 }
+
+// PRODUCTO - TABLA - ALERT
 
 const obtenerCarritoLocalStorage = () => {
   let arr = localStorage.getItem('carrito');
@@ -222,6 +324,10 @@ const mostrarAlertProducto = (btn) => {
       const txtCantidadComprar = document.getElementById('txtCantidadComprar');
       const cantidadComprar = Number(txtCantidadComprar.value.trim());
 
+      if (obtenerCarritoLocalStorage().length === 0) {
+        crearCardCanastaProd();
+      }
+
       objProducto = actualizarStockFilaProd(
         objProducto,
         cantidadComprar,
@@ -229,6 +335,7 @@ const mostrarAlertProducto = (btn) => {
       );
       actualizarGuardarCarrito(objProducto);
       enviarProductoServlet('servlet').then(console.log).catch(console.log);
+      crearFilaCanastaProd(objProducto);
 
       Toast.fire({
         icon: 'success',
