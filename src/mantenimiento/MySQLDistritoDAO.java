@@ -8,7 +8,7 @@ import beans.DistritoDTO;
 import interfaces.DistritoDAO;
 import utils.MySQLConexion8;
 
-public class MySQLDistrito implements DistritoDAO {
+public class MySQLDistritoDAO implements DistritoDAO {
 
 	@Override
 	public ArrayList<DistritoDTO> listarDistrito() {

@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import beans.EmpleadoDTO;
 import dao.DAOFactory;
 
+
 @MultipartConfig
 @WebServlet(name = "emse", urlPatterns = { "/emse" })
 public class EmpleadoServlet extends HttpServlet {
@@ -80,13 +81,27 @@ public class EmpleadoServlet extends HttpServlet {
         DAOFactory f = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
 
         int ok = f.getEmpleadoDAO().actualizarPerfilEmpleado(em);
-
-        if (ok == 0) {
-            System.out.println("Error al actualizar perfil del empleado...");
-        } else {
-            System.out.println("Empleado actualizado con éxito...!");
-        }        
+        EmpleadoDTO e = f.getEmpleadoDAO().buscarEmpleado(codigo);
+        /*Map<String, Object> data = new LinkedHashMap<String, Object>();*/
         
+        if (ok == 0) {
+            /*data.put("ok", false);
+            data.put("titulo", "Error");
+            data.put("mensaje", "No se pudo actualizar perfil");
+            data.put("tipo", "error");*/
+            System.out.println("No se pudo actualizar perfil");
+        } else {
+            /*data.put("ok", true);
+            data.put("titulo", "Perfil Actualizado");
+            data.put("mensaje", "Se ha actualizado su perfil correctamente");
+            data.put("tipo", "success");*/
+            System.out.println("Se ha actualizado su perfil correctamente");
+            request.getSession().setAttribute("e", e);
+        }        
+       /* String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);*/
         request.getRequestDispatcher("perfil.jsp").forward(request, response);
         
         
@@ -190,16 +205,16 @@ public class EmpleadoServlet extends HttpServlet {
         
         Map<String, Object> data = new LinkedHashMap<String, Object>();
 
-        if (ok != 0) {
-            data.put("ok", true);
-            data.put("titulo", "Actualizado");
-            data.put("mensaje", "Se ha actualizado el empleado " + nombre + " " + apellido + " correctamente");
-            data.put("tipo", "success");         
-        } else {
+        if (ok == 0) {
             data.put("ok", false);
             data.put("titulo", "Error");
             data.put("mensaje", "No se pudo actualizar al empleado");
-            data.put("tipo", "error");
+            data.put("tipo", "error"); 
+        } else {
+            data.put("ok", true);
+            data.put("titulo", "Actualizado");
+            data.put("mensaje", "Se ha actualizado el empleado " + nombre + " " + apellido + " correctamente");
+            data.put("tipo", "success");   
         }
         String json = new Gson().toJson(data);
         response.setContentType("application/json");
@@ -211,6 +226,7 @@ public class EmpleadoServlet extends HttpServlet {
 
     private void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         
        int codigo = Integer.parseInt(request.getParameter("id"));
        

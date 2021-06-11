@@ -4,11 +4,11 @@ public class ClienteDTO {
 
     private int codigo, codigoDistrito, estado;
     private String dni, nombre, apellido, direccion, telefono, nombreDistrito;
-
-    public String toString() {
-        return "ClienteDTO [codigo=" + codigo + ", codigoDistrito=" + codigoDistrito + ", dni=" + dni + ", nombre="
-                + nombre + ", apellido=" + apellido + ", direccion=" + direccion + ", telefono=" + telefono + "]";
-    }
+    
+    private String nombreCompleto;
+    private int cantidad;
+    private double descuento;
+   
 
     public int getCodigo() {
         return codigo;
@@ -82,4 +82,29 @@ public class ClienteDTO {
         this.nombreDistrito = nombreDistrito;
     }
 
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(double descuento) {
+        this.descuento = descuento;
+    }
+
+    
 }
