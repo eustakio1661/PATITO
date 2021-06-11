@@ -177,6 +177,8 @@
       </a>
       <jsp:include page="components/footer.jsp"></jsp:include>
     </div>
+    
+    <jsp:include page="components/canasta.jsp"></jsp:include>
 
     <jsp:include page="reusable/scripts.jsp"></jsp:include>
     <jsp:include page="reusable/datatable_scripts.jsp"></jsp:include>
