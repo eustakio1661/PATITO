@@ -79,9 +79,10 @@ if (formBuscarCliente) {
 
 // PRODUCTO - TABLA - ALERT
 
-let carritoProductos = obtenerCarritoLocalStorage();
-
 const actualizarGuardarCarrito = (compraProd) => {
+
+  let carritoProductos = obtenerCarritoLocalStorage();
+
   if (carritoProductos.length > 0) {
     let newCarrito = carritoProductos.filter(
       (prod) => prod.id !== compraProd.id
