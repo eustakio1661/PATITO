@@ -5,6 +5,7 @@ import interfaces.DistritoDAO;
 import interfaces.EmpleadoDAO;
 import interfaces.ProductoDAO;
 import interfaces.VentaDAO;
+import interfaces.ReporteDAO;
 
 public abstract class DAOFactory {
 
@@ -17,6 +18,7 @@ public abstract class DAOFactory {
     public abstract ClienteDAO getClienteDAO();
     public abstract DistritoDAO getDistritoDAO();
     public abstract VentaDAO getVentaDao();
+    public abstract ReporteDAO getReporteDAO();
     
     public static DAOFactory getDAOFactory(int qBD) {
         switch (qBD) {
