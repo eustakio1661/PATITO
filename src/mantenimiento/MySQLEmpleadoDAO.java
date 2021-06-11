@@ -42,7 +42,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         ResultSet rs = null;
         try {
             con = MySQLConexion8.getConexion();
-            String sql = "{call usp_listadoEmpleado()}";
+            String sql = "{call USP_LISTADOEMPLEADO()}";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
             lista = new ArrayList<EmpleadoDTO>();
@@ -98,7 +98,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         PreparedStatement pst = null;
         try {
             cn = MySQLConexion8.getConexion();
-            String sql = "{call usp_eliminarEmpleado(?)}";
+            String sql = "{call USP_ELIMINAREMPLEADO(?)}";
             pst = cn.prepareStatement(sql);
             pst.setInt(1, e.getId());
             rs = pst.executeUpdate();
