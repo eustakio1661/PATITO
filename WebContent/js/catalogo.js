@@ -1,7 +1,9 @@
 const obtenerCarritoLocalStorage = () => {
   let arr = localStorage.getItem('carrito');
+  console.log({arr});
 
   if (arr) {
+    console.log('arr [] me retorna algo si esta vacio');
     return JSON.parse(arr);
   }
   return [];
@@ -23,88 +25,6 @@ const crearCardCanastaProd = () => {
 
   switcherBody.appendChild(card);
 };
-
-const crearFilaCanastaProd = (objProducto) => {
-  const canasta = document.getElementById('canasta');
-
-  if (canasta) {
-    // Si existe fila
-    if (document.getElementById(`row-id-${objProducto.id}`)) {
-      const spanCantidad = document.getElementById(`span-cc-${objProducto.id}`);
-      spanCantidad.innerText = objProducto.cantidadComprada;
-    } else {
-      // Creando row
-      const row = document.createElement('div');
-      row.classList.add('row', 'mt-2');
-      row.setAttribute('id', `row-id-${objProducto.id}`);
-
-      const col4 = document.createElement('div');
-      col4.classList.add('col-4');
-
-      const img = document.createElement('img');
-      img.classList.add('rounded', 'img-fluid');
-      img.setAttribute('src', objProducto.image);
-      img.setAttribute('alt', objProducto.descripcion);
-
-      col4.appendChild(img);
-      row.appendChild(col4);
-
-      const col6 = document.createElement('div');
-      col6.classList.add('col-6');
-
-      const pCardTitle = document.createElement('p');
-      pCardTitle.classList.add('card-title');
-      const b = document.createElement('b');
-      b.innerText = objProducto.descripcion;
-      pCardTitle.appendChild(b);
-
-      const p = document.createElement('p');
-      p.innerHTML = `Cantidad : <span id="span-cc-${objProducto.id}">${objProducto.cantidadComprada}</span>`;
-
-      col6.appendChild(pCardTitle);
-      col6.appendChild(p);
-      row.appendChild(col6);
-
-      const col2 = document.createElement('div');
-      col2.classList.add('col-2');
-
-      const button = document.createElement('button');
-      button.classList.add(
-        'btn',
-        'btn-outline-danger',
-        'btn-close',
-        'ms-auto',
-        'btn-quitar-producto'
-      );
-      button.setAttribute('type', 'button');
-      button.setAttribute('aria-label', 'Close');
-      button.setAttribute('data-idprod', objProducto.id);
-      button.setAttribute(
-        'data-canticomprada',
-        `${objProducto.cantidadComprada}`
-      );
-
-      col2.appendChild(button);
-      row.appendChild(col2);
-
-      canasta.appendChild(row);
-    }
-  }
-};
-
-const llenarCanastaLS = () => {
-  const listaProductos = obtenerCarritoLocalStorage();
-
-  if (listaProductos.length > 0) {
-    crearCardCanastaProd();
-    // Problemas de rendimiento por no usar fragment
-    for (const objProducto of listaProductos) {
-      crearFilaCanastaProd(objProducto)
-    }
-  } 
-};
-
-llenarCanastaLS();
 
 // INPUT CLIENTE
 
@@ -214,31 +134,112 @@ const enviarProductoServlet = (servlet, idProd, cantidadComprar) => {
   });
 };
 
-// Eliminar fila producto de la canasta
-const btnsQuitarProducto = document.querySelectorAll('.btn-quitar-producto');
+const quitarProducto = (btn) => {
+  const idProd = btn.dataset.idprod.trim();
+  const lista = obtenerCarritoLocalStorage();
+  
+  if (lista.length > 0) {
+    let objProducto = lista.find( prod => prod.id == idProd );
+    const nuevaLista = lista.filter( prod => prod.id !== idProd );
 
-// TODO: Falla porque cuando cargo por primera vez no existen, se debe usar onclick, click, setattribute en el botton creado
-if (btnsQuitarProducto) {
-  btnsQuitarProducto.forEach( btn => {
-    btn.addEventListener('click', () => {
-      const idProd = btn.dataset.idprod.trim();
-      const lista = obtenerCarritoLocalStorage();
-      
-      if (lista.length > 0) {
-        let objProducto = lista.find( prod => prod.id == idProd );
-        const nuevaLista = lista.filter( prod => prod.id !== idProd );
+    document.getElementById(`row-id-${objProducto.id}`).remove();
 
-        document.getElementById(`row-id-${objProducto.id}`).remove();
+    localStorage.setItem('carrito', JSON.stringify(nuevaLista));
+    actualizarStockFilaProd(objProducto, objProducto.cantidadComprada, 'sumar');
 
-        localStorage.setItem('carrito', JSON.stringify(nuevaLista));
-        actualizarStockFilaProd(objProducto, objProducto.cantidadComprada, 'sumar');
+    if (obtenerCarritoLocalStorage().length === 0) {
+      const canastaContainer = document.getElementById('canasta').parentElement;
+      canastaContainer.remove();
+    }
 
-        enviarProductoServlet('servlet', idProd, objProducto.cantidadComprada);
-
-      }
-    })
-  })
+    enviarProductoServlet('servlet', idProd, objProducto.cantidadComprada);
+  }
 }
+
+const crearFilaCanastaProd = (objProducto) => {
+  const canasta = document.getElementById('canasta');
+
+  if (canasta) {
+    // Si existe fila
+    if (document.getElementById(`row-id-${objProducto.id}`)) {
+      const spanCantidad = document.getElementById(`span-cc-${objProducto.id}`);
+      spanCantidad.innerText = objProducto.cantidadComprada;
+    } else {
+      // Creando row
+      const row = document.createElement('div');
+      row.classList.add('row', 'mt-2');
+      row.setAttribute('id', `row-id-${objProducto.id}`);
+
+      const col4 = document.createElement('div');
+      col4.classList.add('col-4');
+
+      const img = document.createElement('img');
+      img.classList.add('rounded', 'img-fluid');
+      img.setAttribute('src', objProducto.image);
+      img.setAttribute('alt', objProducto.descripcion);
+
+      col4.appendChild(img);
+      row.appendChild(col4);
+
+      const col6 = document.createElement('div');
+      col6.classList.add('col-6');
+
+      const pCardTitle = document.createElement('p');
+      pCardTitle.classList.add('card-title');
+      const b = document.createElement('b');
+      b.innerText = objProducto.descripcion;
+      pCardTitle.appendChild(b);
+
+      const p = document.createElement('p');
+      p.innerHTML = `Cantidad : <span id="span-cc-${objProducto.id}">${objProducto.cantidadComprada}</span>`;
+
+      col6.appendChild(pCardTitle);
+      col6.appendChild(p);
+      row.appendChild(col6);
+
+      const col2 = document.createElement('div');
+      col2.classList.add('col-2');
+
+      const button = document.createElement('button');
+      button.classList.add(
+        'btn',
+        'btn-outline-danger',
+        'btn-close',
+        'ms-auto',
+        'btn-quitar-producto'
+      );
+      button.setAttribute('type', 'button');
+      button.setAttribute('aria-label', 'Close');
+      button.setAttribute('data-idprod', objProducto.id);
+      button.setAttribute(
+        'data-canticomprada',
+        `${objProducto.cantidadComprada}`
+      );
+
+      button.setAttribute('onclick', 'quitarProducto(this)')
+      button.onclick = function() { quitarProducto(this)  }
+
+      col2.appendChild(button);
+      row.appendChild(col2);
+
+      canasta.appendChild(row);
+    }
+  }
+};
+
+const llenarCanastaLS = () => {
+  const listaProductos = obtenerCarritoLocalStorage();
+
+  if (listaProductos.length > 0) {
+    crearCardCanastaProd();
+    // Problemas de rendimiento por no usar fragment
+    for (const objProducto of listaProductos) {
+      crearFilaCanastaProd(objProducto)
+    }
+  } 
+};
+
+llenarCanastaLS();
 
 const getDatosXFila = (btnFila) => {
   let idProd = btnFila.dataset.idprod.trim();
