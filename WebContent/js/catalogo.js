@@ -203,6 +203,43 @@ const actualizarStockFilaProd = (objProducto, cantidadComprar, operacion) => {
   return { ...objProducto };
 };
 
+const enviarProductoServlet = (servlet, idProd, cantidadComprar) => {
+  let formData = new FormData();
+  formData.append('txtIdProdCarrito', idProd);
+  formData.append('txtCantComprarCarrito', cantidadComprar);
+
+  return fetch(servlet, {
+    method: 'POST',
+    body: formData,
+  });
+};
+
+// Eliminar fila producto de la canasta
+const btnsQuitarProducto = document.querySelectorAll('.btn-quitar-producto');
+
+// TODO: Falla porque cuando cargo por primera vez no existen, se debe usar onclick, click, setattribute en el botton creado
+if (btnsQuitarProducto) {
+  btnsQuitarProducto.forEach( btn => {
+    btn.addEventListener('click', () => {
+      const idProd = btn.dataset.idprod.trim();
+      const lista = obtenerCarritoLocalStorage();
+      
+      if (lista.length > 0) {
+        let objProducto = lista.find( prod => prod.id == idProd );
+        const nuevaLista = lista.filter( prod => prod.id !== idProd );
+
+        document.getElementById(`row-id-${objProducto.id}`).remove();
+
+        localStorage.setItem('carrito', JSON.stringify(nuevaLista));
+        actualizarStockFilaProd(objProducto, objProducto.cantidadComprada, 'sumar');
+
+        enviarProductoServlet('servlet', idProd, objProducto.cantidadComprada);
+
+      }
+    })
+  })
+}
+
 const getDatosXFila = (btnFila) => {
   let idProd = btnFila.dataset.idprod.trim();
   const filaElement = btnFila.parentElement.parentElement.parentElement;
@@ -220,17 +257,6 @@ const getDatosXFila = (btnFila) => {
   };
 
   return objProducto;
-};
-
-const enviarProductoServlet = (servlet, idProd, cantidadComprar) => {
-  let formData = new FormData();
-  formData.append('txtIdProdCarrito', idProd);
-  formData.append('txtCantComprarCarrito', cantidadComprar);
-
-  return fetch(servlet, {
-    method: 'POST',
-    body: formData,
-  });
 };
 
 const Toast = Swal.mixin({
