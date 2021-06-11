@@ -1,3 +1,12 @@
+const obtenerCarritoLocalStorage = () => {
+  let arr = localStorage.getItem('carrito');
+
+  if (arr) {
+    return JSON.parse(arr);
+  }
+  return [];
+};
+
 // CANASTA
 
 const crearCardCanastaProd = () => {
@@ -81,20 +90,21 @@ const crearFilaCanastaProd = (objProducto) => {
       canasta.appendChild(row);
     }
   }
-
-  return canasta;
-
 };
 
-const llenarCanasta = () => {
+const llenarCanastaLS = () => {
   const listaProductos = obtenerCarritoLocalStorage();
 
-  if (listaProductos.length == 0) {
+  if (listaProductos.length > 0) {
     crearCardCanastaProd();
-  } else {
-    // TODO: Aplicar for of para llenar la canasta y eso 
-  }
+    // Problemas de rendimiento por no usar fragment
+    for (const objProducto of listaProductos) {
+      crearFilaCanastaProd(objProducto)
+    }
+  } 
 };
+
+llenarCanastaLS();
 
 // INPUT CLIENTE
 
@@ -148,15 +158,6 @@ if (formBuscarCliente) {
 }
 
 // PRODUCTO - TABLA - ALERT
-
-const obtenerCarritoLocalStorage = () => {
-  let arr = localStorage.getItem('carrito');
-
-  if (arr) {
-    return JSON.parse(arr);
-  }
-  return [];
-};
 
 let carritoProductos = obtenerCarritoLocalStorage();
 
