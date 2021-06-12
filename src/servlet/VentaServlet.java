@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +24,7 @@ import dao.DAOFactory;
 import interfaces.ClienteDAO;
 import interfaces.ProductoDAO;
 
-/**
- * Servlet implementation class VentaServlet
- */
+@MultipartConfig
 @WebServlet(name = "venser", urlPatterns = { "/venser" })
 public class VentaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -75,7 +74,7 @@ public class VentaServlet extends HttpServlet {
 
     private void buscarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        String dni = request.getParameter("txtDNI");
+        String dni = request.getParameter("txtDNICli");
 
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDTO c = factory.getClienteDAO().buscarClienteDNI(dni);
@@ -86,14 +85,15 @@ public class VentaServlet extends HttpServlet {
         if (c != null) {
             data.put("ok", true);
             data.put("titulo", "Cliente Encontrado");
-            data.put("nombreCliente", "Nombre : " + c.getNombreCompleto());
-            data.put("distritoCliente", "Distrito : " + c.getNombreDistrito());
-            data.put("direccionCliente", "Direccion : " + c.getDireccion());
+            data.put("mensaje", "El cliente con DNI " + dni + " fue encontrado" );
+            data.put("nombreCliente", c.getNombreCompleto());
+            data.put("distritoCliente", c.getNombreDistrito());
+            data.put("direccionCliente", c.getDireccion());
             data.put("tipo", "success");
         } else {
             data.put("ok", false);
-            data.put("titulo", "Error");
-            data.put("mensaje", "No se encontro cliente");
+            data.put("titulo", "No existe");
+            data.put("mensaje", "No se encontro cliente con DNI " + dni);
             data.put("tipo", "error");
         }
 
