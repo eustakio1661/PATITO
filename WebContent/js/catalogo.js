@@ -176,7 +176,7 @@ const quitarProducto = (btn) => {
       canastaContainer.remove();
     }
 
-    enviarProductoServlet('servlet', idProd, objProducto.cantidadComprada);
+    enviarProductoServlet('venser?opcion=eliCompra', idProd, objProducto.cantidadComprada);
   }
 };
 
