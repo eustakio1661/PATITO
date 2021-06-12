@@ -2138,10 +2138,10 @@ input.search-control-2::placeholder {
 }
 
 .switcher-wrapper {
-	width: 280px;
+	width: 330px;
 	height: 100%;
 	position: fixed;
-	right: -280px;
+	right: -330px;
 	top: 0;
 	bottom: 0;
 	z-index: 16;

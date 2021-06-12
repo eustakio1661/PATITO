@@ -51,7 +51,7 @@ $(function () {
             .addClass('')
             .parent()
             .addClass('mm-active');
-            //.addClass('active');
+        //.addClass('active');
         o.is('li');
 
       )
@@ -59,6 +59,11 @@ $(function () {
     }),
     $(function () {
       $('#menu').metisMenu();
-      //MetisMenu.attach('#menu');
+    }),
+    $('.switcher-btn').on('click', function () {
+      $('.switcher-wrapper').toggleClass('switcher-toggled');
+    }),
+    $('.close-switcher').on('click', function () {
+      $('.switcher-wrapper').removeClass('switcher-toggled');
     });
 });
