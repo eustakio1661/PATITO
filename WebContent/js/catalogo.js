@@ -46,6 +46,17 @@ if (existeCliente) {
   );
 }
 
+const btnLimpiarClienteTxt = document.getElementById('btnLimpiarClienteTxt');
+
+if (btnLimpiarClienteTxt) {
+  btnLimpiarClienteTxt.addEventListener('click', () => {
+    llenarInputsCliente('','','');
+    if (localStorage.getItem('dataCliente')) {
+      localStorage.removeItem('dataCliente');
+    }
+  })
+}
+
 const realizarPeticionCliente = (form) => {
   const formData = new FormData(form);
 
