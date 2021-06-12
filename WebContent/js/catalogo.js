@@ -1,9 +1,7 @@
 const obtenerCarritoLocalStorage = () => {
   let arr = localStorage.getItem('carrito');
-  console.log({arr});
 
   if (arr) {
-    console.log('arr [] me retorna algo si esta vacio');
     return JSON.parse(arr);
   }
   return [];
@@ -228,7 +226,7 @@ const crearFilaCanastaProd = (objProducto) => {
   }
 };
 
-const llenarCanastaLS = () => {
+const llenarCanastaActualizarFilasLS = () => {
   const listaProductos = obtenerCarritoLocalStorage();
 
   if (listaProductos.length > 0) {
@@ -236,11 +234,12 @@ const llenarCanastaLS = () => {
     // Problemas de rendimiento por no usar fragment
     for (const objProducto of listaProductos) {
       crearFilaCanastaProd(objProducto)
+      actualizarStockFilaProd(objProducto, objProducto.cantidadComprada, 'restar')
     }
   } 
 };
 
-llenarCanastaLS();
+llenarCanastaActualizarFilasLS();
 
 const getDatosXFila = (btnFila) => {
   let idProd = btnFila.dataset.idprod.trim();
