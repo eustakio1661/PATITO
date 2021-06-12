@@ -155,7 +155,7 @@ public class VentaServlet extends HttpServlet {
         int cantidadProductos = (int) request.getSession().getAttribute("cantidadProductos");
         double subTotalVentas = (double) request.getSession().getAttribute("subTotalVentas");
 
-        int idprod = Integer.parseInt(request.getParameter("codigo"));
+        int idprod = Integer.parseInt(request.getParameter("txtIdProdCarrito"));
         for (DetallePedidoDTO d : carro) {
             if (d.getId_pro() == idprod) {
                 cantidadProductos -= d.getCantidad();
