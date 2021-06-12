@@ -22,6 +22,20 @@ const crearCardCanastaProd = () => {
   card.appendChild(cardBody);
 
   switcherBody.appendChild(card);
+
+  // Crea boton de confirmar compra
+  const btnContainer = document.createElement('div');
+  btnContainer.classList.add('d-flex', 'justify-content-center', 'mt-3');
+  btnContainer.setAttribute('id', 'btnConfirmContainer');
+
+  const aBtnConfirm = document.createElement('a');
+  aBtnConfirm.classList.add('btn', 'btn-warning');
+  aBtnConfirm.href = 'servlet';
+  aBtnConfirm.innerText = 'Confirmar Compra';
+
+  btnContainer.appendChild(aBtnConfirm);
+  switcherBody.appendChild(btnContainer);
+
 };
 
 // INPUT CLIENTE
@@ -169,6 +183,14 @@ const enviarProductoServlet = (servlet, idProd, cantidadComprar) => {
   });
 };
 
+const quitarBtnConfirmButton = () => {
+  const btnConfirmContainer = document.getElementById('btnConfirmContainer');
+
+  if (btnConfirmContainer) {
+    btnConfirmContainer.remove();
+  }
+}
+
 const quitarProducto = (btn) => {
   const idProd = btn.dataset.idprod.trim();
   const lista = obtenerCarritoLocalStorage();
@@ -185,6 +207,7 @@ const quitarProducto = (btn) => {
     if (obtenerCarritoLocalStorage().length === 0) {
       const canastaContainer = document.getElementById('canasta').parentElement;
       canastaContainer.remove();
+      quitarBtnConfirmButton();
     }
 
     enviarProductoServlet('venser?opcion=eliCompra', idProd, objProducto.cantidadComprada);
