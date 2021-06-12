@@ -83,6 +83,7 @@ public class ProductoServlet extends HttpServlet {
 
     private void eliminar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         System.out.println("Ingreso al proceso EliminarProducto");
 
         int codigo = Integer.parseInt(request.getParameter("codigo"));

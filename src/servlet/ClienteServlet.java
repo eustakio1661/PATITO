@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import beans.ClienteDTO;
+import beans.ReporteClienteDTO;
 import dao.DAOFactory;
 import interfaces.ClienteDAO;
 
@@ -45,6 +46,9 @@ public class ClienteServlet extends HttpServlet {
             case "buscar":
                 buscar(request, response);
                 break;
+            case "reporte":
+                reporteCliente(request, response);
+                break;
             default:
                 System.out.println("Error en la opcion");
                 break;
@@ -57,6 +61,20 @@ public class ClienteServlet extends HttpServlet {
         }
 
     }
+
+
+    private void reporteCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Ingreso al proceso Reporte Cliente");
+
+        DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        ClienteDAO dao = fabrica.getClienteDAO();
+        ArrayList<ReporteClienteDTO> lista = dao.reporteCliente();
+
+        request.setAttribute("lstReporteClientes", lista);
+        request.getRequestDispatcher("reporte-clientes.jsp").forward(request, response);
+        
+    }
+
 
     private void registrar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -190,7 +208,7 @@ public class ClienteServlet extends HttpServlet {
     }
 
     private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Ingreso al proceso ListarProducto");
+        System.out.println("Ingreso al proceso ListarCliente");
 
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDAO dao = fabrica.getClienteDAO();

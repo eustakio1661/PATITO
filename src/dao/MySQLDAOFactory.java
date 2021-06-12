@@ -3,17 +3,21 @@ package dao;
 
 import interfaces.EmpleadoDAO;
 import interfaces.ProductoDAO;
+import interfaces.VentaDAO;
+import interfaces.ReporteDAO;
 import interfaces.ClienteDAO;
 import interfaces.DistritoDAO;
 import mantenimiento.MySQLEmpleadoDAO;
 import mantenimiento.MySQLProductoDAO;
+import mantenimiento.MySQLVentaDAO;
 import mantenimiento.MySQLClienteDAO;
-import mantenimiento.MySQLDistrito;
+import mantenimiento.MySQLDistritoDAO;
+import mantenimiento.MySQLReporteDAO;
 
 public class MySQLDAOFactory extends DAOFactory {
 
     public EmpleadoDAO getEmpleadoDAO() {
-        // Llama a la clase implementación o Gestión
+        // Llama a la clase implementaciÃ³n o GestiÃ³n
         return new MySQLEmpleadoDAO();
     }
 
@@ -27,6 +31,16 @@ public class MySQLDAOFactory extends DAOFactory {
     }
     
     public DistritoDAO getDistritoDAO() {
-    	return new MySQLDistrito();
+    	return new MySQLDistritoDAO();
+    }
+
+    @Override
+    public VentaDAO getVentaDao() {
+        // TODO Auto-generated method stub
+        return new MySQLVentaDAO();
+    }
+
+    public ReporteDAO getReporteDAO() {
+        return new MySQLReporteDAO();
     }
 }

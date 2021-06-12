@@ -101,6 +101,7 @@ public class MySQLProductoDAO implements ProductoDAO {
                 p.setIdCategoria(rs.getInt(5));
                 p.setDescCategoria(rs.getString(6));
                 p.setImagen(rs.getString(7));
+
                 lista.add(p);
             }
         } catch (Exception e) {
@@ -147,7 +148,9 @@ public class MySQLProductoDAO implements ProductoDAO {
 
         try {
             cn = MySQLConexion8.getConexion();
-            String sql = "select * from producto where ID_PRO = ?";
+
+            String sql = "select * from PRODUCTO where ID_PRO = ?";
+
             pst = cn.prepareStatement(sql);
 
             pst.setInt(1, codigo);
