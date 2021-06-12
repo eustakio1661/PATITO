@@ -186,7 +186,9 @@ public class VentaServlet extends HttpServlet {
     private void agregarCompra(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO Auto-generated method stub
-        int cantidad = Integer.parseInt(request.getParameter("txtCantidad"));
+        int cantidad = Integer.parseInt(request.getParameter("txtCantComprarCarrito"));
+        int idProducto = Integer.parseInt(request.getParameter("txtIdProdCarrito"));
+        
         ProductoDTO p = (ProductoDTO) request.getSession().getAttribute("productoEncontrado");
         // Traer atributos de session
         ArrayList<DetallePedidoDTO> carro = (ArrayList<DetallePedidoDTO>) request.getSession().getAttribute("carro");
