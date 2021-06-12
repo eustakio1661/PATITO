@@ -59,6 +59,9 @@
                         <button class="btn btn-primary" type="submit">
                           <i class="bx bx-search-alt"></i> Buscar Cliente
                         </button>
+                        <button class="btn btn-danger" type="button" id="btnLimpiarClienteTxt">
+                          <i class='bx bx-trash mx-0' ></i>
+                        </button>
                       </div>
                     </form>
                     <div class="col-md-3">
