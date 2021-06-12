@@ -149,6 +149,8 @@ public class VentaServlet extends HttpServlet {
 
     private void eliminarCompraCarro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        @SuppressWarnings("unchecked")
         ArrayList<DetallePedidoDTO> carro = (ArrayList<DetallePedidoDTO>) request.getSession().getAttribute("carro");
         int cantidadProductos = (int) request.getSession().getAttribute("cantidadProductos");
         double subTotalVentas = (double) request.getSession().getAttribute("subTotalVentas");
@@ -186,11 +188,20 @@ public class VentaServlet extends HttpServlet {
     private void agregarCompra(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO Auto-generated method stub
-        int cantidad = Integer.parseInt(request.getParameter("txtCantComprarCarrito"));
-        int idProducto = Integer.parseInt(request.getParameter("txtIdProdCarrito"));
         
-        ProductoDTO p = (ProductoDTO) request.getSession().getAttribute("productoEncontrado");
+        System.out.println("Ingreso al AgregarCompra");
+        
+        int cantidad = Integer.parseInt(request.getParameter("txtCantComprarCarrito"));
+        System.out.println(cantidad);
+        
+        int idProducto = Integer.parseInt(request.getParameter("txtIdProdCarrito"));
+        System.out.println(idProducto);
+        
+        DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        ProductoDTO p = factory.getProductoDAO().buscar(idProducto);
+        
         // Traer atributos de session
+        @SuppressWarnings("unchecked")
         ArrayList<DetallePedidoDTO> carro = (ArrayList<DetallePedidoDTO>) request.getSession().getAttribute("carro");
         int cantidadProductos = (int) request.getSession().getAttribute("cantidadProductos");
         double subTotalVentas = (double) request.getSession().getAttribute("subTotalVentas");
@@ -204,31 +215,42 @@ public class VentaServlet extends HttpServlet {
         // Adicionales
         detalle.setNombreProd(p.getDescripcion());
         detalle.setImporte(cantidad * p.getPrecio());
-
-        int decision = 0;
-        for (DetallePedidoDTO de : carro) {
-            if (p.getIdProducto() == de.getId_pro()) {
-
-                de.setCantidad(cantidad + de.getCantidad());
-                de.setImporte((cantidad * de.getPrecio())+ de.getImporte());
-                decision = 1;
-                
-                break;
-            }
-        }
-        if (decision == 0) {
+        
+        if (carro.size() == 0) {
             carro.add(detalle);
-        }
-        System.out.println(detalle.toString());
-        cantidadProductos += cantidad;
-        subTotalVentas += detalle.getImporte();
+            cantidadProductos += cantidad;
+            subTotalVentas += detalle.getImporte();
+        } else {
+            boolean agregar = true;            
+            
+            for (DetallePedidoDTO de : carro) {
+                if (p.getIdProducto() == de.getId_pro()) {
 
+                    de.setCantidad(cantidad + de.getCantidad());
+                    de.setImporte((cantidad * de.getPrecio())+ de.getImporte());
+                    agregar = false;
+                    break;
+                }
+            }
+            
+            if (agregar) {
+                carro.add(detalle);                
+            }
+
+            cantidadProductos += cantidad;
+            subTotalVentas += detalle.getImporte();
+  
+        }
+        
+        System.out.println(carro.toString());
+        
+        System.out.println("CantidadProductosTotales : " + cantidadProductos);
+        System.out.println("SubtotalProductos : " + subTotalVentas);
+        
         // Envia las variables globales a nivel de session
         request.getSession().setAttribute("carro", carro);
         request.getSession().setAttribute("cantidadProductos", cantidadProductos);
         request.getSession().setAttribute("subTotalVentas", subTotalVentas);
-        // Muestra la pagina
-        listadoClienteyProducto(request, response);
 
     }
 
