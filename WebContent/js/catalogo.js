@@ -393,7 +393,14 @@ const mostrarAlertProducto = (btn) => {
         'resta'
       );
       actualizarGuardarCarrito(objProducto);
-      enviarProductoServlet('venser?opcion=agrCompra').then(console.log).catch(console.log);
+      enviarProductoServlet(
+        'venser?opcion=agrCompra',
+        objProducto.id,
+        cantidadComprar
+      )
+        .then(console.log)
+        .catch(console.log);
+
       crearFilaCanastaProd(objProducto);
 
       Toast.fire({
