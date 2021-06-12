@@ -29,10 +29,6 @@ import interfaces.ProductoDAO;
 public class VentaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
-     *      response)
-     */
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("Entró al Servlet de Venta");
@@ -72,20 +68,20 @@ public class VentaServlet extends HttpServlet {
         }
     }
 
-    private void buscarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+    private void buscarCliente(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         String dni = request.getParameter("txtDNICli");
 
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDTO c = factory.getClienteDAO().buscarClienteDNI(dni);
-        
+
         Map<String, Object> data = new LinkedHashMap<String, Object>();
 
-        
         if (c != null) {
             data.put("ok", true);
             data.put("titulo", "Cliente Encontrado");
-            data.put("mensaje", "El cliente con DNI " + dni + " fue encontrado" );
+            data.put("mensaje", "El cliente con DNI " + dni + " fue encontrado");
             data.put("nombreCliente", c.getNombreCompleto());
             data.put("distritoCliente", c.getNombreDistrito());
             data.put("direccionCliente", c.getDireccion());
@@ -101,7 +97,7 @@ public class VentaServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
-    
+
     }
 
     private void procesarCompra(HttpServletRequest request, HttpServletResponse response)
@@ -111,6 +107,7 @@ public class VentaServlet extends HttpServlet {
         ClienteDTO cl = (ClienteDTO) request.getSession().getAttribute("clienteEncontrado");
         int cantidadProductos = (int) request.getSession().getAttribute("cantidadProductos");
         double subTotalVentas = (double) request.getSession().getAttribute("subTotalVentas");
+        @SuppressWarnings("unchecked")
         ArrayList<DetallePedidoDTO> carro = (ArrayList<DetallePedidoDTO>) request.getSession().getAttribute("carro");
         PedidoDTO pe = new PedidoDTO();
         pe.setId_pe(generarNumPedido());
@@ -121,7 +118,7 @@ public class VentaServlet extends HttpServlet {
         BoletaDTO bo = new BoletaDTO();
         bo.setId_bol(generarNumBoleta());
         bo.setPrecioTotal(subTotalVentas);
-        
+
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         int rs = fabrica.getVentaDao().realizarVenta(pe, carro, bo);
         if (rs == 0) {
@@ -149,7 +146,7 @@ public class VentaServlet extends HttpServlet {
 
     private void eliminarCompraCarro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         @SuppressWarnings("unchecked")
         ArrayList<DetallePedidoDTO> carro = (ArrayList<DetallePedidoDTO>) request.getSession().getAttribute("carro");
         int cantidadProductos = (int) request.getSession().getAttribute("cantidadProductos");
@@ -187,19 +184,18 @@ public class VentaServlet extends HttpServlet {
 
     private void agregarCompra(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        
+
         System.out.println("Ingreso al AgregarCompra");
-        
+
         int cantidad = Integer.parseInt(request.getParameter("txtCantComprarCarrito"));
         System.out.println(cantidad);
-        
+
         int idProducto = Integer.parseInt(request.getParameter("txtIdProdCarrito"));
         System.out.println(idProducto);
-        
+
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ProductoDTO p = factory.getProductoDAO().buscar(idProducto);
-        
+
         // Traer atributos de session
         @SuppressWarnings("unchecked")
         ArrayList<DetallePedidoDTO> carro = (ArrayList<DetallePedidoDTO>) request.getSession().getAttribute("carro");
@@ -215,38 +211,38 @@ public class VentaServlet extends HttpServlet {
         // Adicionales
         detalle.setNombreProd(p.getDescripcion());
         detalle.setImporte(cantidad * p.getPrecio());
-        
+
         if (carro.size() == 0) {
             carro.add(detalle);
             cantidadProductos += cantidad;
             subTotalVentas += detalle.getImporte();
         } else {
-            boolean agregar = true;            
-            
+            boolean agregar = true;
+
             for (DetallePedidoDTO de : carro) {
                 if (p.getIdProducto() == de.getId_pro()) {
 
                     de.setCantidad(cantidad + de.getCantidad());
-                    de.setImporte((cantidad * de.getPrecio())+ de.getImporte());
+                    de.setImporte((cantidad * de.getPrecio()) + de.getImporte());
                     agregar = false;
                     break;
                 }
             }
-            
+
             if (agregar) {
-                carro.add(detalle);                
+                carro.add(detalle);
             }
 
             cantidadProductos += cantidad;
             subTotalVentas += detalle.getImporte();
-  
+
         }
-        
+
         System.out.println(carro.toString());
-        
+
         System.out.println("CantidadProductosTotales : " + cantidadProductos);
         System.out.println("SubtotalProductos : " + subTotalVentas);
-        
+
         // Envia las variables globales a nivel de session
         request.getSession().setAttribute("carro", carro);
         request.getSession().setAttribute("cantidadProductos", cantidadProductos);
