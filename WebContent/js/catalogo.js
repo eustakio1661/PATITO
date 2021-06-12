@@ -36,12 +36,21 @@ const llenarInputsCliente = (nombreCompleto, distrito, direccion) => {
   txtDireccionCliente.value = direccion;
 };
 
+const existeCliente = JSON.parse(localStorage.getItem('dataCliente'));
+
+if (existeCliente) {
+  llenarInputsCliente(
+    existeCliente.nombre,
+    existeCliente.distrito,
+    existeCliente.direccion
+  );
+}
+
 const realizarPeticionCliente = (form) => {
   const formData = new FormData(form);
 
-  // TODO: Falta el Action y que servlet retorne un json con la data
-  return fetch('', {
-    method: 'GET',
+  return fetch('venser?opcion=buscarCliente', {
+    method: 'POST',
     body: formData,
   })
     .then((response) => {
@@ -62,12 +71,29 @@ if (formBuscarCliente) {
   formBuscarCliente.addEventListener(
     'submit',
     (e) => {
+      e.preventDefault();
       if (!formBuscarCliente.checkValidity()) {
-        e.preventDefault();
         e.stopPropagation();
-      }
+      } else {
+        realizarPeticionCliente(formBuscarCliente).then((data) => {
+          Swal.fire(data.titulo, data.mensaje, data.tipo);
+          if (data.ok) {
+            llenarInputsCliente(
+              data.nombreCliente,
+              data.distritoCliente,
+              data.direccionCliente
+            );
 
-      // TODO: Cuando se obtenga al cliente se va al local storage por seguridad
+            const objCliente = {
+              nombre: data.nombreCliente,
+              distrito: data.distritoCliente,
+              direccion: data.direccionCliente,
+            };
+
+            localStorage.setItem('dataCliente', JSON.stringify(objCliente));
+          }
+        });
+      }
 
       formBuscarCliente.classList.add('was-validated');
     },
@@ -78,7 +104,6 @@ if (formBuscarCliente) {
 // PRODUCTO - TABLA - ALERT
 
 const actualizarGuardarCarrito = (compraProd) => {
-
   let carritoProductos = obtenerCarritoLocalStorage();
 
   if (carritoProductos.length > 0) {
@@ -136,10 +161,10 @@ const enviarProductoServlet = (servlet, idProd, cantidadComprar) => {
 const quitarProducto = (btn) => {
   const idProd = btn.dataset.idprod.trim();
   const lista = obtenerCarritoLocalStorage();
-  
+
   if (lista.length > 0) {
-    let objProducto = lista.find( prod => prod.id == idProd );
-    const nuevaLista = lista.filter( prod => prod.id !== idProd );
+    let objProducto = lista.find((prod) => prod.id == idProd);
+    const nuevaLista = lista.filter((prod) => prod.id !== idProd);
 
     document.getElementById(`row-id-${objProducto.id}`).remove();
 
@@ -153,7 +178,7 @@ const quitarProducto = (btn) => {
 
     enviarProductoServlet('servlet', idProd, objProducto.cantidadComprada);
   }
-}
+};
 
 const crearFilaCanastaProd = (objProducto) => {
   const canasta = document.getElementById('canasta');
@@ -215,8 +240,10 @@ const crearFilaCanastaProd = (objProducto) => {
         `${objProducto.cantidadComprada}`
       );
 
-      button.setAttribute('onclick', 'quitarProducto(this)')
-      button.onclick = function() { quitarProducto(this)  }
+      button.setAttribute('onclick', 'quitarProducto(this)');
+      button.onclick = function () {
+        quitarProducto(this);
+      };
 
       col2.appendChild(button);
       row.appendChild(col2);
@@ -233,10 +260,14 @@ const llenarCanastaActualizarFilasLS = () => {
     crearCardCanastaProd();
     // Problemas de rendimiento por no usar fragment
     for (const objProducto of listaProductos) {
-      crearFilaCanastaProd(objProducto)
-      actualizarStockFilaProd(objProducto, objProducto.cantidadComprada, 'restar')
+      crearFilaCanastaProd(objProducto);
+      actualizarStockFilaProd(
+        objProducto,
+        objProducto.cantidadComprada,
+        'restar'
+      );
     }
-  } 
+  }
 };
 
 llenarCanastaActualizarFilasLS();
