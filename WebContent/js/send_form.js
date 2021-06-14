@@ -8,15 +8,20 @@ const existeImagen = (input) => {
 
 const mostrarImagen = (input) => {
   if (existeImagen(input)) {
+    console.log('Existe imagen y hora de usar reader');
     const reader = new FileReader();
 
     reader.addEventListener('load', (event) => {
+
+      console.log('Dentro del load ', event );
+
       document
         .querySelector('.img-upload')
         .setAttribute('src', event.target.result);
     });
 
     reader.readAsDataURL(input.files[0]);
+    console.log('Termino el reader ', reader);
   }
 };
 
@@ -26,6 +31,7 @@ const btnRemoveImg = document.getElementById('remove-img');
 
 if (inputFile) {
   inputFile.addEventListener('change', () => {
+    console.log('Cambiar imagen');
     mostrarImagen(inputFile);
   });
 }
@@ -39,11 +45,13 @@ if (btnSelectImg) {
 if (btnRemoveImg) {
   btnRemoveImg.addEventListener('click', () => {
     document.querySelector('.img-upload').src = 'https://cutt.ly/unbQLrJ';
+    // Limpia el input file
+    inputFile.value = "";
   });
 }
 
 const subirImagenCloudinary = async () => {
-  if (inputFile) {
+  if (inputFile && existeImagen(inputFile)) {
     const file = inputFile.files[0];
     const formData = new FormData();
 
@@ -115,7 +123,7 @@ const cargarDataForm = async (form, imgUrl) => {
 const enviarFormulario = async (form) => {
   let dataCloudinary;
 
-  if (inputFile) {
+  if (inputFile && existeImagen(inputFile)) {
     dataCloudinary = await subirImagenCloudinary();
     const imgUrl = dataCloudinary.url;
     return await cargarDataForm(form, imgUrl);
