@@ -2,6 +2,9 @@ const API_CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/LP2/image/upload';
 const API_KEY = '366667499388496';
 const UPLOAD_PRESET = 'bibo9msx';
 
+let imagenUrlAEnviar = null;
+let imagenFile = null;
+
 const existeImagen = (input) => {
   return input.files && input.files[0];
 };
@@ -12,14 +15,16 @@ const mostrarImagen = (input) => {
     const reader = new FileReader();
 
     reader.addEventListener('load', (event) => {
-
-      console.log('Dentro del load ', event );
+      console.log('Dentro del load ', event);
 
       document
         .querySelector('.img-upload')
         .setAttribute('src', event.target.result);
     });
 
+    imagenFile = input.files[0];
+    console.log('Dentro del mostrar imagen : ', input.files[0]);
+    console.log('Dentro del mostrar imagen ImagenFile : ' , imagenFile);
     reader.readAsDataURL(input.files[0]);
     console.log('Termino el reader ', reader);
   }
@@ -30,9 +35,15 @@ const btnSelectImg = document.getElementById('select-img');
 const btnRemoveImg = document.getElementById('remove-img');
 
 if (inputFile) {
-  inputFile.addEventListener('change', () => {
-    console.log('Cambiar imagen');
-    mostrarImagen(inputFile);
+  inputFile.addEventListener('change', (e) => {
+    if (e.target.files.length > 0) {
+      // Has seleccionado imagen
+      console.log('Seleccionaste imagen');
+      console.log(e.target);
+      mostrarImagen(inputFile);
+    } else{
+      console.log('CHANGE IMAGEFILE : ', imagenFile);
+    }
   });
 }
 
@@ -46,16 +57,20 @@ if (btnRemoveImg) {
   btnRemoveImg.addEventListener('click', () => {
     document.querySelector('.img-upload').src = 'https://cutt.ly/unbQLrJ';
     // Limpia el input file
-    inputFile.value = "";
+    inputFile.value = '';
+    imagenFile = null;
   });
 }
 
 const subirImagenCloudinary = async () => {
-  if (inputFile && existeImagen(inputFile)) {
-    const file = inputFile.files[0];
+  if (inputFile && imagenFile) {
+    //const file = inputFile.files[0];
     const formData = new FormData();
 
-    formData.append('file', file);
+    console.log('En SubirImagenCloudi ImagenFile : ', imagenFile);
+
+    formData.append('file', imagenFile);
+    //formData.append('file', file);
     formData.append('api_key', API_KEY);
     formData.append('upload_preset', UPLOAD_PRESET);
 
@@ -123,7 +138,7 @@ const cargarDataForm = async (form, imgUrl) => {
 const enviarFormulario = async (form) => {
   let dataCloudinary;
 
-  if (inputFile && existeImagen(inputFile)) {
+  if (inputFile && imagenFile) {
     dataCloudinary = await subirImagenCloudinary();
     const imgUrl = dataCloudinary.url;
     return await cargarDataForm(form, imgUrl);
@@ -152,6 +167,7 @@ const mostrarAlertRegistro = (form) => {
       if (data.ok) {
         if (inputFile) {
           document.querySelector('.img-upload').src = 'https://cutt.ly/unbQLrJ';
+          imagenFile = null;
         }
         form.reset();
       }
