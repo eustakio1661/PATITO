@@ -1,3 +1,46 @@
+const existeImagen = (input) => {
+  return input.files && input.files[0];
+};
+
+const mostrarImagen = (input) => {
+  if (existeImagen(input)) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event) => {
+      document
+        .querySelector('.img-upload')
+        .setAttribute('src', event.target.result);
+    });
+
+    reader.readAsDataURL(input.files[0]);
+  }
+};
+
+const inputFile = document.getElementById('input-file');
+const btnSelectImg = document.getElementById('select-img');
+const btnRemoveImg = document.getElementById('remove-img');
+
+if (inputFile) {
+  inputFile.addEventListener('change', () => {
+    mostrarImagen(inputFile);
+  });
+}
+
+if (btnSelectImg) {
+  btnSelectImg.addEventListener('click', () => {
+    inputFile.click();
+  });
+}
+
+if (btnRemoveImg) {
+  btnRemoveImg.addEventListener('click', () => {
+    console.log(btnRemoveImg);
+    document.querySelector('.img-upload').src =
+      'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png';
+    console.log(document.querySelector('.img-upload').src);
+  });
+}
+
 const titleCase = (str) => {
   return str
     .split(' ')
