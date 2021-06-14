@@ -127,6 +127,10 @@ public class ProductoServlet extends HttpServlet {
         int cantidad = Integer.parseInt(request.getParameter("txtStockProd"));
         int idcategoria = Integer.parseInt(request.getParameter("cboCategoriaProd"));
         String imagen = request.getParameter("imgProducto");
+        
+        if (imagen == null) {
+            imagen = "https://cutt.ly/unbQLrJ";
+        }
 
         ProductoDTO p = new ProductoDTO();
         p.setIdProducto(codigo);
@@ -170,6 +174,12 @@ public class ProductoServlet extends HttpServlet {
         int cantidad = Integer.parseInt(request.getParameter("txtStockProd"));
         int idcategoria = Integer.parseInt(request.getParameter("cboCategoriaProd"));
         String imagen = request.getParameter("imgProducto");
+        
+        if (imagen == null) {
+            imagen = "https://cutt.ly/unbQLrJ";
+        }
+        
+        System.out.println("Existe imagen : " + imagen);
 
         ProductoDTO p = new ProductoDTO();
         p.setDescripcion(descripcion);
