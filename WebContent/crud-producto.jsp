@@ -66,7 +66,7 @@
                         <div class="profile-image">
                           <img
                             class="img-upload"
-                            src="https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png"
+                            src="https://cutt.ly/unbQLrJ"
                             alt="Imagen Producto"
                           />
                           <input
