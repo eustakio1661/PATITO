@@ -1,3 +1,7 @@
+const API_CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/LP2/image/upload';
+const API_KEY = '366667499388496';
+const UPLOAD_PRESET = 'bibo9msx';
+
 const existeImagen = (input) => {
   return input.files && input.files[0];
 };
@@ -34,12 +38,31 @@ if (btnSelectImg) {
 
 if (btnRemoveImg) {
   btnRemoveImg.addEventListener('click', () => {
-    console.log(btnRemoveImg);
-    document.querySelector('.img-upload').src =
-      'https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png';
-    console.log(document.querySelector('.img-upload').src);
+    document.querySelector('.img-upload').src = 'https://cutt.ly/unbQLrJ';
   });
 }
+
+const subirImagenCloudinary = async () => {
+  if (inputFile) {
+    const file = inputFile.files[0];
+    const formData = new FormData();
+
+    formData.append('file', file);
+    formData.append('api_key', API_KEY);
+    formData.append('upload_preset', UPLOAD_PRESET);
+
+    try {
+      const response = await fetch(API_CLOUDINARY_URL, {
+        method: 'POST',
+        body: formData,
+      });
+
+      return await response.json();
+    } catch (err) {
+      console.log('Error Cloudinary ', err);
+    }
+  }
+};
 
 const titleCase = (str) => {
   return str
@@ -64,25 +87,41 @@ if (inputHidden) {
   sweetText = `\u00bfDesea ${palabra} el ${entidad} a la BD?`;
 }
 
-const enviarFormulario = (form) => {
+const cargarDataForm = async (form, imgUrl) => {
   const formData = new FormData(form);
+
+  if (imgUrl) {
+    formData.append('imgProducto', imgUrl);
+  }
+
   const action = form.getAttribute('action');
   const method = form.method;
 
-  return fetch(action, {
-    method,
-    body: formData,
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      return response.json();
-    })
-    .catch((err) => {
-      console.log(err);
-      Swal.fire('Error', `Oops, sucedi\u00F3 un error inesperado`, 'error');
+  try {
+    const response = await fetch(action, {
+      method,
+      body: formData,
     });
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+    Swal.fire('Error', `Oops, sucedi\u00F3 un error inesperado`, 'error');
+  }
+};
+
+const enviarFormulario = async (form) => {
+  let dataCloudinary;
+
+  if (inputFile) {
+    dataCloudinary = await subirImagenCloudinary();
+    const imgUrl = dataCloudinary.url;
+    return await cargarDataForm(form, imgUrl);
+  }
+
+  return await cargarDataForm(form, null);
 };
 
 const mostrarAlertRegistro = (form) => {
@@ -102,7 +141,12 @@ const mostrarAlertRegistro = (form) => {
     if (result.isConfirmed) {
       const data = result.value;
 
-      if (data.ok) form.reset();
+      if (data.ok) {
+        if (inputFile) {
+          document.querySelector('.img-upload').src = 'https://cutt.ly/unbQLrJ';
+        }
+        form.reset();
+      }
 
       Swal.fire(data.titulo, data.mensaje, data.tipo).then((result) => {
         if (
