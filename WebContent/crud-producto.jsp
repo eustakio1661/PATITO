@@ -65,19 +65,22 @@
                       <figure class="snip1515">
                         <div class="profile-image">
                           <img
-                            src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/20190503-delish-pineapple-baked-salmon-horizontal-ehg-450-1557771120.jpg"
-                            alt="sample47"
+                            class="img-upload"
+                            src="https://res.cloudinary.com/dfuuywyk9/image/upload/v1622821263/notfound_gwgndg.png"
+                            alt="Imagen Producto"
                           />
                           <input
                             id="input-file"
-                            type="file"
-                            name="imgProducto"
+                            type="file"                            
                             style="display: none"
                           />
                         </div>
                         <figcaption>
-                          <button type="button" class="btn btn-warning">
+                          <button id="select-img" type="button" class="btn btn-warning">
                             Subir Imagen
+                          </button>
+                          <button id="remove-img" type="button" class="btn btn-secondary">
+                            <i class="bx bxs-x-square mx-0"></i>
                           </button>
                         </figcaption>
                       </figure>
