@@ -19,7 +19,7 @@ CREATE TABLE EMPLEADO(
   CLAVE  VARCHAR(50)  NOT NULL UNIQUE,
   ID_TP	 	  INT		  NOT NULL,
   ESTADO      TINYINT     NOT NULL DEFAULT 1,
-  IMAGEN 	VARCHAR(1000) NULL DEFAULT "https://res.cloudinary.com/dfuuywyk9/image/upload/v1621437436/l60Hf_megote.png",
+  IMAGEN 	VARCHAR(1000) NOT NULL DEFAULT "https://res.cloudinary.com/dfuuywyk9/image/upload/v1621437436/l60Hf_megote.png",
   FOREIGN KEY (ID_TP) REFERENCES TIPOEMPLEADO (ID_TP)
 );
 
