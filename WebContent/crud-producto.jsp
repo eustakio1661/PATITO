@@ -83,6 +83,7 @@
                             id="input-file"
                             type="file"                            
                             style="display: none"
+                            data-imgurl="${ productoEncontrado.imagen }"
                           />
                         </div>
                         <figcaption>
