@@ -30,7 +30,7 @@ const crearCardCanastaProd = () => {
 
   const aBtnConfirm = document.createElement('a');
   aBtnConfirm.classList.add('btn', 'btn-warning');
-  aBtnConfirm.href = 'servlet';
+  aBtnConfirm.href = 'venser?opcion=descuento';
   aBtnConfirm.innerText = 'Confirmar Compra';
 
   btnContainer.appendChild(aBtnConfirm);
