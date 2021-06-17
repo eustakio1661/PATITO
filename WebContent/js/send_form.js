@@ -3,6 +3,7 @@ const API_KEY = '366667499388496';
 const UPLOAD_PRESET = 'bibo9msx';
 
 let imagenUrlAEnviar = null;
+console.log({imagenUrlAEnviar});
 let imagenFile = null;
 
 const existeImagen = (input) => {
@@ -41,10 +42,19 @@ if (inputFile) {
       console.log('Seleccionaste imagen');
       console.log(e.target);
       mostrarImagen(inputFile);
+      imagenUrlAEnviar = null;
     } else{
       console.log('CHANGE IMAGEFILE : ', imagenFile);
     }
   });
+
+  // Obteniendo supuesta imagen si es que existe
+  const existeDataImagenUrl = inputFile.dataset.imgurl.trim();
+  if (existeDataImagenUrl) {
+    imagenUrlAEnviar = existeDataImagenUrl;
+    console.log({imagenUrlAEnviar});
+  }
+
 }
 
 if (btnSelectImg) {
@@ -59,6 +69,7 @@ if (btnRemoveImg) {
     // Limpia el input file
     inputFile.value = '';
     imagenFile = null;
+    imagenUrlAEnviar = null;
   });
 }
 
@@ -142,6 +153,10 @@ const enviarFormulario = async (form) => {
     dataCloudinary = await subirImagenCloudinary();
     const imgUrl = dataCloudinary.url;
     return await cargarDataForm(form, imgUrl);
+  }
+
+  if ((inputFile && palabra == 'actualizar') && imagenUrlAEnviar) {
+    return await cargarDataForm(form, imagenUrlAEnviar);
   }
 
   return await cargarDataForm(form, null);
