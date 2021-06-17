@@ -24,7 +24,7 @@ public class MySQLVentaDAO implements VentaDAO {
 
         try {
             con = MySQLConexion8.getConexion();
-            String sql = "SELECT (count(ID_PE) + 1)  FROM PEDIDO";
+            String sql = "SELECT count(ID_PE) + 1 AS CODIGO FROM PEDIDO";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
             if (rs.next()) {
@@ -85,7 +85,7 @@ public class MySQLVentaDAO implements VentaDAO {
             pst1.setInt(4, p.getCantidadTotal());
             rs = pst1.executeUpdate();
 
-            String sql2 = "{call USP_REGISTRARDETALLEPEDIDO(?,?,?,?)}";
+            String sql2 = "{call USP_REGISTRARDETALLEPEDIDO(?,?,?,?,?)}";
             String sql3 = "{call USP_RESTARPRODUCTO(?,?)}";
             for (DetallePedidoDTO d : det) {
                 pst2 = con.prepareStatement(sql2);
@@ -93,18 +93,20 @@ public class MySQLVentaDAO implements VentaDAO {
                 pst2.setInt(2, d.getId_pro());
                 pst2.setDouble(3, d.getPrecio());
                 pst2.setInt(4, d.getCantidad());
+                pst2.setDouble(5, d.getImporte());
                 rs += pst2.executeUpdate();
-                pst3 = con.prepareStatement(sql3);
-               
+                
+                pst3 = con.prepareStatement(sql3);          
                 pst3.setInt(1, d.getCantidad());
                 pst3.setInt(2, d.getId_pro());
                 rs += pst3.executeUpdate();
             }
-            String sql4 = "{call USP_REGISTRARBOLETA(?,?,?,null)}";
+            String sql4 = "{call USP_REGISTRARBOLETA(?,?,?,?)}";
             pst4 = con.prepareStatement(sql4);
             pst4.setInt(1, p.getId_pe());
             pst4.setString(2, b.getId_bol());
             pst4.setDouble(3, b.getPrecioTotal());
+            pst4.setDouble(4, b.getDescuento());
             rs = pst4.executeUpdate();
 
             con.commit();
