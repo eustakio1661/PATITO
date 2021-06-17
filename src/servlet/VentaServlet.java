@@ -36,15 +36,6 @@ public class VentaServlet extends HttpServlet {
 
         try {
             switch (opcion) {
-            case "cargCliente":
-                cargarCliente(request, response);
-                break;
-            case "cargProducto":
-                cargarProducto(request, response);
-                break;
-            case "listados":
-                listadoClienteyProducto(request, response);
-                break;
             case "agrCompra":
                 agregarCompra(request, response);
                 break;
@@ -57,6 +48,9 @@ public class VentaServlet extends HttpServlet {
             case "buscarCliente":
                 buscarCliente(request, response);
                 break;
+            case "descuento":
+                descuentoCliente(request, response);
+                break;
             default:
                 System.out.println("Error en la opcion");
                 break;
@@ -66,6 +60,15 @@ public class VentaServlet extends HttpServlet {
             System.out.println("Error inesperado en la Venta Servlet");
             System.out.println(e);
         }
+    }
+
+    private void descuentoCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       System.out.println("Aplicando Descuento");
+       ClienteDTO cliente = (ClienteDTO) request.getSession().getAttribute("ClienteCompra");
+       DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+       cliente = factory.getClienteDAO().descuento(cliente.getCodigo());
+       request.getSession().setAttribute("ClienteDescuento", cliente);
+       request.getRequestDispatcher("compra.jsp").forward(request, response);
     }
 
     private void buscarCliente(HttpServletRequest request, HttpServletResponse response)
@@ -86,6 +89,7 @@ public class VentaServlet extends HttpServlet {
             data.put("distritoCliente", c.getNombreDistrito());
             data.put("direccionCliente", c.getDireccion());
             data.put("tipo", "success");
+            request.getSession().setAttribute("ClienteCompra", c);
         } else {
             data.put("ok", false);
             data.put("titulo", "No existe");
@@ -104,7 +108,9 @@ public class VentaServlet extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("Entrando a Procesar Compra");
         EmpleadoDTO em = (EmpleadoDTO) request.getSession().getAttribute("e");
-        ClienteDTO cl = (ClienteDTO) request.getSession().getAttribute("clienteEncontrado");
+        ClienteDTO cl = (ClienteDTO) request.getSession().getAttribute("ClienteCompra");
+        ClienteDTO descuento = (ClienteDTO) request.getSession().getAttribute("ClienteDescuento");
+        
         int cantidadProductos = (int) request.getSession().getAttribute("cantidadProductos");
         double subTotalVentas = (double) request.getSession().getAttribute("subTotalVentas");
         @SuppressWarnings("unchecked")
@@ -117,7 +123,8 @@ public class VentaServlet extends HttpServlet {
 
         BoletaDTO bo = new BoletaDTO();
         bo.setId_bol(generarNumBoleta());
-        bo.setPrecioTotal(subTotalVentas);
+        bo.setPrecioTotal((subTotalVentas-(subTotalVentas*descuento.getDescuento())));
+        bo.setDescuento(descuento.getDescuento());
 
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         int rs = fabrica.getVentaDao().realizarVenta(pe, carro, bo);
@@ -126,6 +133,8 @@ public class VentaServlet extends HttpServlet {
         } else {
             System.out.println("Transaccion Exitosa");
             // Reiniciar Variable Globales a nivel de Session
+            request.getSession().setAttribute("ClienteCompra", new ClienteDTO());
+            request.getSession().setAttribute("ClienteDescuento", new ClienteDTO());
             request.getSession().setAttribute("carro", new ArrayList<DetallePedidoDTO>());
             request.getSession().setAttribute("cantidadProductos", 0);
             request.getSession().setAttribute("subTotalVentas", 0.00);
@@ -166,20 +175,6 @@ public class VentaServlet extends HttpServlet {
         request.getSession().setAttribute("cantidadProductos", cantidadProductos);
         request.getSession().setAttribute("subTotalVentas", subTotalVentas);
 
-        listadoClienteyProducto(request, response);
-
-    }
-
-    private void cargarProducto(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        int codigo = Integer.parseInt(request.getParameter("codigo"));
-
-        DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-        ProductoDTO p = factory.getProductoDAO().buscar(codigo);
-        request.getSession().setAttribute("productoEncontrado", p);
-
-        listadoClienteyProducto(request, response);
-
     }
 
     private void agregarCompra(HttpServletRequest request, HttpServletResponse response)
@@ -209,9 +204,10 @@ public class VentaServlet extends HttpServlet {
         detalle.setPrecio(p.getPrecio());
 
         // Adicionales
+        detalle.setImagen(p.getImagen());
         detalle.setNombreProd(p.getDescripcion());
         detalle.setImporte(cantidad * p.getPrecio());
-
+        
         if (carro.size() == 0) {
             carro.add(detalle);
             cantidadProductos += cantidad;
@@ -250,34 +246,5 @@ public class VentaServlet extends HttpServlet {
 
     }
 
-    private void listadoClienteyProducto(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        System.out.println("Ingreso al proceso ListarClienteProducto");
-
-        DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-        ClienteDAO dao = fabrica.getClienteDAO();
-        ProductoDAO dao1 = fabrica.getProductoDAO();
-        ArrayList<ClienteDTO> lista = dao.listarClientexDistrito();
-        ArrayList<ProductoDTO> lista1 = dao1.listado();
-
-        request.setAttribute("lstClientes", lista);
-        request.setAttribute("lstProductos", lista1);
-        request.getRequestDispatcher("catalogo.jsp").forward(request, response);
-
-    }
-
-    private void cargarCliente(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        System.out.println("Ingreso al proceso SeleccionarCliente");
-        int codigo = Integer.parseInt(request.getParameter("codigo"));
-
-        DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-        ClienteDTO c = factory.getClienteDAO().buscarCliente(codigo);
-        ClienteDTO des = factory.getClienteDAO().descuento(codigo);
-        request.getSession().setAttribute("clienteEncontrado", c);
-        request.getSession().setAttribute("ClienteDescuento", des);
-
-        listadoClienteyProducto(request, response);
-    }
 
 }

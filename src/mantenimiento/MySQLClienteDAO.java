@@ -238,14 +238,11 @@ public class MySQLClienteDAO implements ClienteDAO {
 
             if (rs.next()) {
                 cl = new ClienteDTO();
-                cl.setCodigo(rs.getInt(1));
-                cl.setNombreCompleto(rs.getString(3));
-                cl.setCantidad(rs.getInt(4));
-                cl.setDescuento(rs.getDouble(4));
+                cl.setDescuento(rs.getDouble(1));
             }
 
         } catch (Exception e) {
-            System.out.println("Error validar acceso " + e.getMessage());
+            System.out.println("Error en encontrar Descuento " + e.getMessage());
         } finally {
             MySQLConexion8.closeConexion(cn);
         }
@@ -267,9 +264,10 @@ public class MySQLClienteDAO implements ClienteDAO {
             rs = pst.executeQuery();
             if (rs.next()) {
                 c = new ClienteDTO();
-                c.setNombreCompleto(rs.getString(1));
-                c.setNombreDistrito(rs.getString(2));
-                c.setDireccion(rs.getString(3));
+                c.setCodigo(rs.getInt(1));
+                c.setNombreCompleto(rs.getString(2));
+                c.setNombreDistrito(rs.getString(3));
+                c.setDireccion(rs.getString(4));
                
             }
         } catch (Exception ex) {
