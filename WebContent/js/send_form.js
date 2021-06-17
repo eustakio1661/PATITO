@@ -3,7 +3,6 @@ const API_KEY = '366667499388496';
 const UPLOAD_PRESET = 'bibo9msx';
 
 let imagenUrlAEnviar = null;
-console.log({imagenUrlAEnviar});
 let imagenFile = null;
 
 const existeImagen = (input) => {
@@ -12,22 +11,16 @@ const existeImagen = (input) => {
 
 const mostrarImagen = (input) => {
   if (existeImagen(input)) {
-    console.log('Existe imagen y hora de usar reader');
     const reader = new FileReader();
 
     reader.addEventListener('load', (event) => {
-      console.log('Dentro del load ', event);
-
       document
         .querySelector('.img-upload')
         .setAttribute('src', event.target.result);
     });
 
     imagenFile = input.files[0];
-    console.log('Dentro del mostrar imagen : ', input.files[0]);
-    console.log('Dentro del mostrar imagen ImagenFile : ' , imagenFile);
     reader.readAsDataURL(input.files[0]);
-    console.log('Termino el reader ', reader);
   }
 };
 
@@ -39,11 +32,9 @@ if (inputFile) {
   inputFile.addEventListener('change', (e) => {
     if (e.target.files.length > 0) {
       // Has seleccionado imagen
-      console.log('Seleccionaste imagen');
-      console.log(e.target);
       mostrarImagen(inputFile);
       imagenUrlAEnviar = null;
-    } else{
+    } else {
       console.log('CHANGE IMAGEFILE : ', imagenFile);
     }
   });
@@ -52,9 +43,7 @@ if (inputFile) {
   const existeDataImagenUrl = inputFile.dataset.imgurl.trim();
   if (existeDataImagenUrl) {
     imagenUrlAEnviar = existeDataImagenUrl;
-    console.log({imagenUrlAEnviar});
   }
-
 }
 
 if (btnSelectImg) {
@@ -77,8 +66,6 @@ const subirImagenCloudinary = async () => {
   if (inputFile && imagenFile) {
     //const file = inputFile.files[0];
     const formData = new FormData();
-
-    console.log('En SubirImagenCloudi ImagenFile : ', imagenFile);
 
     formData.append('file', imagenFile);
     //formData.append('file', file);
@@ -155,7 +142,7 @@ const enviarFormulario = async (form) => {
     return await cargarDataForm(form, imgUrl);
   }
 
-  if ((inputFile && palabra == 'actualizar') && imagenUrlAEnviar) {
+  if (inputFile && palabra == 'actualizar' && imagenUrlAEnviar) {
     return await cargarDataForm(form, imagenUrlAEnviar);
   }
 
