@@ -133,6 +133,8 @@ public class VentaServlet extends HttpServlet {
         } else {
             System.out.println("Transaccion Exitosa");
             // Reiniciar Variable Globales a nivel de Session
+            request.getSession().setAttribute("ClienteCompra", new ClienteDTO());
+            request.getSession().setAttribute("ClienteDescuento", new ClienteDTO());
             request.getSession().setAttribute("carro", new ArrayList<DetallePedidoDTO>());
             request.getSession().setAttribute("cantidadProductos", 0);
             request.getSession().setAttribute("subTotalVentas", 0.00);
