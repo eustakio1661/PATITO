@@ -114,6 +114,14 @@
         </li>
       </ul>
     </li>
+    <li>
+      <a href="rese?opcion=reporteCliente">
+        <span class="parent-icon">
+          <i class="bx bx-receipt"></i>
+        </span>
+        <span class="menu-title">Reporte de Clientes</span>
+      </a>
+    </li>
   </ul>
   <!--end navigation-->
 </div>
