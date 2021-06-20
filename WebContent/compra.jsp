@@ -78,10 +78,14 @@
                         </div>
                       </div>
                     </div>
+                    <div class="my-2 mx-2">
+                      <a class="btn btn-primary" href="ps?opcion=catalogo">Seguir Comprando</a>
+                      <button id="btnCancelarCompra" class="mx-1 btn btn-danger">Cancelar Compra</button>
+                    </div>
                   </div>
                   <div class="col-lg-4">
                     <div class="border border-3 p-4 rounded">
-                      <form action="venser" method="post">
+                      <form id="formCompra" action="venser" method="post">
                         <h5>Resumen de tu Pedido</h5>
                         <hr />
                         <div class="row g-3">
@@ -140,7 +144,7 @@
                             <div class="d-grid">
                               <button
                                 type="submit"
-                                class="btn btn-primary"
+                                class="btn btn-success"
                                 name="opcion"
                                 value="procCompra"
                               >
