@@ -130,13 +130,21 @@ public class EmpleadoServlet extends HttpServlet {
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         EmpleadoDTO e = fabrica.getEmpleadoDAO().validarAcceso(usuario, clave);
 
+        String url = "";
+        String mensajeAcceso = "";
+        
         if (e != null) {
             System.out.println("Usted ingresó con éxito...!");
+            url = "home.jsp";
+            mensajeAcceso = "Bienvenido(a) " + e.getNombre() + " " + e.getApellido();
         } else {
             System.out.println("Hubo un error al ingresar...");
+            mensajeAcceso = "Usuario/Correo o Contraseña no validos";
+            url = "login.jsp";
         }
         request.getSession().setAttribute("e", e);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        request.setAttribute("mensajeAcceso", mensajeAcceso);
+        request.getRequestDispatcher(url).forward(request, response);
 
     }
 
