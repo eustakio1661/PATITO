@@ -148,7 +148,7 @@ public class ProductoServlet extends HttpServlet {
 
         if (ok != 0) {
             data.put("ok", true);
-            data.put("titulo", "Registrado");
+            data.put("titulo", "Actualizado");
             data.put("mensaje", "Se ah actualizado el producto " + descripcion + " correctamente");
             data.put("tipo", "success");
         } else {
