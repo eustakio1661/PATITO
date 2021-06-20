@@ -10,13 +10,9 @@
     <title>Patito Restaurant</title>
   </head>
   <body>
-    <!--wrapper-->
     <div class="wrapper">
-      <!--sidebar wrapper -->
      <jsp:include page="components/sidebar.jsp"></jsp:include>
-      <!--start header -->
       <jsp:include page="components/header.jsp"></jsp:include>
-      <!--start page wrapper -->
       <div class="page-wrapper">
         <div class="page-content">
           <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 mb-2">
@@ -147,7 +143,6 @@
               </div>
             </div>
           </div>
-          <!--end row-->
 
           <div class="card radius-10 mb-5 box-shadow">
             <div class="card-body">
@@ -418,18 +413,15 @@
           </div>
         </div>
       </div>
-      <!--end page wrapper -->
-      <!--start overlay-->
+
       <div class="overlay toggle-icon"></div>
-      <!--end overlay-->
-      <!--Start Back To Top Button-->
+
       <a href="javaScript:;" class="back-to-top"
         ><i class="bx bxs-up-arrow-alt"></i
       ></a>
-      <!--End Back To Top Button-->
+
       <jsp:include page="components/footer.jsp"></jsp:include>
     </div>
-    <!--end wrapper-->
 
     <jsp:include page="reusable/scripts.jsp"></jsp:include>
   </body>
