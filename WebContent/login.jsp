@@ -48,14 +48,14 @@
                         <div class="col-12">
                           <label for="txtCorreo" class="form-label"
                             >Correo</label
-                          >
+                          >                       
                           <input
                             type="text"
                             class="form-control"
                             id="txtCorreo"
                             name="txtCorreo"
                             placeholder="example@example.com"
-                            pattern="^[\w]{1,}[\w.+-]{0,}@[\w-]{1,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,4})$"
+                           
                             required
                           />
                           <div class="invalid-feedback">
@@ -105,6 +105,7 @@
                             >
                           </div>
                         </div>
+                        
                         <div class="col-md-6 text-end">
                           <a href="authentication-forgot-password.html"
                             >¿ Olvidaste tu contraseña ?</a
