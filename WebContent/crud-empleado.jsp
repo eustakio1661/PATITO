@@ -5,11 +5,20 @@
     pageEncoding="ISO-8859-1"%>
 
 <%
-  EmpleadoDTO user = (EmpleadoDTO) request.getSession().getAttribute("e");
-  if (user == null) {
-      response.sendRedirect("login.jsp");
-  }
-  
+
+  try{
+      EmpleadoDTO user = (EmpleadoDTO) request.getSession().getAttribute("e");
+      if (user == null) {
+          response.sendRedirect("login.jsp");
+          return;
+      }
+      
+      if(user.getIdTipo() != 1) {
+          response.sendRedirect("home.jsp");
+          return;
+      }
+  } catch(Exception e) {}
+
 %> 
 
 <%

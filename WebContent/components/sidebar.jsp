@@ -32,7 +32,7 @@
     </li>
     <li class="menu-label">Mantenimiento</li>
 
-    <c:if test="${ e.idTipoEmpleado == 1 }">
+    <c:if test="${ e.idTipo == 1 }">
       <li>
         <a href="#" class="has-arrow">
           <span class="parent-icon"><i class="bx bx-id-card"></i></span>
