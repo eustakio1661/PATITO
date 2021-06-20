@@ -49,6 +49,9 @@ public class VentaServlet extends HttpServlet {
             case "descuento":
                 descuentoCliente(request, response);
                 break;
+            case "canceCompra":
+                cancelarCompra(request, response);
+                break;
             default:
                 System.out.println("Error en la opcion");
                 break;
@@ -60,13 +63,31 @@ public class VentaServlet extends HttpServlet {
         }
     }
 
-    private void descuentoCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       System.out.println("Aplicando Descuento");
-       ClienteDTO cliente = (ClienteDTO) request.getSession().getAttribute("ClienteCompra");
-       DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-       cliente = factory.getClienteDAO().descuento(cliente.getCodigo());
-       request.getSession().setAttribute("ClienteDescuento", cliente);
-       request.getRequestDispatcher("compra.jsp").forward(request, response);
+    private void descuentoCliente(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        System.out.println("Aplicando Descuento");
+        ClienteDTO cliente = (ClienteDTO) request.getSession().getAttribute("ClienteCompra");
+        DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        cliente = factory.getClienteDAO().descuento(cliente.getCodigo());
+        request.getSession().setAttribute("ClienteDescuento", cliente);
+        request.getRequestDispatcher("compra.jsp").forward(request, response);
+    }
+
+    private void cancelarCompra(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getSession().setAttribute("ClienteCompra", new ClienteDTO());
+        request.getSession().setAttribute("ClienteDescuento", new ClienteDTO());
+        request.getSession().setAttribute("carro", new ArrayList<DetallePedidoDTO>());
+        request.getSession().setAttribute("cantidadProductos", 0);
+        request.getSession().setAttribute("subTotalVentas", 0.00);
+
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+        data.put("ok", true);
+        
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
     }
 
     private void buscarCliente(HttpServletRequest request, HttpServletResponse response)
@@ -108,7 +129,7 @@ public class VentaServlet extends HttpServlet {
         EmpleadoDTO em = (EmpleadoDTO) request.getSession().getAttribute("e");
         ClienteDTO cl = (ClienteDTO) request.getSession().getAttribute("ClienteCompra");
         ClienteDTO descuento = (ClienteDTO) request.getSession().getAttribute("ClienteDescuento");
-        
+
         int cantidadProductos = (int) request.getSession().getAttribute("cantidadProductos");
         double subTotalVentas = (double) request.getSession().getAttribute("subTotalVentas");
         @SuppressWarnings("unchecked")
@@ -121,13 +142,20 @@ public class VentaServlet extends HttpServlet {
 
         BoletaDTO bo = new BoletaDTO();
         bo.setId_bol(generarNumBoleta());
-        bo.setPrecioTotal((subTotalVentas-(subTotalVentas*descuento.getDescuento())));
+        bo.setPrecioTotal((subTotalVentas - (subTotalVentas * descuento.getDescuento())));
         bo.setDescuento(descuento.getDescuento());
 
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         int rs = fabrica.getVentaDao().realizarVenta(pe, carro, bo);
+
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+
         if (rs == 0) {
             System.out.println("Error en la transaccion");
+            data.put("ok", false);
+            data.put("titulo", "Error");
+            data.put("mensaje", "No se pudo confirmar la compra");
+            data.put("tipo", "error");
         } else {
             System.out.println("Transaccion Exitosa");
             // Reiniciar Variable Globales a nivel de Session
@@ -136,9 +164,17 @@ public class VentaServlet extends HttpServlet {
             request.getSession().setAttribute("carro", new ArrayList<DetallePedidoDTO>());
             request.getSession().setAttribute("cantidadProductos", 0);
             request.getSession().setAttribute("subTotalVentas", 0.00);
+            // Envia datos
+            data.put("ok", true);
+            data.put("titulo", "Realizado");
+            data.put("mensaje", "Venta concretada exitosamente");
+            data.put("tipo", "success");
         }
 
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
     }
 
     private int generarNumPedido() {
@@ -205,7 +241,7 @@ public class VentaServlet extends HttpServlet {
         detalle.setImagen(p.getImagen());
         detalle.setNombreProd(p.getDescripcion());
         detalle.setImporte(cantidad * p.getPrecio());
-        
+
         if (carro.size() == 0) {
             carro.add(detalle);
             cantidadProductos += cantidad;
@@ -243,6 +279,5 @@ public class VentaServlet extends HttpServlet {
         request.getSession().setAttribute("subTotalVentas", subTotalVentas);
 
     }
-
 
 }
