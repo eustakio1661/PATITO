@@ -21,8 +21,6 @@ import beans.EmpleadoDTO;
 import beans.PedidoDTO;
 import beans.ProductoDTO;
 import dao.DAOFactory;
-import interfaces.ClienteDAO;
-import interfaces.ProductoDAO;
 
 @MultipartConfig
 @WebServlet(name = "venser", urlPatterns = { "/venser" })
