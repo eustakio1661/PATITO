@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.ListadoEntreFechasDTO;
+import beans.ReporteClienteDTO;
 import interfaces.ReporteDAO;
 import utils.MySQLConexion8;
 
@@ -78,6 +79,35 @@ public class MySQLReporteDAO implements ReporteDAO{
         } finally {
             MySQLConexion8.closeConexion(con);
         }
+        return lista;
+    }
+
+    @Override
+    public ArrayList<ReporteClienteDTO> reporteCliente() {
+        ArrayList<ReporteClienteDTO> lista = null;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "{call USP_CATEGORIZACIONCLIENTES()}";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            lista = new ArrayList<ReporteClienteDTO>();
+            while (rs.next()) {
+                ReporteClienteDTO r = new ReporteClienteDTO();
+                r.setId_cli(rs.getInt(1));
+                r.setNombreCompleto(rs.getString(2));
+                r.setCantidadCompras(rs.getInt(3));
+                r.setSegmentacion(rs.getString(4));
+                lista.add(r);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en listar segmentacion de Cliente: " + e.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(con);
+        }
+
         return lista;
     }
 
