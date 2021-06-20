@@ -33,8 +33,8 @@
                       <h3 class="">Iniciar Sesión</h3>
                       <p>Bienvenido usuario, inicie sesión para comenzar</p>
                     </div>
-                    <div class="d-grid">
-                      <!-- Inserte imagen del pato -->
+                    <div class="d-flex justify-content-center">
+                      <img class="img-fluid" alt="Pato Logo" src="img/duck.png">
                     </div>
                     <div class="login-separater text-center mb-4">
                       <span>Ingrese correo y contraseña</span>
