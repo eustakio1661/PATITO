@@ -219,7 +219,7 @@
                           </div>
                         </div>
                       </td>
-                      <td>Martin Hughes</td>
+                      <td>Martin Hughes</td>                      
                       <td>14 Jul 2020</td>
                       <td>$45.00</td>
                       <td>

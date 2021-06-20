@@ -1,4 +1,5 @@
 <%@page import="beans.ProductoDTO"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -64,20 +65,33 @@
                     <div class="col-xs-6 col-md-4">
                       <figure class="snip1515">
                         <div class="profile-image">
-                          <img
-                            src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/20190503-delish-pineapple-baked-salmon-horizontal-ehg-450-1557771120.jpg"
-                            alt="sample47"
-                          />
+                          <c:if test="${ productoEncontrado.imagen == null }">
+                            <img
+                              class="img-upload"
+                              src="https://cutt.ly/unbQLrJ"
+                              alt="Imagen Producto"
+                            />
+                          </c:if>
+                          <c:if test="${ productoEncontrado.imagen != null }">
+                            <img
+                              class="img-upload"
+                              src="${ productoEncontrado.imagen }"
+                              alt="Imagen Producto"
+                            />
+                          </c:if>                          
                           <input
                             id="input-file"
-                            type="file"
-                            name="imgProducto"
+                            type="file"                            
                             style="display: none"
+                            data-imgurl="${ productoEncontrado.imagen }"
                           />
                         </div>
                         <figcaption>
-                          <button type="button" class="btn btn-warning">
+                          <button id="select-img" type="button" class="btn btn-warning">
                             Subir Imagen
+                          </button>
+                          <button id="remove-img" type="button" class="btn btn-secondary">
+                            <i class="bx bxs-x-square mx-0"></i>
                           </button>
                         </figcaption>
                       </figure>
