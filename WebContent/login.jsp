@@ -47,15 +47,14 @@
                       >
                         <div class="col-12">
                           <label for="txtCorreo" class="form-label"
-                            >Correo</label
+                            >Correo o Usuario</label
                           >
                           <input
                             type="text"
                             class="form-control"
                             id="txtCorreo"
                             name="txtCorreo"
-                            placeholder="example@example.com"
-                            pattern="^[\w]{1,}[\w.+-]{0,}@[\w-]{1,}([.][a-zA-Z]{2,}|[.][\w-]{2,}[.][a-zA-Z]{2,4})$"
+                            placeholder="Ingrese correo o usuario"
                             required
                           />
                           <div class="invalid-feedback">
