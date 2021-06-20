@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.ListadoEntreFechasDTO;
+import beans.ReporteClienteDTO;
 import dao.DAOFactory;
+import interfaces.ReporteDAO;
 
 /**
  * Servlet implementation class ReporteServlet
@@ -31,6 +33,8 @@ public class ReporteServlet extends HttpServlet {
         switch (opcion) {
         case "reporte":
             reporteEntreFechas(request, response);
+        case "reporteCliente":
+            reporteCliente(request, response);
             break;
         case "listado":
             listadoVentas(request, response);
@@ -38,6 +42,17 @@ public class ReporteServlet extends HttpServlet {
         default:
             System.out.println("Error en la opción");
         }
+    }
+
+    private void reporteCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Ingreso al proceso Reporte Cliente");
+
+        DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        ReporteDAO dao = fabrica.getReporteDAO();
+        ArrayList<ReporteClienteDTO> lista = dao.reporteCliente();
+
+        request.setAttribute("lstReporteClientes", lista);
+        request.getRequestDispatcher("reporte-clientes.jsp").forward(request, response);
     }
 
     private void listadoVentas(HttpServletRequest request, HttpServletResponse response)
