@@ -1,11 +1,9 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <div class="sidebar-wrapper" data-simplebar="true">
   <div class="sidebar-header">
     <div>
-      <img
-        src="img/logo-icon.png"
-        class="logo-icon"
-        alt="logo icon"
-      />
+      <img src="img/logo-icon.png" class="logo-icon" alt="logo icon" />
     </div>
     <div>
       <h4 class="logo-text">* Patito</h4>
@@ -14,7 +12,7 @@
       <i class="bx bx-arrow-to-left"></i>
     </div>
   </div>
-  <!--navigation-->
+  <!--navigation -->
   <ul class="metismenu" id="menu">
     <li>
       <a href="#" class="has-arrow">
@@ -23,9 +21,7 @@
       </a>
       <ul>
         <li>
-          <a href="home.jsp"
-            ><i class="bx bx-right-arrow-alt"></i>Inicio</a
-          >
+          <a href="home.jsp"><i class="bx bx-right-arrow-alt"></i>Inicio</a>
         </li>
         <li>
           <a href="#"
@@ -35,24 +31,27 @@
       </ul>
     </li>
     <li class="menu-label">Mantenimiento</li>
-    <li>
-      <a href="#" class="has-arrow">
-        <span class="parent-icon"><i class="bx bx-id-card"></i></span>
-        <span class="menu-title">Empleados</span>
-      </a>
-      <ul>
-        <li>
-          <a href="crud-empleado.jsp"
-            ><i class="bx bx-right-arrow-alt"></i>Registro</a
-          >
-        </li>
-        <li>
-          <a href="emse?opcion=listar"
-            ><i class="bx bx-right-arrow-alt"></i>Listado</a
-          >
-        </li>
-      </ul>
-    </li>
+
+    <c:if test="${ e.idTipoEmpleado == 1 }">
+      <li>
+        <a href="#" class="has-arrow">
+          <span class="parent-icon"><i class="bx bx-id-card"></i></span>
+          <span class="menu-title">Empleados</span>
+        </a>
+        <ul>
+          <li>
+            <a href="crud-empleado.jsp"
+              ><i class="bx bx-right-arrow-alt"></i>Registro</a
+            >
+          </li>
+          <li>
+            <a href="emse?opcion=listar"
+              ><i class="bx bx-right-arrow-alt"></i>Listado</a
+            >
+          </li>
+        </ul>
+      </li>
+    </c:if>
     <li>
       <a class="has-arrow" href="javascript:;">
         <span class="parent-icon">
@@ -110,7 +109,8 @@
       <ul>
         <li>
           <a href="rese?opcion=listado"
-            ><i class="bx bx-right-arrow-alt"></i>Reporte entre Fechas</a>
+            ><i class="bx bx-right-arrow-alt"></i>Reporte entre Fechas</a
+          >
         </li>
       </ul>
     </li>
