@@ -1,6 +1,15 @@
+<%@page import="beans.EmpleadoDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<%
+  EmpleadoDTO user = (EmpleadoDTO) request.getSession().getAttribute("e");
+  if (user == null) {
+      response.sendRedirect("login.jsp");
+  }
+  
+%> 
 <!DOCTYPE html>
 <html lang="en">
   <head>

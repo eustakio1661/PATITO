@@ -1,3 +1,11 @@
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'bottom-end',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+});
+
 const obtenerCarritoLocalStorage = () => {
   let arr = localStorage.getItem('carrito');
 
@@ -8,6 +16,17 @@ const obtenerCarritoLocalStorage = () => {
 };
 
 // CANASTA
+
+const realizarCompra = () => {
+  if (localStorage.getItem('dataCliente')) {    
+    window.location.href = 'venser?opcion=descuento';
+  } else {
+    Toast.fire({
+      icon: 'error',
+      title: 'Cliente No Seleccionado',
+    });
+  }
+};
 
 const crearCardCanastaProd = () => {
   const switcherBody = document.querySelector('.switcher-body');
@@ -28,14 +47,16 @@ const crearCardCanastaProd = () => {
   btnContainer.classList.add('d-flex', 'justify-content-center', 'mt-3');
   btnContainer.setAttribute('id', 'btnConfirmContainer');
 
-  const aBtnConfirm = document.createElement('a');
+  const aBtnConfirm = document.createElement('button');
   aBtnConfirm.classList.add('btn', 'btn-warning');
-  aBtnConfirm.href = 'venser?opcion=descuento';
   aBtnConfirm.innerText = 'Confirmar Compra';
+  aBtnConfirm.setAttribute('onclick', 'realizarCompra()');
+  aBtnConfirm.onclick = function () {
+    realizarCompra();
+  };
 
   btnContainer.appendChild(aBtnConfirm);
   switcherBody.appendChild(btnContainer);
-
 };
 
 // INPUT CLIENTE
@@ -64,11 +85,11 @@ const btnLimpiarClienteTxt = document.getElementById('btnLimpiarClienteTxt');
 
 if (btnLimpiarClienteTxt) {
   btnLimpiarClienteTxt.addEventListener('click', () => {
-    llenarInputsCliente('','','');
+    llenarInputsCliente('', '', '');
     if (localStorage.getItem('dataCliente')) {
       localStorage.removeItem('dataCliente');
     }
-  })
+  });
 }
 
 const realizarPeticionCliente = (form) => {
@@ -189,7 +210,7 @@ const quitarBtnConfirmButton = () => {
   if (btnConfirmContainer) {
     btnConfirmContainer.remove();
   }
-}
+};
 
 const quitarProducto = (btn) => {
   const idProd = btn.dataset.idprod.trim();
@@ -210,7 +231,11 @@ const quitarProducto = (btn) => {
       quitarBtnConfirmButton();
     }
 
-    enviarProductoServlet('venser?opcion=eliCompra', idProd, objProducto.cantidadComprada);
+    enviarProductoServlet(
+      'venser?opcion=eliCompra',
+      idProd,
+      objProducto.cantidadComprada
+    );
   }
 };
 
@@ -324,14 +349,6 @@ const getDatosXFila = (btnFila) => {
 
   return objProducto;
 };
-
-const Toast = Swal.mixin({
-  toast: true,
-  position: 'bottom-end',
-  showConfirmButton: false,
-  timer: 2000,
-  timerProgressBar: true,
-});
 
 const mostrarAlertProducto = (btn) => {
   let objProducto = getDatosXFila(btn);
