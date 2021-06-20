@@ -188,6 +188,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         ResultSet rs = null;        
         try {
             con = MySQLConexion8.getConexion();
+            // TODO: Se necesita de un procedure y que retorne tambien la desc del tipo emp
             String sql = "SELECT * FROM EMPLEADO WHERE ID_EM=?";
             pst = con.prepareStatement(sql);
             pst.setInt(1, codigo);
