@@ -85,7 +85,7 @@
                   </div>
                   <div class="col-lg-4">
                     <div class="border border-3 p-4 rounded">
-                      <form id="formCompra" action="venser" method="post">
+                      <form id="formCompra" action="venser?opcion=procCompra" method="post">
                         <h5>Resumen de tu Pedido</h5>
                         <hr />
                         <div class="row g-3">
@@ -145,8 +145,6 @@
                               <button
                                 type="submit"
                                 class="btn btn-success"
-                                name="opcion"
-                                value="procCompra"
                               >
                                 Finalizar Compra
                               </button>
@@ -173,5 +171,6 @@
     <jsp:include page="reusable/scripts.jsp"></jsp:include>
     <jsp:include page="reusable/datatable_scripts.jsp"></jsp:include>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="js/compra.js"></script>
   </body>
 </html>
