@@ -1,9 +1,19 @@
+<%@page import="beans.EmpleadoDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
+<%
+  EmpleadoDTO user = (EmpleadoDTO) request.getSession().getAttribute("e");
+  if (user == null) {
+      response.sendRedirect("login.jsp");
+  }
+  
+%> 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

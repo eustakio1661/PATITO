@@ -5,6 +5,14 @@
     pageEncoding="ISO-8859-1"%>
 
 <%
+  EmpleadoDTO user = (EmpleadoDTO) request.getSession().getAttribute("e");
+  if (user == null) {
+      response.sendRedirect("login.jsp");
+  }
+  
+%> 
+
+<%
   EmpleadoDTO existeEmpleado = (EmpleadoDTO) request.getAttribute("empleadoEncontrado");
   String action = "emse?opcion=registro";
   String typeColor = "primary";
