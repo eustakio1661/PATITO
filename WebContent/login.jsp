@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
@@ -78,13 +79,13 @@
                               minlength="6"
                               maxlength="30"
                               required
-                            />                            
-                              <a
-                                href="#"
-                                class="input-group-text bg-transparent"
-                                id="icon-hide"
-                                ><i class="bx bx-hide"></i
-                              ></a>
+                            />
+                            <a
+                              href="#"
+                              class="input-group-text bg-transparent"
+                              id="icon-hide"
+                              ><i class="bx bx-hide"></i
+                            ></a>
                             <div class="invalid-feedback">
                               Se requiere de una clave +6
                             </div>
@@ -112,7 +113,12 @@
                         </div>
                         <div class="col-12">
                           <div class="d-grid">
-                            <button type="submit" name="opcion" value="login" class="btn btn-primary">
+                            <button
+                              type="submit"
+                              name="opcion"
+                              value="login"
+                              class="btn btn-primary"
+                            >
                               <i class="bx bxs-lock-open"></i>Iniciar sesión
                             </button>
                           </div>
@@ -121,6 +127,22 @@
                     </div>
                   </div>
                 </div>
+                <c:if test="${ mensajeAcceso != null }">
+                  <div class="d-flex justify-content-center px-2">
+                    <div
+                      class="alert alert-danger alert-dismissible fade show"
+                      role="alert"
+                    >
+                      ${ mensajeAcceso }
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                  </div>
+                </c:if>
               </div>
             </div>
           </div>
