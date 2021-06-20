@@ -50,6 +50,9 @@ public class EmpleadoServlet extends HttpServlet {
             actualizarPerfil(request, response);
             break;
         default:
+            System.out.println("----------------------------");
+            System.out.println("Cerrando Session");
+            System.out.println("----------------------------");
             request.getSession().invalidate();
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
@@ -126,7 +129,7 @@ public class EmpleadoServlet extends HttpServlet {
             throws ServletException, IOException {
         String usuario = request.getParameter("txtCorreo");
         String clave = request.getParameter("txtClave");
-
+        
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         EmpleadoDTO e = fabrica.getEmpleadoDAO().validarAcceso(usuario, clave);
 
