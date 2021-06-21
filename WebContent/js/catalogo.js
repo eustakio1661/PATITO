@@ -85,10 +85,17 @@ const btnLimpiarClienteTxt = document.getElementById('btnLimpiarClienteTxt');
 
 if (btnLimpiarClienteTxt) {
   btnLimpiarClienteTxt.addEventListener('click', () => {
-    llenarInputsCliente('', '', '');
-    if (localStorage.getItem('dataCliente')) {
-      localStorage.removeItem('dataCliente');
-    }
+    fetch('venser?opcion=canceCliente',{
+      method: 'GET'
+    }).then(rest => rest.json()).then(data => {
+      if(data.ok){
+        llenarInputsCliente('', '', '');
+        if (localStorage.getItem('dataCliente')) {
+          localStorage.removeItem('dataCliente');
+        }
+      }
+    })
+    
   });
 }
 
