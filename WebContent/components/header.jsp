@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <header>
   <div class="topbar d-flex align-items-center">
     <nav class="navbar navbar-expand">
@@ -37,11 +39,20 @@
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
+        <c:if test="${ e.imagen == null }">
+          <img
+            src="https://res.cloudinary.com/dfuuywyk9/image/upload/v1621437436/l60Hf_megote.png"
+            class="user-img"
+            alt="user avatar"
+          />
+        </c:if>
+        <c:if test="${ e.imagen != null }">
           <img
             src="${e.imagen }"
             class="user-img"
             alt="user avatar"
           />
+        </c:if>          
           <span class="user-info ps-3">
             <span class="user-name mb-0">${e.nombre }</span><br>
             <span class="designattion mb-0">${e.descripcionTipoEmpleado }</span>
@@ -51,11 +62,6 @@
           <li>
             <a class="dropdown-item" href="perfil.jsp"
               ><i class="bx bx-user"></i><span>Perfil</span></a
-            >
-          </li>
-          <li>
-            <a class="dropdown-item" href="javascript:;"
-              ><i class="bx bx-cog"></i><span>Configuraciones</span></a
             >
           </li>
           <li>

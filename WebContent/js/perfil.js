@@ -17,6 +17,10 @@ const mostrarImagen = (input) => {
       document
         .querySelector('.img-upload')
         .setAttribute('src', event.target.result);
+
+      document
+        .querySelector('.user-img')
+        .setAttribute('src', event.target.result);
     });
 
     imagenFile = input.files[0];
@@ -54,7 +58,8 @@ if (btnSelectImg) {
 
 if (btnRemoveImg) {
   btnRemoveImg.addEventListener('click', () => {
-    document.querySelector('.img-upload').src = 'https://cutt.ly/unbQLrJ';
+    document.querySelector('.img-upload').src = 'https://res.cloudinary.com/dfuuywyk9/image/upload/v1621437436/l60Hf_megote.png';
+    document.querySelector('.user-img').src = 'https://res.cloudinary.com/dfuuywyk9/image/upload/v1621437436/l60Hf_megote.png';
     // Limpia el input file
     inputFile.value = '';
     imagenFile = null;
@@ -85,34 +90,16 @@ const subirImagenCloudinary = async () => {
   }
 };
 
-const titleCase = (str) => {
-  return str
-    .split(' ')
-    .map((w) => w[0].toUpperCase() + w.substr(1).toLowerCase())
-    .join(' ')
-    .trim();
-};
-
 let inputHidden = document.getElementById('input-hidden');
-let palabra = 'registrar';
-let entidad = '';
-let sweetTitle = '';
-let sweetText = '';
-
-if (inputHidden) {
-  entidad = inputHidden.dataset.entidad.trim();
-  if (inputHidden.value.trim()) {
-    palabra = 'actualizar';
-  }
-  sweetTitle = titleCase(`${palabra} ${entidad}`);
-  sweetText = `\u00bfDesea ${palabra} el ${entidad} a la BD?`;
-}
+let palabra = 'actualizar'
+let sweetTitle = 'Actualizar Perfil';
+let sweetText = '\u00bfDeseas actualizar tu perfil? ';
 
 const cargarDataForm = async (form, imgUrl) => {
   const formData = new FormData(form);
 
   if (imgUrl) {
-    formData.append('imgProducto', imgUrl);
+    formData.append('imgEmpleado', imgUrl);
   }
 
   const action = form.getAttribute('action');
@@ -126,6 +113,9 @@ const cargarDataForm = async (form, imgUrl) => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
+
+    console.log(response);
+
     return await response.json();
   } catch (err) {
     console.log(err);
@@ -149,7 +139,7 @@ const enviarFormulario = async (form) => {
   return await cargarDataForm(form, null);
 };
 
-const mostrarAlertRegistro = (form) => {
+const mostrarAlertUpdate = (form) => {
   Swal.fire({
     title: sweetTitle,
     text: sweetText,
@@ -165,14 +155,6 @@ const mostrarAlertRegistro = (form) => {
   }).then((result) => {
     if (result.isConfirmed) {
       const data = result.value;
-
-      if (data.ok) {
-        if (inputFile) {
-          document.querySelector('.img-upload').src = 'https://cutt.ly/unbQLrJ';
-          imagenFile = null;
-        }
-        form.reset();
-      }
 
       Swal.fire(data.titulo, data.mensaje, data.tipo).then((result) => {
         if (
@@ -191,10 +173,11 @@ const mostrarAlertRegistro = (form) => {
   });
 };
 
+
 (function () {
   'use strict';
 
-  var forms = document.querySelectorAll('.needs-validation');
+  let forms = document.querySelectorAll('.needs-validation');
 
   Array.prototype.slice.call(forms).forEach(function (form) {
     form.addEventListener(
@@ -204,7 +187,7 @@ const mostrarAlertRegistro = (form) => {
         if (!form.checkValidity()) {
           event.stopPropagation();
         } else {
-          mostrarAlertRegistro(form);
+          mostrarAlertUpdate(form);
         }
 
         form.classList.add('was-validated');
@@ -213,3 +196,20 @@ const mostrarAlertRegistro = (form) => {
     );
   });
 })();
+
+$(document).ready(function () {
+  $('#show_hide_password a').on('click', function (event) {
+    event.preventDefault();
+    if ($('#show_hide_password input').attr('type') == 'text') {
+      $('#show_hide_password input').attr('type', 'password');
+      $('#show_hide_password i').addClass('bx-hide');
+      $('#show_hide_password i').removeClass('bx-show');
+    } else if (
+      $('#show_hide_password input').attr('type') == 'password'
+    ) {
+      $('#show_hide_password input').attr('type', 'text');
+      $('#show_hide_password i').removeClass('bx-hide');
+      $('#show_hide_password i').addClass('bx-show');
+    }
+  });
+});

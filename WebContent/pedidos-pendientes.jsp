@@ -1,5 +1,6 @@
 <%@page import="beans.EmpleadoDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%
@@ -21,7 +22,7 @@
       href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css"
       rel="stylesheet"
     />
-    <title>Lista de Clientes</title>
+    <title>Pedidos Pendientes</title>
   </head>
   <body>
     <div class="wrapper">
@@ -30,8 +31,8 @@
       <div class="page-wrapper">
         <div class="page-content">
           <jsp:include page="components/breadcrumb.jsp">
-            <jsp:param name="pagina" value="Cliente" />
-            <jsp:param name="accion" value="Listado" />
+            <jsp:param name="pagina" value="Dashboard" />
+            <jsp:param name="accion" value="Pedidos" />
           </jsp:include>
           <div class="row">
             <div class="col mx-auto">
@@ -40,7 +41,7 @@
                 <div class="card-body">
                   <div class="d-flex align-items-center">
                     <div>
-                      <h5 class="mb-0">Lista de Clientes</h5>
+                      <h5 class="mb-0">Pedidos Pendientes</h5>
                     </div>
                     <div class="font-22 ms-auto">
                       <i class="bx bx-dots-horizontal-rounded"></i>
@@ -51,47 +52,47 @@
                     <table id="myTable" class="table align-middle mb-0">
                       <thead class="table-light">
                         <tr>
-                          <th>Número Cliente</th>
-                          <th>DNI</th>
-                          <th>Nombre</th>
-                          <th>Apellido</th>
-                          <th>Teléfono</th>
-                          <th>Distrito</th>
+                          <th>ID</th>
+                          <th>Nombre Empleado</th>
+                          <th>Nombre Cliente</th>
+                          <th>Fecha Pedido</th>
+                          <th>Cantidad Total</th>
+                          <th>Estado</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <c:forEach items="${ lstClientes }" var="cli">
+                        <c:forEach items="${ lstPedidosPendientes }" var="pe">
                           <tr>
-                            <td>${cli.codigo}</td>
-                            <td>${cli.dni }</td>
-                            <td>${cli.nombre }</td>
-                            <td>${cli.apellido }</td>
-                            <td>${cli.telefono }</td>
-                            <td>${cli.nombreDistrito }</td>
+                            <td>${pe.id_pe}</td>
+                            <td>${pe.nombreEmpleado}</td>
+                            <td>${pe.nombreCliente}</td>
+                            <td>
+                            	${pe.fechaPedido}
+                    
+                            </td>
+                            <td>${pe.cantidadTotal}</td>
+                            <td>
+                            <div class="d-flex align-items-center text-danger">	<i class='bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1'></i>
+												<span>
+												<c:if test="${pe.estado == 1 }">
+												Pendiente
+												</c:if>
+												</span>
+											</div>
+                            </td>
                             <td>
                               <div class="d-flex order-actions">
                                 <a
-                                  href="cs?opcion=buscar&codigo=${cli.codigo}"
+                                  href="venser?opcion=actualizarPedido&codigo=${pe.id_pe}"
                                   class="btn btn-success"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
-                                  title="Editar Cliente"
+                                  title="Actualizar Pedido"
                                 >
-                                  <i class="bx bx-edit mx-0"></i
-                                ></a>
-                                <button
-                                  type="button"
-                                  data-entidad="cliente"
-                                  data-nombre="${ cli.nombre } ${ cli.apellido }"
-                                  data-action="cs?opcion=eliminar&codigo=${cli.codigo}"
-                                  class="ms-4 btn btn-danger btnEliminarEntidad"
-                                  data-bs-toggle="tooltip"
-                                  data-bs-placement="bottom"
-                                  title="Eliminar Cliente"
-                                >
-                                  <i class="bx bx-trash mx-0"></i
-                                ></button>
+                                  <i class='bx bx-station mx-0'></i>
+                                  </a>
+                               
                               </div>
                             </td>
                           </tr>

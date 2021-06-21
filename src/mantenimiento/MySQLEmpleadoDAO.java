@@ -42,7 +42,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         ResultSet rs = null;
         try {
             con = MySQLConexion8.getConexion();
-            String sql = "{call usp_listadoEmpleado()}";
+            String sql = "{call USP_LISTADOEMPLEADO()}";
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
             lista = new ArrayList<EmpleadoDTO>();
@@ -98,7 +98,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         PreparedStatement pst = null;
         try {
             cn = MySQLConexion8.getConexion();
-            String sql = "{call usp_eliminarEmpleado(?)}";
+            String sql = "{call USP_ELIMINAREMPLEADO(?)}";
             pst = cn.prepareStatement(sql);
             pst.setInt(1, e.getId());
             rs = pst.executeUpdate();
@@ -188,7 +188,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         ResultSet rs = null;        
         try {
             con = MySQLConexion8.getConexion();
-            String sql = "SELECT * FROM EMPLEADO WHERE ID_EM=?";
+            String sql = "{call USP_BUSCAREMPLEADO(?)}";
             pst = con.prepareStatement(sql);
             pst.setInt(1, codigo);
             rs = pst.executeQuery();
@@ -198,7 +198,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
                 e.setDni(rs.getString(2));
                 e.setNombre(rs.getString(3));
                 e.setApellido(rs.getString(4));
-                e.setTelefono(rs.getString(5));    
+                e.setTelefono(rs.getString(5));
                 e.setDireccion(rs.getString(6));
                 e.setCorreo(rs.getString(7));
                 e.setUsuario(rs.getString(8));
@@ -206,6 +206,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
                 e.setIdTipo(rs.getInt(10));
                 e.setEstado(rs.getInt(11));
                 e.setImagen(rs.getString(12));
+                e.setDescripcionTipoEmpleado(rs.getString(13));
                
             }
         } catch (Exception ex) {

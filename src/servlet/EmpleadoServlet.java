@@ -50,13 +50,17 @@ public class EmpleadoServlet extends HttpServlet {
             actualizarPerfil(request, response);
             break;
         default:
+            System.out.println("----------------------------");
+            System.out.println("Cerrando Session");
+            System.out.println("----------------------------");
             request.getSession().invalidate();
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
-    private void actualizarPerfil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-             
+    private void actualizarPerfil(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         String imagen = request.getParameter("imgEmpleado");
         String nombre = request.getParameter("txtNombreEmpleado");
         String apellido = request.getParameter("txtApellidoEmpleado");
@@ -65,8 +69,12 @@ public class EmpleadoServlet extends HttpServlet {
         String correo = request.getParameter("txtEmailEmpleado");
         String clave = request.getParameter("txtClaveEmpleado");
         int codigo = Integer.parseInt(request.getParameter("txtIdEmpleado"));
+        
+        if (imagen == null) {
+            imagen = "https://res.cloudinary.com/dfuuywyk9/image/upload/v1621437436/l60Hf_megote.png";
+        }
 
-        EmpleadoDTO em = new EmpleadoDTO();        
+        EmpleadoDTO em = new EmpleadoDTO();
         em.setImagen(imagen);
         em.setNombre(nombre);
         em.setApellido(apellido);
@@ -76,48 +84,70 @@ public class EmpleadoServlet extends HttpServlet {
         em.setClave(clave);
         em.setId(codigo);
 
-
         DAOFactory f = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
 
         int ok = f.getEmpleadoDAO().actualizarPerfilEmpleado(em);
+        EmpleadoDTO e = f.getEmpleadoDAO().buscarEmpleado(codigo);
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
 
         if (ok == 0) {
-            System.out.println("Error al actualizar perfil del empleado...");
+            data.put("ok", false);
+            data.put("titulo", "Error");
+            data.put("mensaje", "No se pudo actualizar perfil");
+            data.put("tipo", "error");
+            System.out.println("No se pudo actualizar perfil");
         } else {
-            System.out.println("Empleado actualizado con éxito...!");
-        }        
-        
-        request.getRequestDispatcher("perfil.jsp").forward(request, response);
-        
-        
+            data.put("ok", true);
+            data.put("titulo", "Perfil Actualizado");
+            data.put("mensaje", "Se ha actualizado su perfil correctamente");
+            data.put("tipo", "success");
+            System.out.println("Se ha actualizado su perfil correctamente");
+        }
+
+        request.getSession().setAttribute("e", e);
+
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
+
     }
 
-    private void buscarEmpleado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void buscarEmpleado(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         int codigo = Integer.parseInt(request.getParameter("idEmp"));
 
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         EmpleadoDTO e = factory.getEmpleadoDAO().buscarEmpleado(codigo);
-        
+
         request.setAttribute("empleadoEncontrado", e);
         request.getRequestDispatcher("crud-empleado.jsp").forward(request, response);
-        
+
     }
 
     private void loginEmpleado(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String usuario = request.getParameter("txtCorreo");
         String clave = request.getParameter("txtClave");
-
+        
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         EmpleadoDTO e = fabrica.getEmpleadoDAO().validarAcceso(usuario, clave);
 
+        String url = "";
+        String mensajeAcceso = "";
+        
         if (e != null) {
             System.out.println("Usted ingresó con éxito...!");
+            url = "home.jsp";
+            mensajeAcceso = "Bienvenido(a) " + e.getNombre() + " " + e.getApellido();
         } else {
             System.out.println("Hubo un error al ingresar...");
+            mensajeAcceso = "Usuario/Correo o Contraseña no validos";
+            url = "login.jsp";
         }
         request.getSession().setAttribute("e", e);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        request.setAttribute("mensajeAcceso", mensajeAcceso);
+        request.getRequestDispatcher(url).forward(request, response);
 
     }
 
@@ -165,7 +195,7 @@ public class EmpleadoServlet extends HttpServlet {
 
     private void actualizarEmpleado(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         int codigo = Integer.parseInt(request.getParameter("txtIdEmpleado"));
         String dni = request.getParameter("txtDNIEmpleado");
         String nombre = request.getParameter("txtNombreEmpleado");
@@ -183,41 +213,39 @@ public class EmpleadoServlet extends HttpServlet {
         e.setDireccion(direccion);
         e.setIdTipo(idTipo);
 
-
         DAOFactory f = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
 
         int ok = f.getEmpleadoDAO().actualizarEmpleado(e);
-        
+
         Map<String, Object> data = new LinkedHashMap<String, Object>();
 
-        if (ok != 0) {
-            data.put("ok", true);
-            data.put("titulo", "Actualizado");
-            data.put("mensaje", "Se ha actualizado el empleado " + nombre + " " + apellido + " correctamente");
-            data.put("tipo", "success");         
-        } else {
+        if (ok == 0) {
             data.put("ok", false);
             data.put("titulo", "Error");
             data.put("mensaje", "No se pudo actualizar al empleado");
             data.put("tipo", "error");
+        } else {
+            data.put("ok", true);
+            data.put("titulo", "Actualizado");
+            data.put("mensaje", "Se ha actualizado el empleado " + nombre + " " + apellido + " correctamente");
+            data.put("tipo", "success");
         }
         String json = new Gson().toJson(data);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
 
-
     }
 
     private void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-       int codigo = Integer.parseInt(request.getParameter("id"));
-       
-       EmpleadoDTO e = new EmpleadoDTO();
-       
-       e.setId(codigo);       
-        
+
+        int codigo = Integer.parseInt(request.getParameter("id"));
+
+        EmpleadoDTO e = new EmpleadoDTO();
+
+        e.setId(codigo);
+
         DAOFactory f = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         int ok = f.getEmpleadoDAO().eliminar(e);
 
@@ -239,7 +267,7 @@ public class EmpleadoServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
-        
+
     }
 
     private void listarEmpleado(HttpServletRequest request, HttpServletResponse response)

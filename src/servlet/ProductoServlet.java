@@ -45,6 +45,9 @@ public class ProductoServlet extends HttpServlet {
             case "buscar":
                 buscar(request, response);
                 break;
+            case "catalogo":
+                listarCatalogo(request, response);
+                break;
             default:
                 System.out.println("Error en la opcion");
                 break;
@@ -78,7 +81,9 @@ public class ProductoServlet extends HttpServlet {
 
     }
 
-    private void eliminar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void eliminar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
         System.out.println("Ingreso al proceso EliminarProducto");
 
         int codigo = Integer.parseInt(request.getParameter("codigo"));
@@ -122,6 +127,10 @@ public class ProductoServlet extends HttpServlet {
         int cantidad = Integer.parseInt(request.getParameter("txtStockProd"));
         int idcategoria = Integer.parseInt(request.getParameter("cboCategoriaProd"));
         String imagen = request.getParameter("imgProducto");
+        
+        if (imagen == null) {
+            imagen = "https://cutt.ly/unbQLrJ";
+        }
 
         ProductoDTO p = new ProductoDTO();
         p.setIdProducto(codigo);
@@ -139,7 +148,7 @@ public class ProductoServlet extends HttpServlet {
 
         if (ok != 0) {
             data.put("ok", true);
-            data.put("titulo", "Registrado");
+            data.put("titulo", "Actualizado");
             data.put("mensaje", "Se ah actualizado el producto " + descripcion + " correctamente");
             data.put("tipo", "success");
         } else {
@@ -165,6 +174,12 @@ public class ProductoServlet extends HttpServlet {
         int cantidad = Integer.parseInt(request.getParameter("txtStockProd"));
         int idcategoria = Integer.parseInt(request.getParameter("cboCategoriaProd"));
         String imagen = request.getParameter("imgProducto");
+        
+        if (imagen == null) {
+            imagen = "https://cutt.ly/unbQLrJ";
+        }
+        
+        System.out.println("Existe imagen : " + imagen);
 
         ProductoDTO p = new ProductoDTO();
         p.setDescripcion(descripcion);
@@ -195,6 +210,20 @@ public class ProductoServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
+
+    }
+
+    private void listarCatalogo(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        System.out.println("Ingreso al proceso ListarCatalogo");
+
+        DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        ProductoDAO dao = factory.getProductoDAO();
+        ArrayList<ProductoDTO> lista = dao.listado();
+
+        request.setAttribute("lstProductos", lista);
+        request.getRequestDispatcher("catalogo.jsp").forward(request, response);
 
     }
 

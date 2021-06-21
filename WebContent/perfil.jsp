@@ -1,5 +1,15 @@
+<%@page import="beans.EmpleadoDTO"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<%
+  EmpleadoDTO user = (EmpleadoDTO) request.getSession().getAttribute("e");
+  if (user == null) {
+      response.sendRedirect("login.jsp");
+  }
+  
+%> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,13 +20,9 @@
     <title>Perfil</title>
   </head>
   <body>
-    <!--wrapper-->
     <div class="wrapper">
-      <!--sidebar wrapper -->
       <jsp:include page="components/sidebar.jsp"></jsp:include>
-      <!--start header -->
       <jsp:include page="components/header.jsp"></jsp:include>
-      <!--start page wrapper -->
       <div class="page-wrapper">
         <div class="page-content">
           <jsp:include page="components/breadcrumb.jsp">
@@ -27,7 +33,7 @@
           <div class="container">
             <div class="main-body">
               <form
-                action="emse"
+                action="emse?opcion=perfil"
                 method="POST"
                 class="needs-validation"
                 novalidate
@@ -43,28 +49,54 @@
                             align-items-center
                             text-center
                           "
-                        >
+                        >                        
+                        <c:if test="${e.imagen == null }">
+                          <img
+                            src="https://res.cloudinary.com/dfuuywyk9/image/upload/v1621437436/l60Hf_megote.png"
+                            alt="${e.usuario }"
+                            class="rounded-circle p-1 bg-primary img-upload"
+                            width="110"
+                            height="110"
+                          />
+                        </c:if>
+                        <c:if test="${e.imagen != null }">
                           <img
                             src="${e.imagen }"
-                            alt="Admin"
-                            class="rounded-circle p-1 bg-primary"
+                            alt="${e.usuario }"
+                            class="rounded-circle p-1 bg-primary img-upload"
                             width="110"
-                            name="ImgEmpleado"
+                            height="110"
                           />
+                        </c:if>
+                        <input
+                            id="input-file"
+                            type="file"                            
+                            style="display: none"
+                            data-imgurl="${e.imagen }"
+                          />                        
                           <div class="mt-3">
                             <h4>${e.nombre }</h4>
                             <p class="text-secondary mb-1">
-                              ${e.descripcionTipoEmpleado }
+                              ${e.usuario }
                             </p>
                             <p class="text-muted font-size-sm">
                               ${e.direccion }
                             </p>
-                            <button
+                            
+                            <div>
+                              <button
+                              id="select-img"
                               type="button"
-                              class="btn btn-outline-warning"
+                              class="btn btn-outline-warning mx-1"
                             >
-                              Actualizar fotografía
+                              Subir
                             </button>
+                            <button id="remove-img" type="button" class="btn btn-outline-danger mx-1">
+                              <i class='bx bx-minus-circle mx-0' ></i>
+                            </button>
+                            </div>
+                            
+                            
                           </div>
                         </div>
                         <hr class="my-4" />
@@ -76,30 +108,30 @@
                     <div class="card">
                       <div class="card-body">
                         <div class="row mb-3">
-                          <div class="col-sm-3">
-                            <input
+                           <input
                               type="hidden"
                               class="input-hidden"
                               id="input-hidden"
                               name="txtIdEmpleado"
                               value="${ e.id }"
                             />
-                            <label for="txtNombreEmpleado" class="mb-0"
-                              >Nombre</label
-                            >
+                          <div class="col-sm-3">
+                          <label for="txtNombreEmpleado" class="mb-0"
+                              >Nombre:</label
+                            >                            
                           </div>
-                          <div class="col-sm-9 text-secondary">
+                          <div class="col-sm-9 text-secondary">                          
                             <input
                               id="txtNombreEmpleado"
                               name="txtNombreEmpleado"
                               type="text"
                               class="form-control"
-                              value="${e.nombre }"
+                              value="${ e.nombre }"
                               placeholder="Ingrese nombre"
                               required
                             />
                             <div class="invalid-feedback">
-                              Ingrese un nombre válido
+                              Ingrese un nombre v&aacute;lido
                             </div>
                           </div>
                         </div>
@@ -120,14 +152,14 @@
                               required
                             />
                             <div class="invalid-feedback">
-                              Ingrese un apellido válido
+                              Ingrese un apellido v&aacute;lido
                             </div>
                           </div>
                         </div>
                         <div class="row mb-3">
                           <div class="col-sm-3">
                             <label for="txtTelefonoEmpleado" class="mb-0"
-                              >Teléfono</label
+                              >Tel&eacute;fono</label
                             >
                           </div>
                           <div class="col-sm-9 text-secondary">
@@ -141,14 +173,14 @@
                               required
                             />
                             <div class="invalid-feedback">
-                              Ingrese un teléfono válido
+                              Ingrese un tel&eacute;fono v&aacute;lido
                             </div>
                           </div>
                         </div>
                         <div class="row mb-3">
                           <div class="col-sm-3">
                             <label for="txtDireccionEmpleado" class="mb-0"
-                              >Dirección</label
+                              >Direcci&oacute;n</label
                             >
                           </div>
                           <div class="col-sm-9 text-secondary">
@@ -156,10 +188,14 @@
                               class="form-control"
                               id="txtDireccionEmpleado"
                               name="txtDireccionEmpleado"
-                              placeholder="Ingrese dirección"
+                              placeholder="Ingrese direcci&oacute;n"
+                              required
                               rows="2"
-                              minlength="0"
+                              minlength="3"
                             >${e.direccion }</textarea>
+                            <div class="invalid-feedback">
+                              Ingrese una direcci&oacute;n v&aacute;lida
+                            </div>
                           </div>
                         </div>
                         <div class="row mb-3">
@@ -171,21 +207,22 @@
                           <div class="col-sm-9 text-secondary">
                             <input
                               id="txtEmailEmpleado"
-                              name="txtEmailEmpleado"
+                              name="txtEmailEmpleado"                              
                               type="text"
                               class="form-control"
                               value="${e.correo }"
                               placeholder="Ingrese email"
+                              required
                             />
                             <div class="invalid-feedback">
-                              Ingrese un email válido
+                              Ingrese un email v&aacute;lido
                             </div>
                           </div>
                         </div>
                         <div class="row mb-3">
                           <div class="col-sm-3">
                             <label for="txtClaveEmpleado" class="mb-0"
-                              >Contraseña</label
+                              >Contrase&ntilde;a</label
                             >
                           </div>
                           <div class="col-sm-9 text-secondary">
@@ -198,8 +235,8 @@
                                 class="form-control"
                                 id="txtClaveEmpleado"
                                 name="txtClaveEmpleado"
-                                placeholder="Ingrese contraseña"
-                                aria-label="Ingrese contraseña"
+                                placeholder="Ingrese contrase&ntilde;a"
+                                aria-label="Ingrese contrase&ntilde;a"
                                 aria-describedby="icon-hide"
                                 minlength="6"
                                 maxlength="30"
@@ -214,7 +251,7 @@
                               ></a>
                             </div>
                             <div class="invalid-feedback">
-                              Ingrese una contraseña válido +6
+                              Ingrese una contrase&ntilde;a v&aacute;lida +6
                             </div>
                           </div>
                         </div>
@@ -223,8 +260,6 @@
                           <div class="col-sm-9 text-secondary">
                             <button
                               type="submit"
-                              name="opcion"
-                              value="perfil"
                               class="btn btn-primary px-4"
                             >
                               Actualizar perfil
@@ -240,58 +275,16 @@
           </div>
         </div>
       </div>
-      <!--end page wrapper -->
-      <!--start overlay-->
       <div class="overlay toggle-icon"></div>
-      <!--end overlay-->
-      <!--Start Back To Top Button-->
       <a href="javaScript:;" class="back-to-top"
         ><i class="bx bxs-up-arrow-alt"></i
       ></a>
-      <!--End Back To Top Button-->
       <jsp:include page="components/footer.jsp"></jsp:include>
     </div>
-    <!--end wrapper-->
 
     <jsp:include page="reusable/scripts.jsp"></jsp:include>
 
-    <script>
-      (function () {
-        'use strict';
-        var forms = document.querySelectorAll('.needs-validation');
-
-        Array.prototype.slice.call(forms).forEach(function (form) {
-          form.addEventListener(
-            'submit',
-            function (event) {
-              if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-
-              form.classList.add('was-validated');
-            },
-            false
-          );
-        });
-      })();
-
-      $(document).ready(function () {
-        $('#show_hide_password a').on('click', function (event) {
-          event.preventDefault();
-          if ($('#show_hide_password input').attr('type') == 'text') {
-            $('#show_hide_password input').attr('type', 'password');
-            $('#show_hide_password i').addClass('bx-hide');
-            $('#show_hide_password i').removeClass('bx-show');
-          } else if (
-            $('#show_hide_password input').attr('type') == 'password'
-          ) {
-            $('#show_hide_password input').attr('type', 'text');
-            $('#show_hide_password i').removeClass('bx-hide');
-            $('#show_hide_password i').addClass('bx-show');
-          }
-        });
-      });
-    </script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="js/perfil.js"></script>
   </body>
 </html>

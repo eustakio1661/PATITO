@@ -1,8 +1,17 @@
+<%@page import="beans.EmpleadoDTO"%>
 <%@page import="beans.ClienteDTO"%>
 <%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
+<%
+  EmpleadoDTO user = (EmpleadoDTO) request.getSession().getAttribute("e");
+  if (user == null) {
+      response.sendRedirect("login.jsp");
+  }
+  
+%> 
     
 <%
    ClienteDTO existeCliente = (ClienteDTO) request.getAttribute("clienteEncontrado");
