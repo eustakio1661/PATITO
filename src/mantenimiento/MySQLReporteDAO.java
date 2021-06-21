@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.ListadoEntreFechasDTO;
+import beans.PedidoDTO;
 import beans.ReporteClienteDTO;
 import interfaces.ReporteDAO;
 import utils.MySQLConexion8;
@@ -104,6 +105,37 @@ public class MySQLReporteDAO implements ReporteDAO{
             }
         } catch (Exception e) {
             System.out.println("Error en listar segmentacion de Cliente: " + e.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(con);
+        }
+
+        return lista;
+    }
+
+    @Override
+    public ArrayList<PedidoDTO> listarPedidosPendientes() {
+        ArrayList<PedidoDTO> lista = null;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "{call USP_listarPedidosPendientes()}";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            lista = new ArrayList<PedidoDTO>();
+            while (rs.next()) {
+                PedidoDTO p = new PedidoDTO();
+                p.setId_pe(rs.getInt(1));
+                p.setNombreEmpleado(rs.getString(2));
+                p.setNombreCliente(rs.getString(3));
+                p.setFechaPedido(rs.getString(4));
+                p.setCantidadTotal(rs.getInt(5));
+                p.setEstado(rs.getInt(6));
+                lista.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en listar pedidos pendientes: " + e.getMessage());
         } finally {
             MySQLConexion8.closeConexion(con);
         }
