@@ -161,6 +161,7 @@
                         id="cboTipoEmpleado"
                         class="form-select"
                         name="cboTipoEmpleado"
+                        required
                       >
                         <tools:comboTipoEmp
                           idTipoEmp="${ empleadoEncontrado.idTipo }"
@@ -181,6 +182,7 @@
                         placeholder="Ingrese direcci&oacute;n"
                         rows="3"
                         minlength="0"
+                        required
                       >${ empleadoEncontrado.direccion }</textarea>
                     </div>
                     <div class="col-12">

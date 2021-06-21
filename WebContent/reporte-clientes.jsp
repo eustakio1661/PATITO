@@ -32,8 +32,8 @@
       <div class="page-wrapper">
         <div class="page-content">
           <jsp:include page="components/breadcrumb.jsp">
-            <jsp:param name="pagina" value="Empleado" />
-            <jsp:param name="accion" value="Listado" />
+            <jsp:param name="pagina" value="Reportes" />
+            <jsp:param name="accion" value="Reporte Cliente" />
           </jsp:include>
           <div class="row">
             <div class="col mx-auto">
