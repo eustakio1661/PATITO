@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import beans.BoletaDTO;
+import beans.ClienteDTO;
+import beans.EmpleadoDTO;
 import beans.ListadoEntreFechasDTO;
 import beans.PedidoDTO;
 import beans.ReporteClienteDTO;
@@ -141,6 +144,130 @@ public class MySQLReporteDAO implements ReporteDAO{
         }
 
         return lista;
+    }
+
+    @Override
+    public ArrayList<EmpleadoDTO> cantidadEmpleados() {
+        ArrayList<EmpleadoDTO> total = null;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "select count(id_em) from empleado";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            total = new ArrayList<EmpleadoDTO>();
+            while (rs.next()) {
+                EmpleadoDTO cb = new EmpleadoDTO();
+                cb.setId(rs.getInt(1));
+                total.add(cb);
+            }       
+            
+        }catch (Exception e) {
+            System.out.println("Error en listado : " + e.getMessage());
+        }
+        finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar : " + e.getMessage());
+            }
+        }
+        return total;
+    }
+
+    @Override
+    public ArrayList<ClienteDTO> cantidadClientes() {
+        ArrayList<ClienteDTO> total = null;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "select count(id_cli) from cliente";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            total = new ArrayList<ClienteDTO>();
+            while (rs.next()) {
+                ClienteDTO cb = new ClienteDTO();
+                cb.setCodigo(rs.getInt(1));
+                total.add(cb);
+            }       
+            
+        }catch (Exception e) {
+            System.out.println("Error en listado : " + e.getMessage());
+        }
+        finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar : " + e.getMessage());
+            }
+        }
+        return total;
+    }
+
+    @Override
+    public ArrayList<PedidoDTO> cantidadPedidos() {
+        ArrayList<PedidoDTO> total = null;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "select count(id_pe) from pedido";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            total = new ArrayList<PedidoDTO>();
+            while (rs.next()) {
+                PedidoDTO cb = new PedidoDTO();
+                cb.setId_pe(rs.getInt(1));
+                total.add(cb);
+            }       
+            
+        }catch (Exception e) {
+            System.out.println("Error en listado : " + e.getMessage());
+        }
+        finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar : " + e.getMessage());
+            }
+        }
+        return total;
+    }
+
+    @Override
+    public ArrayList<BoletaDTO> VentaTotal() {
+        ArrayList<BoletaDTO> total = null;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "select sum(pretotal-descuento) from boleta";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            total = new ArrayList<BoletaDTO>();
+            while (rs.next()) {
+                BoletaDTO cb = new BoletaDTO();
+                cb.setPrecioTotal(rs.getInt(1));
+                total.add(cb);
+            }       
+            
+        }catch (Exception e) {
+            System.out.println("Error en listado : " + e.getMessage());
+        }
+        finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar : " + e.getMessage());
+            }
+        }
+        return total;
     }
 
 }
