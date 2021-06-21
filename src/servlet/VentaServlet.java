@@ -21,7 +21,6 @@ import beans.EmpleadoDTO;
 import beans.PedidoDTO;
 import beans.ProductoDTO;
 import dao.DAOFactory;
-import interfaces.ProductoDAO;
 import interfaces.ReporteDAO;
 import interfaces.VentaDAO;
 
