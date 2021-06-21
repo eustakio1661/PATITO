@@ -57,7 +57,7 @@
                           <th>Nombre Cliente</th>
                           <th>Fecha Pedido</th>
                           <th>Cantidad Total</th>
-                          <th>Pendiente</th>
+                          <th>Estado</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>

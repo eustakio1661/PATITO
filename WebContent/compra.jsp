@@ -11,6 +11,7 @@
 <%
   EmpleadoDTO user = (EmpleadoDTO) request.getSession().getAttribute("e");
   ClienteDTO cli = (ClienteDTO) request.getSession().getAttribute("ClienteCompra");
+  @SuppressWarnings("unchecked")
   ArrayList<DetallePedidoDTO> det = (ArrayList<DetallePedidoDTO>) request.getSession().getAttribute("carro");
   if (user == null) {
       response.sendRedirect("login.jsp");
