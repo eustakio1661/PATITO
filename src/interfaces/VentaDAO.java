@@ -10,4 +10,5 @@ public interface VentaDAO {
     public String generaNumBoleta();
     public int generarNumPedido();
     public int realizarVenta(PedidoDTO p, ArrayList<DetallePedidoDTO> det, BoletaDTO b);
+    public int actualizarPedido(PedidoDTO p);
 }
