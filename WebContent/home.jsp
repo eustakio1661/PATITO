@@ -1,3 +1,6 @@
+<%@page import="dao.DAOFactory"%>
+<%@page import="beans.PedidoDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="beans.EmpleadoDTO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -156,7 +159,7 @@
 
           <div class="card radius-10 mb-5 box-shadow">
             <div class="bg-light p-5 rounded-lg m-3">
-              <h1 class="display-4">Bienvenido ${ e.nombre } ${ e.apellido }</h1>
+              <h1 class="display-4">Bienvenid@ ${ e.nombre } ${ e.apellido }</h1>
               <p class="lead">
                 Usted se encuentra disponible para comenzar a realizar ventas en
                 el restaurante PATITO

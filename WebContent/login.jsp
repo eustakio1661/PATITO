@@ -49,6 +49,7 @@
                       >
                         <div class="col-12">
                           <label for="txtCorreo" class="form-label"
+
                             >Correo o Usuario</label
                           >
                           <input
@@ -57,6 +58,7 @@
                             id="txtCorreo"
                             name="txtCorreo"
                             placeholder="Ingrese correo o usuario"
+
                             required
                           />
                           <div class="invalid-feedback">
@@ -106,6 +108,7 @@
                             >
                           </div>
                         </div>
+                        
                         <div class="col-md-6 text-end">
                           <a href="authentication-forgot-password.html"
                             >¿ Olvidaste tu contraseña ?</a

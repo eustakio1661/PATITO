@@ -126,9 +126,8 @@
                               />
                             </td>
                             <td>
-                              <fmt:setLocale value="es_PE" />
                               <fmt:formatNumber
-                                type="currency"
+                                type="percent"
                                 value="${ven.descuento}"
                               />
                             </td>

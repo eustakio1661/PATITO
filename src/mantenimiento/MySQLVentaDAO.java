@@ -124,6 +124,25 @@ public class MySQLVentaDAO implements VentaDAO {
         }
         return rs;
     }
+    @Override
+    public int actualizarPedido(PedidoDTO p) {
+        int rs = 0;
+        Connection con = null;
+        PreparedStatement pst = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "update pedido set estado = 0 where id_pe=?";
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, p.getId_pe());
+            rs = pst.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println("Error en actualizar Pedido: " + ex.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(con);
+        }
+        return rs;
+    }
 
    
 

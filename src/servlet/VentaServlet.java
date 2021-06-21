@@ -21,6 +21,9 @@ import beans.EmpleadoDTO;
 import beans.PedidoDTO;
 import beans.ProductoDTO;
 import dao.DAOFactory;
+import interfaces.ProductoDAO;
+import interfaces.ReporteDAO;
+import interfaces.VentaDAO;
 
 @MultipartConfig
 @WebServlet(name = "venser", urlPatterns = { "/venser" })
@@ -40,6 +43,9 @@ public class VentaServlet extends HttpServlet {
             case "eliCompra":
                 eliminarCompraCarro(request, response);
                 break;
+            case "canceCliente":
+                cancelarCliente(request, response);
+                break;
             case "procCompra":
                 procesarCompra(request, response);
                 break;
@@ -52,6 +58,12 @@ public class VentaServlet extends HttpServlet {
             case "canceCompra":
                 cancelarCompra(request, response);
                 break;
+            case "pedidosPendientes":
+                pedidosPendientes(request, response);
+                break;
+            case "actualizarPedido":
+                actualizarPedido(request, response);
+                break;
             default:
                 System.out.println("Error en la opcion");
                 break;
@@ -61,6 +73,57 @@ public class VentaServlet extends HttpServlet {
             System.out.println("Error inesperado en la Venta Servlet");
             System.out.println(e);
         }
+    }
+
+
+    private void actualizarPedido(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Ingreso al proceso Actualizar Pedido");
+        String url = "";
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
+
+        PedidoDTO p = new PedidoDTO();
+        p.setId_pe(codigo);
+        DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        VentaDAO dao = fabrica.getVentaDao();
+
+        int ok = dao.actualizarPedido(p);
+        
+        if (ok !=0) {
+            System.out.println("Se actualizo Pedido");
+            url = "pedidos-pendientes.jsp";
+        }else {
+            System.out.println("Error en actualizar Pedido");
+            url = "home.jsp";
+        }
+        
+        request.getRequestDispatcher(url).forward(request, response);
+    }
+
+
+    private void pedidosPendientes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Ingreso al proceso Pedidos Pendientes");
+
+        DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        ReporteDAO dao = factory.getReporteDAO();
+        ArrayList<PedidoDTO> lista = dao.listarPedidosPendientes();
+
+        request.setAttribute("lstPedidosPendientes", lista);
+        request.getRequestDispatcher("pedidos-pendientes.jsp").forward(request, response);
+    }
+
+
+    private void cancelarCliente(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("Cancelar Cliente");
+        request.getSession().setAttribute("ClienteCompra", new ClienteDTO());
+        request.getSession().setAttribute("ClienteDescuento", new ClienteDTO());
+        
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+        data.put("ok", true);
+        
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
     }
 
     private void descuentoCliente(HttpServletRequest request, HttpServletResponse response)

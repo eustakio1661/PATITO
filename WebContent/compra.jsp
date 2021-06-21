@@ -1,3 +1,7 @@
+<%@page import="beans.DetallePedidoDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="beans.ProductoDTO"%>
+<%@page import="beans.ClienteDTO"%>
 <%@page import="beans.EmpleadoDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -6,8 +10,15 @@
 	
 <%
   EmpleadoDTO user = (EmpleadoDTO) request.getSession().getAttribute("e");
+  ClienteDTO cli = (ClienteDTO) request.getSession().getAttribute("ClienteCompra");
+  ArrayList<DetallePedidoDTO> det = (ArrayList<DetallePedidoDTO>) request.getSession().getAttribute("carro");
   if (user == null) {
       response.sendRedirect("login.jsp");
+      return;
+  }
+	if (cli == null || det == null){
+      response.sendRedirect("ps?opcion=catalogo");
+      return;
   }
   
 %> 
@@ -25,6 +36,7 @@
     <title>Compra</title>
   </head>
   <body>
+  <fmt:setLocale value="es_PE" />
     <div class="wrapper">
       <jsp:include page="components/sidebar.jsp"></jsp:include>
       <jsp:include page="components/header.jsp"></jsp:include>
@@ -79,7 +91,10 @@
                                   </td>
                                   <td>${carro.precio }</td>
                                   <td>${carro.cantidad }</td>
-                                  <td>${carro.importe }</td>
+                                  <td><fmt:formatNumber
+                              type="currency"
+                              value="${carro.importe}"
+                            /></td>
                                 </tr>
                               </c:forEach>
                             </tbody>
@@ -113,7 +128,7 @@
                             >
                           </div>
                           <hr />
-                          <fmt:setLocale value="es_PE" />
+                          
                           <div class="col-md-6">
                             <label>Subtotal(${cantidadProductos })</label>
                           </div>

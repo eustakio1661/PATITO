@@ -6,7 +6,7 @@
       <img src="img/logo-icon.png" class="logo-icon" alt="logo icon" />
     </div>
     <div>
-      <h4 class="logo-text">* Patito</h4>
+      <h4 class="logo-text">Patito</h4>
     </div>
     <div class="toggle-icon ms-auto">
       <i class="bx bx-arrow-to-left"></i>
@@ -24,7 +24,7 @@
           <a href="home.jsp"><i class="bx bx-right-arrow-alt"></i>Inicio</a>
         </li>
         <li>
-          <a href="#"
+          <a href="venser?opcion=pedidosPendientes"
             ><i class="bx bx-right-arrow-alt"></i>Pedidos Pendientes</a
           >
         </li>
@@ -113,6 +113,14 @@
           >
         </li>
       </ul>
+    </li>
+    <li>
+      <a href="rese?opcion=reporteCliente">
+        <span class="parent-icon">
+          <i class="bx bx-receipt"></i>
+        </span>
+        <span class="menu-title">Reporte de Clientes</span>
+      </a>
     </li>
   </ul>
   <!--end navigation-->

@@ -4,9 +4,12 @@ public class PedidoDTO {
     private int id_pe;
     private int id_em;
     private int id_cli;
-    private String fechaSalida;
-    private String fechaEntrega;
+    private String fechaPedido;
     private int cantidadTotal;
+    
+    private String nombreCliente;
+    private String nombreEmpleado;
+    private int estado;
     
     public PedidoDTO() {
         
@@ -30,23 +33,41 @@ public class PedidoDTO {
     public void setId_cli(int id_cli) {
         this.id_cli = id_cli;
     }
-    public String getFechaSalida() {
-        return fechaSalida;
+    public String getFechaPedido() {
+        return fechaPedido;
     }
-    public void setFechaSalida(String fechaSalida) {
-        this.fechaSalida = fechaSalida;
-    }
-    public String getFechaEntrega() {
-        return fechaEntrega;
-    }
-    public void setFechaEntrega(String fechaEntrega) {
-        this.fechaEntrega = fechaEntrega;
+    public void setFechaPedido(String fechaPedido) {
+        this.fechaPedido = fechaPedido;
     }
     public int getCantidadTotal() {
         return cantidadTotal;
     }
     public void setCantidadTotal(int cantidadTotal) {
         this.cantidadTotal = cantidadTotal;
+    }
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    public String getNombreEmpleado() {
+        return nombreEmpleado;
+    }
+
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
     
     
