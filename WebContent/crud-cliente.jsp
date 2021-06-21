@@ -99,6 +99,7 @@
                             name="txtNombreCliente"
                             placeholder="Nombre del cliente"
                             value="${ clienteEncontrado.nombre }"
+                            required
                           />
                           <div class="invalid-feedback">
                             Ingrese un nombre v&aacute;lido
@@ -119,6 +120,7 @@
                             name="txtApellidoCliente"
                             placeholder="Apellido del cliente"
                             value="${ clienteEncontrado.apellido }"
+                            required
                           />
                           <div class="invalid-feedback">
                             Ingrese un apellido v&aacute;lido
@@ -139,6 +141,7 @@
                             name="txtTelefonoCliente"
                             placeholder="Celular o fijo"
                             value="${ clienteEncontrado.telefono }"
+                            required
                           />
                           <div class="invalid-feedback">
                             Ingrese un número tel&eacute;fonico válido
@@ -159,6 +162,7 @@
                             name="txtDNICliente"
                             placeholder="Dni del cliente"
                             value="${ clienteEncontrado.dni }"
+                            required
                           />
                           <div class="invalid-feedback">
                             Ingrese un DNI v&aacute;lido
@@ -201,6 +205,7 @@
                             name="txtDireccionCliente"
                             rows="3"
                             placeholder="Direcci&oacute;n completa del cliente"
+                            required
                           >${ clienteEncontrado.direccion }</textarea
                           >
                           <div class="invalid-feedback">
