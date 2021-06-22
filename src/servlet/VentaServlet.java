@@ -89,13 +89,13 @@ public class VentaServlet extends HttpServlet {
         
         if (ok !=0) {
             System.out.println("Se actualizo Pedido");
-            url = "pedidos-pendientes.jsp";
+            pedidosPendientes(request, response);
         }else {
             System.out.println("Error en actualizar Pedido");
-            url = "home.jsp";
+            request.getRequestDispatcher("home.jsp").forward(request, response);
         }
         
-        request.getRequestDispatcher(url).forward(request, response);
+        
     }
 
 
