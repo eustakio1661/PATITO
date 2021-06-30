@@ -76,7 +76,7 @@ public class ClienteServlet extends HttpServlet {
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDAO dao = fabrica.getClienteDAO();
 
-        int ok = dao.actualizarCliente(c);
+        int ok = dao.actualizarEstado(c);
 
         Map<String, Object> data = new LinkedHashMap<String, Object>();
 

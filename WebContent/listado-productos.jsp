@@ -50,7 +50,7 @@
                         name="cboEstado"
                         data-servlet="ps?opcion=listado"
                         required
-                      >     
+                      >
                        <option selected disabled hidden="hidden" value="">Seleccione Estado</option>
                        <option  value="1">Activo</option>
                        <option  value="0">Inactivo</option>
@@ -102,7 +102,7 @@
                                   data-nombre="${ prod.descripcion }"
                                   data-opciones="eliminar"
                                   data-action="ps?opcion=eliminar&codigo=${prod.idProducto}"
-                                  class="ms-4 btn btn-danger btnEliminarEntidad"
+                                  class="ms-4 btn btn-danger btnActualizarEntidad"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
                                   title="Eliminar Producto"
