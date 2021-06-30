@@ -1,3 +1,32 @@
+/*
+const selectEstado = document.getElementById("cboEstado");
+
+selectEstado.addEventListener("click", function() {
+    var options = selectEstado.querySelectorAll("option");
+    var count = options.length;
+    if(typeof(count) === "undefined" || count < 2)
+    {
+        addActivityItem();
+    }
+});
+
+selectEstado.addEventListener("change", function() {
+    if(selectEstado.value == "addNew")
+    {
+        addActivityItem();
+    }
+});
+
+function addActivityItem() {
+    // ... Code to add item here
+}
+*/
+
+
+
+
+
+
 const eliminarEntidad = (action) => {
   return fetch(action, {
     method: 'DELETE',
