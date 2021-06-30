@@ -190,6 +190,7 @@ public class MySQLClienteDAO implements ClienteDAO {
 
         return listacd;
     }
+    
 
     @Override
     public ArrayList<ReporteClienteDTO> reporteCliente() {
@@ -272,6 +273,31 @@ public class MySQLClienteDAO implements ClienteDAO {
             }
         } catch (Exception ex) {
             System.out.println("Error al buscar Cliente por DNI:" + ex.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(con);
+        }
+        return c;
+    }
+    
+    public ClienteDTO ListarClienteEstado(int estado) {
+        ClienteDTO c = null;        
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;        
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "{call USP_CLIENTEXESTADO(?)}";
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, estado);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                c = new ClienteDTO();
+                c.setCodigo(rs.getInt(1));
+                c.setNombreCompleto(rs.getString(2));
+                
+            }
+        } catch (Exception ex) {
+            System.out.println("Error al buscar Cliente por Estado:" + ex.getMessage());
         } finally {
             MySQLConexion8.closeConexion(con);
         }
