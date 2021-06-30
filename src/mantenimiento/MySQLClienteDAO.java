@@ -293,7 +293,12 @@ public class MySQLClienteDAO implements ClienteDAO {
             if (rs.next()) {
                 c = new ClienteDTO();
                 c.setCodigo(rs.getInt(1));
-                c.setNombreCompleto(rs.getString(2));
+                c.setCodigoDistrito(rs.getInt(2));
+                c.setDni(rs.getString(3));
+                c.setNombreCompleto(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setTelefono(rs.getString(6));
+                c.setEstado(rs.getInt(7));
                 
             }
         } catch (Exception ex) {
