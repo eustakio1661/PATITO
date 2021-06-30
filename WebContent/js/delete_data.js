@@ -1,30 +1,15 @@
-/*
-const selectEstado = document.getElementById("cboEstado");
+const selectEstado = document.getElementById('cboEstado');
 
-selectEstado.addEventListener("click", function() {
-    var options = selectEstado.querySelectorAll("option");
-    var count = options.length;
-    if(typeof(count) === "undefined" || count < 2)
-    {
-        addActivityItem();
-    }
+const filtrarListaSegunEstado = (estado) => {
+  console.log(estado);
+};
+
+selectEstado.addEventListener('change', () => {
+  const optionValue = selectEstado.options[selectEstado.selectedIndex].value;
+  if (optionValue) {
+    filtrarListaSegunEstado(optionValue);
+  }
 });
-
-selectEstado.addEventListener("change", function() {
-    if(selectEstado.value == "addNew")
-    {
-        addActivityItem();
-    }
-});
-
-function addActivityItem() {
-    // ... Code to add item here
-}
-*/
-
-
-
-
 
 
 const eliminarEntidad = (action) => {
@@ -67,7 +52,7 @@ const mostrarAlerta = (action, titulo, entidad, nombre) => {
   });
 };
 
-const btnsEliminarEntidad = document.querySelectorAll('.btnEliminarEntidad');
+const btnsEliminarEntidad = document.querySelectorAll('.btnActualizarEntidad');
 
 let entidad = '';
 let action = '';
