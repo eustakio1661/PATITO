@@ -14,7 +14,8 @@ const opciones = {
 const selectEstado = document.getElementById('cboEstado');
 
 const filtrarListaSegunEstado = (estado) => {
-  console.log(estado);
+  const servlet = selectEstado.dataset.servlet?.trim();
+  window.location.href = `${servlet}?cboEstado=${estado}`;
 };
 
 selectEstado.addEventListener('change', () => {
