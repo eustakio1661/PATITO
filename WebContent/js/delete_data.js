@@ -1,3 +1,16 @@
+const opciones = {
+  eliminar: {
+    text: 'eliminar',
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6'
+  },
+  regresar: {
+    text: 'actualizar',
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#757575'
+  }
+}
+
 const selectEstado = document.getElementById('cboEstado');
 
 const filtrarListaSegunEstado = (estado) => {
@@ -11,10 +24,9 @@ selectEstado.addEventListener('change', () => {
   }
 });
 
-
-const eliminarEntidad = (action) => {
+const actualizarEstadoEntidad = (action) => {
   return fetch(action, {
-    method: 'DELETE',
+    method: 'PATCH',
   })
     .then((response) => {
       if (!response.ok) {
@@ -28,20 +40,22 @@ const eliminarEntidad = (action) => {
     });
 };
 
-const mostrarAlerta = (action, titulo, entidad, nombre) => {
-  console.log(action);
+const mostrarAlerta = (action, titulo, entidad, nombre, dataOpcion) => {
+
+  const { text, confirmButtonColor, cancelButtonColor } = opciones[dataOpcion]
+
   Swal.fire({
     title: titulo,
-    text: `\u00bfDesea eliminar el ${entidad} ${nombre}?`,
+    text: `\u00bfDesea ${text} el ${entidad} ${nombre}?`,
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonColor: '#d33',
-    cancelButtonColor: '#3085d6',
-    confirmButtonText: 'Eliminar',
+    confirmButtonColor,
+    cancelButtonColor,
+    confirmButtonText: text[0].toUpperCase() + text.substr(1).toLowerCase(),
     cancelButtonText: 'Cancelar',
   }).then((result) => {
     if (result.isConfirmed) {
-      eliminarEntidad(action).then((data) => {
+      actualizarEstadoEntidad(action).then((data) => {
         Swal.fire(data.titulo, data.mensaje, data.tipo).then((result) => {
           if (result.isConfirmed || result.isDismissed) {
             window.location.reload();
@@ -52,27 +66,30 @@ const mostrarAlerta = (action, titulo, entidad, nombre) => {
   });
 };
 
-const btnsEliminarEntidad = document.querySelectorAll('.btnActualizarEntidad');
+const btnsActualizarEstadoEntidad = document.querySelectorAll('.btnEliminarEntidad');
 
 let entidad = '';
 let action = '';
 let titulo = '';
 let nombre = '';
+let dataOpcion = 'eliminar';
 
 const obtenerDatos = (btn) => {
-  entidad = btn.dataset.entidad.trim();
-  action = btn.dataset.action.trim();
+  entidad = btn.dataset.entidad?.trim();
+  action = btn.dataset.action?.trim();
   titulo = btn.getAttribute('title');
-  nombre = btn.dataset.nombre.trim();
+  nombre = btn.dataset.nombre?.trim();
+  dataOpcion = btn.dataset.opciones?.trim();
 
-  return { entidad, action, titulo, nombre };
+  return { entidad, action, titulo, nombre, dataOpcion };
 };
 
-if (btnsEliminarEntidad.length > 0) {
-  btnsEliminarEntidad.forEach((btn) => {
+if (btnsActualizarEstadoEntidad.length > 0) {
+  btnsActualizarEstadoEntidad.forEach((btn) => {
+
     btn.addEventListener('click', () => {
-      const { entidad, action, titulo, nombre } = obtenerDatos(btn);
-      mostrarAlerta(action, titulo, entidad, nombre);
+      const { entidad, action, titulo, nombre, dataOpcion } = obtenerDatos(btn);
+      mostrarAlerta(action, titulo, entidad, nombre, dataOpcion);
     });
   });
 }
