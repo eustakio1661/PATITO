@@ -219,9 +219,9 @@ public class ClienteServlet extends HttpServlet {
 
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDAO dao = fabrica.getClienteDAO();
-        ClienteDTO listaE = dao.ListarClienteEstado(estado);
+        ClienteDTO lista = dao.ListarClienteEstado(estado);
 
-        request.setAttribute("lstClientes", listaE);
+        request.setAttribute("lstClientes", lista);
         request.getRequestDispatcher("listado-clientes.jsp").forward(request, response);
 
     }
