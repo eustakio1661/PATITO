@@ -15,7 +15,7 @@ const selectEstado = document.getElementById('cboEstado');
 
 const filtrarListaSegunEstado = (estado) => {
   const servlet = selectEstado.dataset.servlet?.trim();
-  window.location.href = `${servlet}?cboEstado=${estado}`;
+  window.location.href = `${servlet}&cboEstado=${estado}`;
 };
 
 selectEstado.addEventListener('change', () => {
@@ -67,7 +67,7 @@ const mostrarAlerta = (action, titulo, entidad, nombre, dataOpcion) => {
   });
 };
 
-const btnsActualizarEstadoEntidad = document.querySelectorAll('.btnEliminarEntidad');
+const btnsActualizarEstadoEntidad = document.querySelectorAll('.btnActualizarEntidad');
 
 let entidad = '';
 let action = '';

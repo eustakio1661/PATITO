@@ -97,7 +97,7 @@
                                   data-nombre="${ cli.nombre } ${ cli.apellido }"
                                   data-opciones="eliminar"
                                   data-action="cs?opcion=eliminar&codigo=${cli.codigo}"
-                                  class="ms-4 btn btn-danger btnEliminarEntidad"
+                                  class="ms-4 btn btn-danger btnActualizarEntidad"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
                                   title="Eliminar Cliente"

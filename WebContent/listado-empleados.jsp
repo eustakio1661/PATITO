@@ -106,7 +106,7 @@
                                   data-nombre="${emp.nombre} ${emp.apellido}"
                                   data-opciones="eliminar"
                                   data-action="emse?opcion=eliminar&id=${emp.id}"
-                                  class="ms-4 btn btn-danger btnEliminarEntidad"
+                                  class="ms-4 btn btn-danger btnActualizarEntidad"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
                                   title="Eliminar Empleado"
