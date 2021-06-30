@@ -43,7 +43,16 @@
                       <h5 class="mb-0">Lista de Clientes</h5>
                     </div>
                     <div class="font-22 ms-auto">
-                      <i class="bx bx-dots-horizontal-rounded"></i>
+                      <select
+                        id="cboEstado"
+                        class="form-select"
+                        name="cboEstado"
+                        required
+                      >
+                       <option selected disabled hidden value="">Seleccione Estado</option>
+                       <option  value="1">Activo</option>
+                       <option  value="0">Inactivo</option>
+                      </select>
                     </div>
                   </div>
                   <hr />
