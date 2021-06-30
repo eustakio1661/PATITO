@@ -52,7 +52,19 @@
                       <h5 class="mb-0">Lista de Empleados</h5>
                     </div>
                     <div class="font-22 ms-auto">
-                      <i class="bx bx-dots-horizontal-rounded"></i>
+                      <select
+                        id="cboEstado"
+                        class="form-select"
+                        name="cboEstado"
+                        data-servlet="emse?opcion=listar"
+                        required
+                      >
+                      
+                       <option selected disabled hidden="hidden" value="">Seleccione Estado</option>
+                       <option  value="1">Activo</option>
+                       <option  value="0">Inactivo</option>
+                      </select>
+               
                     </div>
                   </div>
                   <hr />
@@ -79,7 +91,8 @@
                             <td>${emp.correo}</td>
                             <td>${emp.telefono}</td>
                             <td>
-                              <div class="d-flex order-actions">
+                            <c:if test="${emp.estado == 1 }">
+                              <div class="d-flex order-actions">                          
                                 <a
                                   href="emse?opcion=buscar&idEmp=${emp.id}"
                                   class="btn btn-success"
@@ -93,6 +106,7 @@
                                   type="button"
                                   data-entidad="empleado"
                                   data-nombre="${emp.nombre} ${emp.apellido}"
+                                  data-opciones="eliminar"
                                   data-action="emse?opcion=eliminar&id=${emp.id}"
                                   class="ms-4 btn btn-danger btnEliminarEntidad"
                                   data-bs-toggle="tooltip"
@@ -102,6 +116,24 @@
                                   <i class="bx bx-trash mx-0"></i
                                 ></button>
                               </div>
+                              </c:if>
+                              <c:if test="${emp.estado == 0 }">
+                              <div class="d-flex order-actions">                                                      
+                                <button
+                                  type="button"
+                                  data-entidad="empleado"
+                                  data-nombre="${emp.nombre} ${emp.apellido}"
+                                  data-opciones="regresar"
+                                  data-action="emse?opcion=actualizarEstado&id=${emp.id}"
+                                  class="ms-4 btn btn-primary btnActualizarEntidad"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="bottom"
+                                  title="Actualizar Estado"
+                                >
+                                  <i class="bx bx-user-check mx-0" ></i>
+                                </button>
+                              </div>
+                              </c:if>
                             </td>
                           </tr>
                         </c:forEach>

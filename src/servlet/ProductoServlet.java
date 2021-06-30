@@ -48,6 +48,9 @@ public class ProductoServlet extends HttpServlet {
             case "catalogo":
                 listarCatalogo(request, response);
                 break;
+            case "actualizarEstado":
+                actualizarEstado(request, response);
+                break;
             default:
                 System.out.println("Error en la opcion");
                 break;
@@ -55,6 +58,38 @@ public class ProductoServlet extends HttpServlet {
         } catch (Exception e) {
             System.out.println("Error inesperado en el Producto Servlet");
         }
+    }
+
+    private void actualizarEstado(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("Ingreso al proceso Actualizar Estado Producto");
+
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
+
+        ProductoDTO p = new ProductoDTO();
+        p.setIdProducto(codigo);
+        DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        ProductoDAO dao = fabrica.getProductoDAO();
+
+        int ok = dao.actualizarEstado(p);
+
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+
+        if (ok != 0) {
+            data.put("ok", true);
+            data.put("titulo", "Actualizado");
+            data.put("mensaje", "Se actualizo estado del producto correctamente");
+            data.put("tipo", "success");
+        } else {
+            data.put("ok", false);
+            data.put("titulo", "Error");
+            data.put("mensaje", "No se pudo actualizar estado del producto");
+            data.put("tipo", "error");
+        }
+
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
     }
 
     private void buscar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,9 +107,16 @@ public class ProductoServlet extends HttpServlet {
     private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Ingreso al proceso ListarProducto");
 
+        int estado;
+        if(request.getParameter("cboEstado") == null) {
+            estado = 1;
+        }else {
+            estado = Integer.parseInt(request.getParameter("cboEstado"));
+        }
+        
         DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ProductoDAO dao = factory.getProductoDAO();
-        ArrayList<ProductoDTO> lista = dao.listado();
+        ArrayList<ProductoDTO> lista = dao.listadoProductoEstado(estado);
 
         request.setAttribute("lstProductos", lista);
         request.getRequestDispatcher("listado-productos.jsp").forward(request, response);

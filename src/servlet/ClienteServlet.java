@@ -49,6 +49,9 @@ public class ClienteServlet extends HttpServlet {
             case "reporte":
                 reporteCliente(request, response);
                 break;
+            case "actualizarEstado":
+                actualizarEstado(request, response);
+                break;
             default:
                 System.out.println("Error en la opcion");
                 break;
@@ -60,6 +63,40 @@ public class ClienteServlet extends HttpServlet {
             System.out.println(e.getMessage());
         }
 
+    }
+
+
+    private void actualizarEstado(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("Ingreso al proceso Actualizar Estado Cliente");
+
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
+
+        ClienteDTO c = new ClienteDTO();
+        c.setCodigo(codigo);
+        DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        ClienteDAO dao = fabrica.getClienteDAO();
+
+        int ok = dao.actualizarCliente(c);
+
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+
+        if (ok != 0) {
+            data.put("ok", true);
+            data.put("titulo", "Actualizado");
+            data.put("mensaje", "Se actualizo estado del cliente correctamente");
+            data.put("tipo", "success");
+        } else {
+            data.put("ok", false);
+            data.put("titulo", "Error");
+            data.put("mensaje", "No se pudo actualizar estado del cliente");
+            data.put("tipo", "error");
+        }
+
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
+        
     }
 
 
@@ -210,12 +247,21 @@ public class ClienteServlet extends HttpServlet {
     private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Ingreso al proceso ListarCliente");
 
+        int estado;
+
+        if (request.getParameter("cboEstado") == null) {
+            estado = 1;
+        } else {
+            estado = Integer.parseInt(request.getParameter("cboEstado"));
+        }
+
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ClienteDAO dao = fabrica.getClienteDAO();
-        ArrayList<ClienteDTO> lista = dao.listarClientexDistrito();
+        ArrayList<ClienteDTO> lista = dao.listarClienteEstado(estado);
 
         request.setAttribute("lstClientes", lista);
         request.getRequestDispatcher("listado-clientes.jsp").forward(request, response);
+
 
     }
 

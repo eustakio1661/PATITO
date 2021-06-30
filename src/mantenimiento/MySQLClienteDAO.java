@@ -180,6 +180,7 @@ public class MySQLClienteDAO implements ClienteDAO {
                 cd.setTelefono(rs.getString(6));
                 cd.setCodigoDistrito(rs.getInt(7));
                 cd.setNombreDistrito(rs.getString(8));
+                cd.setEstado(rs.getInt(9));
                 listacd.add(cd);
             }
         } catch (Exception e) {
@@ -276,6 +277,61 @@ public class MySQLClienteDAO implements ClienteDAO {
             MySQLConexion8.closeConexion(con);
         }
         return c;
+    }
+
+    @Override
+    public ArrayList<ClienteDTO> listarClienteEstado(int estado) {
+        ArrayList<ClienteDTO> listacd = null;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "{call USP_ESTADOCLIENTES(?)}";
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, estado);
+            rs = pst.executeQuery();
+            listacd = new ArrayList<ClienteDTO>();
+            while (rs.next()) {
+                ClienteDTO cd = new ClienteDTO();
+                cd.setCodigo(rs.getInt(1));
+                cd.setDni(rs.getString(2));
+                cd.setNombre(rs.getString(3));
+                cd.setApellido(rs.getString(4));
+                cd.setDireccion(rs.getString(5));
+                cd.setTelefono(rs.getString(6));
+                cd.setCodigoDistrito(rs.getInt(7));
+                cd.setNombreDistrito(rs.getString(8));
+                cd.setEstado(rs.getInt(9));
+                listacd.add(cd);
+                
+            }
+        } catch (Exception ex) {
+            System.out.println("Error al buscar Cliente por Estado:" + ex.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(con);
+        }
+        return listacd;
+    }
+
+    @Override
+    public int actualizarEstado(ClienteDTO cli) {
+        int rs = 0;
+        Connection con = null;
+        PreparedStatement pst = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "UPDATE CLIENTE SET ESTADO = 1 WHERE ID_CLI=?";
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, cli.getCodigo());
+            rs = pst.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println("Error en actualizar estado cliente: " + ex.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(con);
+        }
+        return rs;
     }
 
 }

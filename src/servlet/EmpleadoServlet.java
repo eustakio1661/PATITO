@@ -49,6 +49,9 @@ public class EmpleadoServlet extends HttpServlet {
         case "perfil":
             actualizarPerfil(request, response);
             break;
+        case "actualizarEstado":
+            actualizarEstado(request, response);
+            break;
         default:
             System.out.println("----------------------------");
             System.out.println("Cerrando Session");
@@ -56,6 +59,35 @@ public class EmpleadoServlet extends HttpServlet {
             request.getSession().invalidate();
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
+    }
+
+    private void actualizarEstado(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int codigo = Integer.parseInt(request.getParameter("id"));
+
+        EmpleadoDTO e = new EmpleadoDTO();
+
+        e.setId(codigo);
+
+        DAOFactory f = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        int ok = f.getEmpleadoDAO().actualizarEstado(e);
+
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+
+        if (ok != 0) {
+            data.put("ok", true);
+            data.put("titulo", "Actualizado");
+            data.put("mensaje", "Se actualizo estado del empleado correctamente");
+            data.put("tipo", "success");
+        } else {
+            data.put("ok", false);
+            data.put("titulo", "Error");
+            data.put("mensaje", "No se pudo actualizar estado del empleado");
+            data.put("tipo", "error");
+        }
+        String json = new Gson().toJson(data);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
     }
 
     private void actualizarPerfil(HttpServletRequest request, HttpServletResponse response)
@@ -271,9 +303,15 @@ public class EmpleadoServlet extends HttpServlet {
     }
 
     private void listarEmpleado(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException {       
+        int estado;
+        if(request.getParameter("cboEstado") == null) {
+            estado = 1;
+        }else {
+            estado = Integer.parseInt(request.getParameter("cboEstado"));
+        }  
         DAOFactory f = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-        ArrayList<EmpleadoDTO> listado = f.getEmpleadoDAO().listado();
+        ArrayList<EmpleadoDTO> listado = f.getEmpleadoDAO().listadoEmpleadoEstado(estado);
 
         request.setAttribute("listarEmpleado", listado);
         request.getRequestDispatcher("listado-empleados.jsp").forward(request, response);

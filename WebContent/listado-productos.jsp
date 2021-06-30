@@ -44,7 +44,17 @@
                       <h5 class="mb-0">Lista de Productos</h5>
                     </div>
                     <div class="font-22 ms-auto">
-                      <i class="bx bx-dots-horizontal-rounded"></i>
+                      <select
+                        id="cboEstado"
+                        class="form-select"
+                        name="cboEstado"
+                        data-servlet="ps?opcion=listado"
+                        required
+                      >     
+                       <option selected disabled hidden="hidden" value="">Seleccione Estado</option>
+                       <option  value="1">Activo</option>
+                       <option  value="0">Inactivo</option>
+                      </select>              
                     </div>
                   </div>
                   <hr />
@@ -75,6 +85,7 @@
                             </td>
                             <td>${prod.cantidad}</td>
                             <td>
+                             <c:if test="${prod.estado == 1 }">
                               <div class="d-flex order-actions">
                                 <a
                                   href="ps?opcion=buscar&codigo=${prod.idProducto}"
@@ -89,6 +100,7 @@
                                   type="button"
                                   data-entidad="producto"
                                   data-nombre="${ prod.descripcion }"
+                                  data-opciones="eliminar"
                                   data-action="ps?opcion=eliminar&codigo=${prod.idProducto}"
                                   class="ms-4 btn btn-danger btnEliminarEntidad"
                                   data-bs-toggle="tooltip"
@@ -98,6 +110,25 @@
                                   <i class="bx bx-trash mx-0"></i
                                 ></button>
                               </div>
+                              </c:if>
+                              <c:if test="${prod.estado == 0 }">
+                              <div class="d-flex order-actions">
+                                
+                                <button
+                                  type="button"
+                                  data-entidad="producto"
+                                  data-nombre="${ prod.descripcion }"
+                                  data-opciones="regresar"
+                                  data-action="ps?opcion=actualizarEstado&codigo=${prod.idProducto}"
+                                  class="ms-4 btn btn-primary btnActualizarEntidad"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="bottom"
+                                  title="Actualizar Estado"
+                                >
+                                  <i class="bx bx-checkbox-checked mx-0" ></i>
+                                  </button>
+                              </div>
+                              </c:if>
                             </td>
                           </tr>
                         </c:forEach>

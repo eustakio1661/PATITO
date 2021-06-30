@@ -55,6 +55,7 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
                 e.setTelefono(rs.getString(5));
                 e.setCorreo(rs.getString(6));
                 e.setDescripcionTipoEmpleado(rs.getString(7));
+                e.setEstado(rs.getInt(8));
                 lista.add(e);
             }
         } catch (Exception e) {
@@ -243,5 +244,61 @@ public class MySQLEmpleadoDAO implements EmpleadoDAO {
         }
         return rs;
     }
+    
+    @Override
+    public ArrayList<EmpleadoDTO> listadoEmpleadoEstado(int estado) {
+        ArrayList<EmpleadoDTO> lista = null;
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = MySQLConexion8.getConexion();
+            String sql = "{CALL USP_ESTADOEMPLEADO(?)}";
+            pst = cn.prepareStatement(sql);
+            pst.setInt(1, estado);
+            rs = pst.executeQuery();
+            lista = new ArrayList<EmpleadoDTO>();
+            while(rs.next()){
+                EmpleadoDTO e = new EmpleadoDTO();
+                e.setId(rs.getInt(1));
+                e.setDni(rs.getString(2));
+                e.setNombre(rs.getString(3));
+                e.setApellido(rs.getString(4));
+                e.setTelefono(rs.getString(5));
+                e.setCorreo(rs.getString(6));
+                e.setDescripcionTipoEmpleado(rs.getString(7));
+                e.setEstado(rs.getInt(8));
+                lista.add(e);
+            }            
+        }catch (Exception e) {
+            System.out.println("Error en listar empleado por estado : " + e.getMessage());
+        }
+        finally{
+            MySQLConexion8.closeConexion(cn);
+        }
+        return lista;
+    }
+
+    @Override
+    public int actualizarEstado(EmpleadoDTO e) {
+        int rs = 0;
+        Connection cn = null;
+        PreparedStatement pst = null;
+        try {
+            cn = MySQLConexion8.getConexion();
+            String sql = "UPDATE EMPLEADO SET ESTADO = 1 WHERE ID_EM=?";
+            pst = cn.prepareStatement(sql);
+            pst.setInt(1, e.getId());
+            rs = pst.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println("Error al actualizar estado Empleado: " + ex.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(cn);
+        }
+        return rs;
+    }
+
+   
 
 }
