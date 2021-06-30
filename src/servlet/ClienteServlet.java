@@ -43,6 +43,9 @@ public class ClienteServlet extends HttpServlet {
             case "listado":
                 listar(request, response);
                 break;
+            case "listarEstado":
+                listarClienteEstado(request, response);
+                break;
             case "buscar":
                 buscar(request, response);
                 break;
@@ -218,6 +221,8 @@ public class ClienteServlet extends HttpServlet {
         request.getRequestDispatcher("listado-clientes.jsp").forward(request, response);
 
     }
+    
+    
 
     private void buscar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Ingreso al proceso BuscarCliente");
@@ -230,4 +235,25 @@ public class ClienteServlet extends HttpServlet {
 
         request.getRequestDispatcher("crud-cliente.jsp").forward(request, response);
     }
+    
+    private void listarClienteEstado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Ingreso al proceso ListarCliente");
+        int estado;
+        
+        if (request.getParameter("cboEstado") == null) {
+        estado = 1;
+    } else {
+        estado = Integer.parseInt(request.getParameter("cboEstado"));
+    }
+
+        DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        ClienteDAO dao = fabrica.getClienteDAO();
+        ClienteDTO listaE = dao.ListarClienteEstado(estado);
+
+        request.setAttribute("lstClientes", listaE);
+        request.getRequestDispatcher("listado-clientes.jsp").forward(request, response);
+
+    }
+    
+    
 }
