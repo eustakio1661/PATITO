@@ -98,6 +98,7 @@
                                   type="button"
                                   data-entidad="producto"
                                   data-nombre="${ prod.descripcion }"
+                                  data-opciones="eliminar"
                                   data-action="ps?opcion=eliminar&codigo=${prod.idProducto}"
                                   class="ms-4 btn btn-danger btnEliminarEntidad"
                                   data-bs-toggle="tooltip"
