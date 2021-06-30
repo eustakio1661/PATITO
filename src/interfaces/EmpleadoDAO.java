@@ -15,4 +15,6 @@ public interface EmpleadoDAO {
     public EmpleadoDTO validarAcceso(String correo_usuario, String clave);
     public ArrayList<TipoEmpleadoDTO> listadoTipoEmpleado();
     public EmpleadoDTO buscarEmpleado(int codigo);
+    public int actualizarEstado(EmpleadoDTO e);
+    public ArrayList<EmpleadoDTO> listadoEmpleadoEstado(int estado);
 }

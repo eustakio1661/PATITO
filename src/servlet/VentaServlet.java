@@ -77,7 +77,6 @@ public class VentaServlet extends HttpServlet {
 
     private void actualizarPedido(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Ingreso al proceso Actualizar Pedido");
-        String url = "";
         int codigo = Integer.parseInt(request.getParameter("codigo"));
 
         PedidoDTO p = new PedidoDTO();
