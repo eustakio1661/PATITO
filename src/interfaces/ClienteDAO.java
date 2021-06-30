@@ -16,4 +16,6 @@ public interface ClienteDAO {
 	public ArrayList<ReporteClienteDTO> reporteCliente();
 	public ClienteDTO descuento(int codigo);
 	public ClienteDTO buscarClienteDNI(String dni);
+	public ArrayList<ClienteDTO> listarClienteEstado(int estado);
+	public int actualizarEstado(ClienteDTO cli);
 }
