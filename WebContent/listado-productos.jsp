@@ -50,7 +50,7 @@
                         name="cboEstado"
                         required
                       >
-                       <option selected disabled hidden value>Seleccione Estado</option>
+                       <option selected disabled hidden value="">Seleccione Estado</option>
                        <option  value="1">Activo</option>
                        <option  value="0">Inactivo</option>
                       </select>
