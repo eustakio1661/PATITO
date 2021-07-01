@@ -101,7 +101,7 @@ public class MySQLProductoDAO implements ProductoDAO {
                 p.setIdCategoria(rs.getInt(5));
                 p.setDescCategoria(rs.getString(6));
                 p.setImagen(rs.getString(7));
-
+                p.setEstado(rs.getInt(8));
                 lista.add(p);
             }
         } catch (Exception e) {
@@ -176,6 +176,60 @@ public class MySQLProductoDAO implements ProductoDAO {
         }
 
         return p;
+    }
+
+    @Override
+    public ArrayList<ProductoDTO> listadoProductoEstado(int estado) {
+        ArrayList<ProductoDTO> lista = null;
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = MySQLConexion8.getConexion();
+            String sql = "{CALL USP_ESTADOPRODUCTOS(?)}";
+            pst = cn.prepareStatement(sql);
+            pst.setInt(1, estado);
+            rs = pst.executeQuery();
+            lista = new ArrayList<ProductoDTO>();
+            while(rs.next()){
+                ProductoDTO p = new ProductoDTO();
+                p.setIdProducto(rs.getInt(1));
+                p.setDescripcion(rs.getString(2));
+                p.setPrecio(rs.getDouble(3));
+                p.setCantidad(rs.getInt(4));
+                p.setIdCategoria(rs.getInt(5));
+                p.setDescCategoria(rs.getString(6));
+                p.setImagen(rs.getString(7));
+                p.setEstado(rs.getInt(8));
+                lista.add(p);
+            }            
+        }catch (Exception e) {
+            System.out.println("Error en listar Productos por estado : " + e.getMessage());
+        }
+        finally{
+            MySQLConexion8.closeConexion(cn);
+        }
+        return lista;
+    }
+
+    @Override
+    public int actualizarEstado(ProductoDTO p) {
+        int rs = 0;
+        Connection con = null;
+        PreparedStatement pst = null;
+        try {
+            con = MySQLConexion8.getConexion();
+            String sql = "UPDATE PRODUCTO SET ESTADO = 1 WHERE ID_PRO=?";
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, p.getIdProducto());
+            rs = pst.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println("Error en actualizar estado producto: " + ex.getMessage());
+        } finally {
+            MySQLConexion8.closeConexion(con);
+        }
+        return rs;
     }
 
 }

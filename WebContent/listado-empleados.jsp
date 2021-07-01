@@ -1,5 +1,6 @@
 <%@page import="beans.EmpleadoDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%
@@ -51,8 +52,8 @@
                     <div>
                       <h5 class="mb-0">Lista de Empleados</h5>
                     </div>
-                    <div class="font-22 ms-auto">
-                      <i class="bx bx-dots-horizontal-rounded"></i>
+                    <div class="font-22 ms-auto">                                                 
+                       <tools:comboEstado data="emse?opcion=listar"/>         
                     </div>
                   </div>
                   <hr />
@@ -72,6 +73,7 @@
                       <tbody>
                         <c:forEach items="${ listarEmpleado }" var="emp">
                           <tr>
+                          
                             <td>${emp.id}</td>
                             <td>${emp.dni }</td>
                             <td>${emp.nombre} ${emp.apellido}</td>
@@ -79,7 +81,8 @@
                             <td>${emp.correo}</td>
                             <td>${emp.telefono}</td>
                             <td>
-                              <div class="d-flex order-actions">
+                            <c:if test="${emp.estado == 1 }">
+                              <div class="d-flex order-actions">                          
                                 <a
                                   href="emse?opcion=buscar&idEmp=${emp.id}"
                                   class="btn btn-success"
@@ -93,8 +96,9 @@
                                   type="button"
                                   data-entidad="empleado"
                                   data-nombre="${emp.nombre} ${emp.apellido}"
+                                  data-opciones="eliminar"
                                   data-action="emse?opcion=eliminar&id=${emp.id}"
-                                  class="ms-4 btn btn-danger btnEliminarEntidad"
+                                  class="ms-4 btn btn-danger btnActualizarEntidad"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
                                   title="Eliminar Empleado"
@@ -102,6 +106,24 @@
                                   <i class="bx bx-trash mx-0"></i
                                 ></button>
                               </div>
+                              </c:if>
+                              <c:if test="${emp.estado == 0 }">
+                              <div class="d-flex order-actions">                                                      
+                                <button
+                                  type="button"
+                                  data-entidad="empleado"
+                                  data-nombre="${emp.nombre} ${emp.apellido}"
+                                  data-opciones="regresar"
+                                  data-action="emse?opcion=actualizarEstado&id=${emp.id}"
+                                  class="ms-4 btn btn-primary btnActualizarEntidad"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="bottom"
+                                  title="Actualizar Estado"
+                                >
+                                  <i class="bx bx-user-check mx-0" ></i>
+                                </button>
+                              </div>
+                              </c:if>                             
                             </td>
                           </tr>
                         </c:forEach>

@@ -1,6 +1,7 @@
 <%@page import="beans.EmpleadoDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%
@@ -44,7 +45,7 @@
                       <h5 class="mb-0">Lista de Productos</h5>
                     </div>
                     <div class="font-22 ms-auto">
-                      <i class="bx bx-dots-horizontal-rounded"></i>
+                    	<tools:comboEstado data="ps?opcion=listado"/>                   
                     </div>
                   </div>
                   <hr />
@@ -75,6 +76,7 @@
                             </td>
                             <td>${prod.cantidad}</td>
                             <td>
+                             <c:if test="${prod.estado == 1 }">
                               <div class="d-flex order-actions">
                                 <a
                                   href="ps?opcion=buscar&codigo=${prod.idProducto}"
@@ -89,8 +91,9 @@
                                   type="button"
                                   data-entidad="producto"
                                   data-nombre="${ prod.descripcion }"
+                                  data-opciones="eliminar"
                                   data-action="ps?opcion=eliminar&codigo=${prod.idProducto}"
-                                  class="ms-4 btn btn-danger btnEliminarEntidad"
+                                  class="ms-4 btn btn-danger btnActualizarEntidad"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
                                   title="Eliminar Producto"
@@ -98,6 +101,25 @@
                                   <i class="bx bx-trash mx-0"></i
                                 ></button>
                               </div>
+                              </c:if>
+                              <c:if test="${prod.estado == 0 }">
+                              <div class="d-flex order-actions">
+                                
+                                <button
+                                  type="button"
+                                  data-entidad="producto"
+                                  data-nombre="${ prod.descripcion }"
+                                  data-opciones="regresar"
+                                  data-action="ps?opcion=actualizarEstado&codigo=${prod.idProducto}"
+                                  class="ms-4 btn btn-primary btnActualizarEntidad"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="bottom"
+                                  title="Actualizar Estado"
+                                >
+                                  <i class="bx bx-checkbox-checked mx-0" ></i>
+                                  </button>
+                              </div>
+                              </c:if>
                             </td>
                           </tr>
                         </c:forEach>

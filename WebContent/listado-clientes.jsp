@@ -1,5 +1,6 @@
 <%@page import="beans.EmpleadoDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%
@@ -43,7 +44,7 @@
                       <h5 class="mb-0">Lista de Clientes</h5>
                     </div>
                     <div class="font-22 ms-auto">
-                      <i class="bx bx-dots-horizontal-rounded"></i>
+                    	<tools:comboEstado data="cs?opcion=listado"/>                               
                     </div>
                   </div>
                   <hr />
@@ -70,6 +71,7 @@
                             <td>${cli.telefono }</td>
                             <td>${cli.nombreDistrito }</td>
                             <td>
+                            <c:if test="${cli.estado == 1 }">
                               <div class="d-flex order-actions">
                                 <a
                                   href="cs?opcion=buscar&codigo=${cli.codigo}"
@@ -84,8 +86,9 @@
                                   type="button"
                                   data-entidad="cliente"
                                   data-nombre="${ cli.nombre } ${ cli.apellido }"
+                                  data-opciones="eliminar"
                                   data-action="cs?opcion=eliminar&codigo=${cli.codigo}"
-                                  class="ms-4 btn btn-danger btnEliminarEntidad"
+                                  class="ms-4 btn btn-danger btnActualizarEntidad"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="bottom"
                                   title="Eliminar Cliente"
@@ -93,6 +96,24 @@
                                   <i class="bx bx-trash mx-0"></i
                                 ></button>
                               </div>
+                              </c:if>
+                              <c:if test="${cli.estado == 0 }">
+                              <div class="d-flex order-actions">                           
+                                <button
+                                  type="button"
+                                  data-entidad="cliente"
+                                  data-nombre="${ cli.nombre } ${ cli.apellido }"
+                                  data-opciones="regresar"
+                                  data-action="cs?opcion=actualizarEstado&codigo=${cli.codigo}"
+                                  class="ms-4 btn btn-primary btnActualizarEntidad"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="bottom"
+                                  title="Actualizar Estado"
+                                >
+                                  <i class="bx bx-user-check mx-0" ></i>
+                                </button>
+                              </div>
+                              </c:if>
                             </td>
                           </tr>
                         </c:forEach>

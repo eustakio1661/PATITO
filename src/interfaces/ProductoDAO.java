@@ -17,5 +17,9 @@ public interface ProductoDAO {
 
     public ArrayList<CategoriaDTO> listadoCategoria();
 
+    public ArrayList<ProductoDTO> listadoProductoEstado(int estado);
+    
     public ProductoDTO buscar(int codigo);
+    
+    public int actualizarEstado(ProductoDTO p);
 }
