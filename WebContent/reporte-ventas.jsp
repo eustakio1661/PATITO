@@ -68,7 +68,7 @@
                               type="date"
                               class="form-control"
                               name="txtFechaInicio"
-                              value="reporte"
+                             
                             />
                           </div>
                           <label
@@ -81,7 +81,7 @@
                               type="date"
                               class="form-control"
                               name="txtFechaFinal"
-                              value="reporte"
+                             
                             />
                           </div>
                           <div class="col-md-12 col-form-label text-md-end">

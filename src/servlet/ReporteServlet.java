@@ -30,9 +30,11 @@ public class ReporteServlet extends HttpServlet {
         
         String opcion = request.getParameter("opcion");
         opcion = (opcion == null) ? "cerrar" : opcion;
+        System.out.println(opcion);
         switch (opcion) {
         case "reporte":
             reporteEntreFechas(request, response);
+            break;
         case "reporteCliente":
             reporteCliente(request, response);
             break;
@@ -67,8 +69,12 @@ public class ReporteServlet extends HttpServlet {
 
     private void reporteEntreFechas(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("Ingreso al proceso Reporte Ventas entre fechas");
         String fecha1 = request.getParameter("txtFechaInicio");
         String fecha2 = request.getParameter("txtFechaFinal");
+        
+        System.out.println(fecha1);
+        System.out.println(fecha2);
 
         DAOFactory fabrica = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         ArrayList<ListadoEntreFechasDTO> lista = fabrica.getReporteDAO().reporte(fecha1, fecha2);
