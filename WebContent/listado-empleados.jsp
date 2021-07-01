@@ -1,5 +1,6 @@
 <%@page import="beans.EmpleadoDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%
@@ -51,18 +52,8 @@
                     <div>
                       <h5 class="mb-0">Lista de Empleados</h5>
                     </div>
-                    <div class="font-22 ms-auto">
-                      <select
-                        id="cboEstado"
-                        class="form-select"
-                        name="cboEstado"
-                        data-servlet="emse?opcion=listar"
-                        required
-                      >                                       
-                       <option selected disabled hidden="hidden" value="">Seleccione Estado</option>
-                       <option  value="1">Activo</option>
-                       <option  value="0">Inactivo</option>
-                      </select>               
+                    <div class="font-22 ms-auto">                                                 
+                       <tools:comboEstado data="emse?opcion=listar"/>         
                     </div>
                   </div>
                   <hr />
@@ -82,6 +73,7 @@
                       <tbody>
                         <c:forEach items="${ listarEmpleado }" var="emp">
                           <tr>
+                          
                             <td>${emp.id}</td>
                             <td>${emp.dni }</td>
                             <td>${emp.nombre} ${emp.apellido}</td>
@@ -131,7 +123,7 @@
                                   <i class="bx bx-user-check mx-0" ></i>
                                 </button>
                               </div>
-                              </c:if>
+                              </c:if>                             
                             </td>
                           </tr>
                         </c:forEach>

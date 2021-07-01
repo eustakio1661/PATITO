@@ -41,4 +41,15 @@
     </attribute>	
   </tag>
   
+  <tag>	
+    <name>comboEstado</name>	
+    <tagclass>etiquetas.ComboEstadoTag</tagclass>	
+    <bodycontent>empty</bodycontent>	
+    <info>Muestra lista de estado</info>
+    <attribute>
+      <name>data</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
 </taglib>
