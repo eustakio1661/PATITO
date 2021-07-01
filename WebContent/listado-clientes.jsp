@@ -1,5 +1,6 @@
 <%@page import="beans.EmpleadoDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%
@@ -42,18 +43,8 @@
                     <div>
                       <h5 class="mb-0">Lista de Clientes</h5>
                     </div>
-                    <div class="font-22 ms-auto">                
-                      <select
-                        id="cboEstado"
-                        class="form-select"
-                        data-servlet="cs?opcion=listado"
-                        name="cboEstado"
-                        required
-                      >                                    
-                       <option selected disabled hidden="hidden" value="">Seleccione Estado</option>
-                       <option  value="1">Activo</option>
-                       <option  value="0">Inactivo</option>
-                      </select>               
+                    <div class="font-22 ms-auto">
+                    	<tools:comboEstado data="cs?opcion=listado"/>                               
                     </div>
                   </div>
                   <hr />
