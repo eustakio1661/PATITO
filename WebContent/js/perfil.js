@@ -1,6 +1,6 @@
 const API_CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/LP2/image/upload';
-const API_KEY = '366667499388496';
-const UPLOAD_PRESET = 'bibo9msx';
+const API_KEY = '294235963826735';
+const UPLOAD_PRESET = 'patito';
 
 let imagenUrlAEnviar = null;
 let imagenFile = null;

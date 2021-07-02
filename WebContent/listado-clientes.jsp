@@ -1,6 +1,7 @@
 <%@page import="beans.EmpleadoDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%
@@ -66,8 +67,8 @@
                           <tr>
                             <td>${cli.codigo}</td>
                             <td>${cli.dni }</td>
-                            <td>${cli.nombre }</td>
-                            <td>${cli.apellido }</td>
+                            <td>${fn:toUpperCase(cli.nombre) }</td>
+                            <td>${fn:toUpperCase(cli.apellido) }</td>
                             <td>${cli.telefono }</td>
                             <td>${cli.nombreDistrito }</td>
                             <td>

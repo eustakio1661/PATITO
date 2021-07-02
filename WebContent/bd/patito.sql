@@ -444,28 +444,28 @@ CALL USP_REGISTRARCLIENTE(8, '98438934', 'Daniel', 'Esteban', 'Calle Los Naranjo
 CALL USP_REGISTRARCLIENTE(9, '23982389', 'Matias', 'Sosa', 'Jr. Fifo 555', '948347384');
 CALL USP_REGISTRARCLIENTE(10, '23289389', 'Ricardo', 'Robles', 'Los Algarrobos 253', '974337344');
 
-INSERT INTO CATEGORIA(DESCRIPCION) VALUES('BEBIDAS');
-INSERT INTO CATEGORIA(DESCRIPCION) VALUES('COMBOS');
-INSERT INTO CATEGORIA(DESCRIPCION) VALUES('CHIFA');
-INSERT INTO CATEGORIA(DESCRIPCION) VALUES('OFERTAS');
-INSERT INTO CATEGORIA(DESCRIPCION) VALUES('SOPAS');
-INSERT INTO CATEGORIA(DESCRIPCION) VALUES('HAMBURGUESAS');
-INSERT INTO CATEGORIA(DESCRIPCION) VALUES('MARISCOS');
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('Bebidas');
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('Combos');
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('Chifa');
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('Ofertas');
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('Sopas');
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('Hamburguesas');
+INSERT INTO CATEGORIA(DESCRIPCION) VALUES('Mariscos');
 
-CALL USP_REGISTRARPRODUCTO('MARACUYA',5.99,14,1,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311982/agua-maracuya_te1d7l.jpg');
-CALL USP_REGISTRARPRODUCTO('CHICHA MORADA',5.99,13,1,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311982/beb_chicha_yy7091.jpg');
-CALL USP_REGISTRARPRODUCTO('COMBO CLASICO',14.99,5,2,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311984/8cf3dc63-f273-4338-808d-db5057df0a0a_gmdqci.jpg');
-CALL USP_REGISTRARPRODUCTO('COMBO FAMILIAR',42.00,5,2,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311981/ccb5dd3a-fcc0-416e-9d93-529bea82d02b_rzndb5.jpg');
-CALL USP_REGISTRARPRODUCTO('ARROZ CHAUFA DE POLLO',10.99,20,3,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311983/d082d5cd-5a0c-4232-985a-8dc94341e2fa_qqg1bn.jpg');
-CALL USP_REGISTRARPRODUCTO('AEROPUERTO DE POLLO',11.99,10,3,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311984/e55d26c2-d14a-47f9-88d0-fdd4ab388ca7_zirz50.jpg');
-CALL USP_REGISTRARPRODUCTO('1 POLLO ENTERO + 1/4 DE POLLO + CHAUFA + PAPAS + GASEOSA 1 1/2L',64.99,5,4,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311982/d9bb1f8a-bd9b-4d29-8873-2120528e92b5_hgtewb.jpg');
-CALL USP_REGISTRARPRODUCTO('1 POLLO ENTERO + 1/4 POLLO + PAPAS',49.99,4,4,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311982/af9d9303-7037-4e56-a998-7a4faa067244_g0x2qm.jpg');
-CALL USP_REGISTRARPRODUCTO('SOPA DE DIETA',10,20,5,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311983/7f10fdfd-dfb4-42b9-99f9-1d77aad67f15_rjlyzv.jpg');
-CALL USP_REGISTRARPRODUCTO('CALDO DE POLLO',15,10,5,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311984/349ff5d3-0e73-4fac-9a11-a4879df61d27_zo8oqv.jpg');
-CALL USP_REGISTRARPRODUCTO('SIMPLE',5.99,12,6,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311984/8cf3dc63-f273-4338-808d-db5057df0a0a_gmdqci.jpg');
-CALL USP_REGISTRARPRODUCTO('CHEESEBURGER',7.99,23,6,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311983/cheeseburger_lvpyxt.jpg');
-CALL USP_REGISTRARPRODUCTO('CEVICHE DE PESCADO',12.99,15,7,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311983/ceviche-de-pescado-peruano-foto-principal_ngrt9f.jpg');
-CALL USP_REGISTRARPRODUCTO('CEVICHE + CHICHARRON',17.99,14,7,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311981/be96e124c7c3ca7399bae8c790d9e2cc_rw5c8s.jpg');
+CALL USP_REGISTRARPRODUCTO('Maracuya',5.99,14,1,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311982/agua-maracuya_te1d7l.jpg');
+CALL USP_REGISTRARPRODUCTO('Chicha morada',5.99,13,1,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311982/beb_chicha_yy7091.jpg');
+CALL USP_REGISTRARPRODUCTO('Combo clasico',14.99,5,2,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311984/8cf3dc63-f273-4338-808d-db5057df0a0a_gmdqci.jpg');
+CALL USP_REGISTRARPRODUCTO('Combo familiar',42.00,5,2,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311981/ccb5dd3a-fcc0-416e-9d93-529bea82d02b_rzndb5.jpg');
+CALL USP_REGISTRARPRODUCTO('Arroz chaufa de pollo',10.99,20,3,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311983/d082d5cd-5a0c-4232-985a-8dc94341e2fa_qqg1bn.jpg');
+CALL USP_REGISTRARPRODUCTO('Aeropuerto de pollo',11.99,10,3,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311984/e55d26c2-d14a-47f9-88d0-fdd4ab388ca7_zirz50.jpg');
+CALL USP_REGISTRARPRODUCTO('1 Pollo entero + 1/4 De pollo + Chaufa + Papas + Gaseosa 1 1/2L',64.99,5,4,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311982/d9bb1f8a-bd9b-4d29-8873-2120528e92b5_hgtewb.jpg');
+CALL USP_REGISTRARPRODUCTO('1 Pollo entero + 1/4 Pollo + Papas',49.99,4,4,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311982/af9d9303-7037-4e56-a998-7a4faa067244_g0x2qm.jpg');
+CALL USP_REGISTRARPRODUCTO('Sopa de dieta',10,20,5,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311983/7f10fdfd-dfb4-42b9-99f9-1d77aad67f15_rjlyzv.jpg');
+CALL USP_REGISTRARPRODUCTO('Caldo de pollo',15,10,5,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311984/349ff5d3-0e73-4fac-9a11-a4879df61d27_zo8oqv.jpg');
+CALL USP_REGISTRARPRODUCTO('Simple',5.99,12,6,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311984/8cf3dc63-f273-4338-808d-db5057df0a0a_gmdqci.jpg');
+CALL USP_REGISTRARPRODUCTO('Cheeseburger',7.99,23,6,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311983/cheeseburger_lvpyxt.jpg');
+CALL USP_REGISTRARPRODUCTO('Ceviche de pescado',12.99,15,7,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311983/ceviche-de-pescado-peruano-foto-principal_ngrt9f.jpg');
+CALL USP_REGISTRARPRODUCTO('Ceviche + Chicharron',17.99,14,7,'https://res.cloudinary.com/dfuuywyk9/image/upload/v1624311981/be96e124c7c3ca7399bae8c790d9e2cc_rw5c8s.jpg');
 
 
 DROP PROCEDURE IF EXISTS USP_REGISTRARPEDIDO;

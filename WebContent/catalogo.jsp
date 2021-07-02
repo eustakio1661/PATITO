@@ -1,6 +1,7 @@
 <%@page import="beans.EmpleadoDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%
@@ -146,7 +147,7 @@
                             <td>
                               <img src="${ prod.imagen }" alt="${ prod.descripcion }" width="100">
                             </td>
-                            <td>${prod.descripcion}</td>
+                            <td>${fn:toUpperCase(prod.descripcion)}</td>
                             <td>${prod.descCategoria}</td>
                             <td>
                               <fmt:setLocale value="es_PE" />

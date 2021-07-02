@@ -1,6 +1,7 @@
 <%@page import="beans.EmpleadoDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib  uri="/WEB-INF/libreria.tld" prefix="tools"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
@@ -65,7 +66,7 @@
                         <c:forEach items="${ lstProductos }" var="prod">
                           <tr>
                             <td>${prod.idProducto}</td>
-                            <td>${prod.descripcion}</td>
+                            <td>${fn:toUpperCase(prod.descripcion)}</td>
                             <td>${prod.descCategoria}</td>
                             <td>
                               <fmt:setLocale value="es_PE" />
